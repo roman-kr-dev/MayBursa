@@ -1,0 +1,23 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@monorepo/shared-types": ["./src/packages/shared-types/src/index.ts"],
+      "@monorepo/shared-utils": ["./src/packages/shared-utils/src/index.ts"],
+      "@monorepo/ui-components": ["./src/packages/ui-components/src/index.ts"],
+      "@monorepo/typescript-config": ["./src/packages/typescript-config"],
+      "@monorepo/eslint-config": ["./src/packages/eslint-config"]
+    }
+  },
+  "files": [],
+  "references": [
+    { "path": "./src/apps/optionssniper/api" },
+    { "path": "./src/apps/optionssniper/live" },
+    { "path": "./src/apps/optionssniper/ui" },
+    { "path": "./src/apps/intuitions/api" },
+    { "path": "./src/apps/intuitions/ui" },
+    { "path": "./src/packages/shared-types" },
+    { "path": "./src/packages/shared-utils" },
+    { "path": "./src/packages/ui-components" }
+  ]
+}

@@ -1,0 +1,109 @@
+.options-table-wrapper {
+  overflow-x: auto;
+}
+
+.options-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.875rem;
+}
+
+.options-table th {
+  text-align: left;
+  padding: 0.75rem;
+  background: #f5f5f5;
+  font-weight: 600;
+  color: #333;
+  border-bottom: 2px solid #ddd;
+}
+
+.options-table td {
+  padding: 0.75rem;
+  border-bottom: 1px solid #eee;
+}
+
+.option-row {
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.option-row:hover {
+  background-color: #f8f8f8;
+}
+
+.option-row.selected {
+  background-color: #e3f2fd;
+}
+
+.symbol {
+  font-weight: 600;
+  color: #1976d2;
+}
+
+.option-type {
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+.option-type.call {
+  background: #e8f5e9;
+  color: #2e7d32;
+}
+
+.option-type.put {
+  background: #ffebee;
+  color: #c62828;
+}
+
+.strike {
+  font-weight: 500;
+}
+
+.days-to-exp {
+  text-align: center;
+}
+
+.days-to-exp.expiring-soon {
+  color: #f57c00;
+  font-weight: 600;
+}
+
+.premium {
+  font-weight: 600;
+  color: #388e3c;
+}
+
+.status {
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  font-weight: 500;
+}
+
+.status.active {
+  background: #e3f2fd;
+  color: #1976d2;
+}
+
+.status.expired {
+  background: #f5f5f5;
+  color: #757575;
+}
+
+.status.exercised {
+  background: #f3e5f5;
+  color: #7b1fa2;
+}
+
+.status.closed {
+  background: #fafafa;
+  color: #616161;
+}
+
+.no-options {
+  text-align: center;
+  padding: 2rem;
+  color: #666;
+}
