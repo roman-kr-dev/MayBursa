@@ -27,7 +27,7 @@ Generate a comprehensive task list for focused changes with validation.
 ## PRP Generation
 
 **READ**
-Using TASK_PRP/PRPs/prp_task.md format:
+Using PRPs/prp_task.md format:
 
 ### Context Section
 
@@ -92,7 +92,7 @@ ACTION path/to/file:
 
 ## Output
 
-Save as: `TASK_PRP/PRPs/{task-name}.md`
+Save as: `./PRPs/{task-name}.md`
 
 ## Quality Checklist
 

@@ -1,0 +1,664 @@
+2025-08-04 11:12:18 [INFO] Starting IBKR Gateway Manager...
+2025-08-04 11:12:19 [INFO] ========================================
+2025-08-04 11:12:19 [INFO] Starting IBKR Gateway in PAPER MODE
+2025-08-04 11:12:19 [INFO] ========================================
+2025-08-04 11:12:19 [INFO] Initializing IBKR Gateway...
+2025-08-04 11:12:19 [INFO] Killing any existing gateway processes...
+2025-08-04 11:12:19 [INFO] Killed any existing gateway processes
+2025-08-04 11:12:19 [INFO] IBKR Gateway Manager running on http://localhost:3000
+2025-08-04 11:12:19 [INFO] Control Panel UI available at root path /
+2025-08-04 11:12:21 [INFO] Starting gateway process...
+2025-08-04 11:12:21 [INFO] Java installation verified
+2025-08-04 11:12:21 [INFO] Killed any existing gateway processes
+2025-08-04 11:12:23 [ERROR] Failed to initialize gateway: Gateway run script not found at /Users/romankr/Dev/MayBursa/src/apps/ibkr-gateway/clientportal.gw/bin/run.sh. Please ensure clientportal.gw is installed. {"stack":"Error: Gateway run script not found at /Users/romankr/Dev/MayBursa/src/apps/ibkr-gateway/clientportal.gw/bin/run.sh. Please ensure clientportal.gw is installed.\n    at ClientPortalManager.startGateway (/Users/romankr/Dev/MayBursa/src/apps/ibkr-gateway/src/services/clientPortalManager.ts:68:13)\n    at initializeGateway (/Users/romankr/Dev/MayBursa/src/apps/ibkr-gateway/src/server.ts:30:5)"}
+2025-08-04 11:12:23 [ERROR] Gateway initialization failed: Gateway run script not found at /Users/romankr/Dev/MayBursa/src/apps/ibkr-gateway/clientportal.gw/bin/run.sh. Please ensure clientportal.gw is installed. {"stack":"Error: Gateway run script not found at /Users/romankr/Dev/MayBursa/src/apps/ibkr-gateway/clientportal.gw/bin/run.sh. Please ensure clientportal.gw is installed.\n    at ClientPortalManager.startGateway (/Users/romankr/Dev/MayBursa/src/apps/ibkr-gateway/src/services/clientPortalManager.ts:68:13)\n    at initializeGateway (/Users/romankr/Dev/MayBursa/src/apps/ibkr-gateway/src/server.ts:30:5)"}
+2025-08-04 11:12:40 [ERROR] Failed to get gateway status: Converting circular structure to JSON
+    --> starting at object with constructor 'Agent'
+    |     property 'sockets' -> object with constructor 'Object'
+    |     property 'localhost:5001::::::::false:::::::::::::' -> object with constructor 'Array'
+    |     ...
+    |     property '_httpMessage' -> object with constructor 'ClientRequest'
+    --- property 'agent' closes the circle {"stack":"TypeError: Converting circular structure to JSON\n    --> starting at object with constructor 'Agent'\n    |     property 'sockets' -> object with constructor 'Object'\n    |     property 'localhost:5001::::::::false:::::::::::::' -> object with constructor 'Array'\n    |     ...\n    |     property '_httpMessage' -> object with constructor 'ClientRequest'\n    --- property 'agent' closes the circle\n    at JSON.stringify (<anonymous>)\n    at Printf.template (/Users/romankr/Dev/MayBursa/src/apps/ibkr-gateway/src/utils/logger.ts:11:23)\n    at Printf.transform (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/logform@2.7.0/node_modules/logform/printf.js:11:26)\n    at Format.transform (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/logform@2.7.0/node_modules/logform/combine.js:20:24)\n    at DerivedLogger._transform (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/winston@3.17.0/node_modules/winston/lib/winston/logger.js:314:29)\n    at DerivedLogger.Transform._read (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/readable-stream@3.6.2/node_modules/readable-stream/lib/_stream_transform.js:166:10)\n    at DerivedLogger.Transform._write (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/readable-stream@3.6.2/node_modules/readable-stream/lib/_stream_transform.js:155:83)\n    at doWrite (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/readable-stream@3.6.2/node_modules/readable-stream/lib/_stream_writable.js:390:139)\n    at writeOrBuffer (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/readable-stream@3.6.2/node_modules/readable-stream/lib/_stream_writable.js:381:5)\n    at DerivedLogger.Writable.write (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/readable-stream@3.6.2/node_modules/readable-stream/lib/_stream_writable.js:302:11)"}
+2025-08-04 11:12:40 [ERROR] Failed to get auth status: Converting circular structure to JSON
+    --> starting at object with constructor 'Agent'
+    |     property 'sockets' -> object with constructor 'Object'
+    |     property 'localhost:5001::::::::false:::::::::::::' -> object with constructor 'Array'
+    |     ...
+    |     property '_httpMessage' -> object with constructor 'ClientRequest'
+    --- property 'agent' closes the circle {"stack":"TypeError: Converting circular structure to JSON\n    --> starting at object with constructor 'Agent'\n    |     property 'sockets' -> object with constructor 'Object'\n    |     property 'localhost:5001::::::::false:::::::::::::' -> object with constructor 'Array'\n    |     ...\n    |     property '_httpMessage' -> object with constructor 'ClientRequest'\n    --- property 'agent' closes the circle\n    at JSON.stringify (<anonymous>)\n    at Printf.template (/Users/romankr/Dev/MayBursa/src/apps/ibkr-gateway/src/utils/logger.ts:11:23)\n    at Printf.transform (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/logform@2.7.0/node_modules/logform/printf.js:11:26)\n    at Format.transform (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/logform@2.7.0/node_modules/logform/combine.js:20:24)\n    at DerivedLogger._transform (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/winston@3.17.0/node_modules/winston/lib/winston/logger.js:314:29)\n    at DerivedLogger.Transform._read (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/readable-stream@3.6.2/node_modules/readable-stream/lib/_stream_transform.js:166:10)\n    at DerivedLogger.Transform._write (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/readable-stream@3.6.2/node_modules/readable-stream/lib/_stream_transform.js:155:83)\n    at doWrite (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/readable-stream@3.6.2/node_modules/readable-stream/lib/_stream_writable.js:390:139)\n    at writeOrBuffer (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/readable-stream@3.6.2/node_modules/readable-stream/lib/_stream_writable.js:381:5)\n    at DerivedLogger.Writable.write (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/readable-stream@3.6.2/node_modules/readable-stream/lib/_stream_writable.js:302:11)"}
+2025-08-04 11:12:50 [ERROR] Failed to get gateway status: Converting circular structure to JSON
+    --> starting at object with constructor 'Agent'
+    |     property 'sockets' -> object with constructor 'Object'
+    |     property 'localhost:5001::::::::false:::::::::::::' -> object with constructor 'Array'
+    |     ...
+    |     property '_httpMessage' -> object with constructor 'ClientRequest'
+    --- property 'agent' closes the circle {"stack":"TypeError: Converting circular structure to JSON\n    --> starting at object with constructor 'Agent'\n    |     property 'sockets' -> object with constructor 'Object'\n    |     property 'localhost:5001::::::::false:::::::::::::' -> object with constructor 'Array'\n    |     ...\n    |     property '_httpMessage' -> object with constructor 'ClientRequest'\n    --- property 'agent' closes the circle\n    at JSON.stringify (<anonymous>)\n    at Printf.template (/Users/romankr/Dev/MayBursa/src/apps/ibkr-gateway/src/utils/logger.ts:11:23)\n    at Printf.transform (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/logform@2.7.0/node_modules/logform/printf.js:11:26)\n    at Format.transform (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/logform@2.7.0/node_modules/logform/combine.js:20:24)\n    at DerivedLogger._transform (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/winston@3.17.0/node_modules/winston/lib/winston/logger.js:314:29)\n    at DerivedLogger.Transform._read (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/readable-stream@3.6.2/node_modules/readable-stream/lib/_stream_transform.js:166:10)\n    at DerivedLogger.Transform._write (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/readable-stream@3.6.2/node_modules/readable-stream/lib/_stream_transform.js:155:83)\n    at doWrite (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/readable-stream@3.6.2/node_modules/readable-stream/lib/_stream_writable.js:390:139)\n    at writeOrBuffer (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/readable-stream@3.6.2/node_modules/readable-stream/lib/_stream_writable.js:381:5)\n    at DerivedLogger.Writable.write (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/readable-stream@3.6.2/node_modules/readable-stream/lib/_stream_writable.js:302:11)"}
+2025-08-04 11:12:50 [ERROR] Failed to get auth status: Converting circular structure to JSON
+    --> starting at object with constructor 'Agent'
+    |     property 'sockets' -> object with constructor 'Object'
+    |     property 'localhost:5001::::::::false:::::::::::::' -> object with constructor 'Array'
+    |     ...
+    |     property '_httpMessage' -> object with constructor 'ClientRequest'
+    --- property 'agent' closes the circle {"stack":"TypeError: Converting circular structure to JSON\n    --> starting at object with constructor 'Agent'\n    |     property 'sockets' -> object with constructor 'Object'\n    |     property 'localhost:5001::::::::false:::::::::::::' -> object with constructor 'Array'\n    |     ...\n    |     property '_httpMessage' -> object with constructor 'ClientRequest'\n    --- property 'agent' closes the circle\n    at JSON.stringify (<anonymous>)\n    at Printf.template (/Users/romankr/Dev/MayBursa/src/apps/ibkr-gateway/src/utils/logger.ts:11:23)\n    at Printf.transform (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/logform@2.7.0/node_modules/logform/printf.js:11:26)\n    at Format.transform (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/logform@2.7.0/node_modules/logform/combine.js:20:24)\n    at DerivedLogger._transform (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/winston@3.17.0/node_modules/winston/lib/winston/logger.js:314:29)\n    at DerivedLogger.Transform._read (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/readable-stream@3.6.2/node_modules/readable-stream/lib/_stream_transform.js:166:10)\n    at DerivedLogger.Transform._write (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/readable-stream@3.6.2/node_modules/readable-stream/lib/_stream_transform.js:155:83)\n    at doWrite (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/readable-stream@3.6.2/node_modules/readable-stream/lib/_stream_writable.js:390:139)\n    at writeOrBuffer (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/readable-stream@3.6.2/node_modules/readable-stream/lib/_stream_writable.js:381:5)\n    at DerivedLogger.Writable.write (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/readable-stream@3.6.2/node_modules/readable-stream/lib/_stream_writable.js:302:11)"}
+2025-08-04 11:13:00 [ERROR] Failed to get gateway status: Converting circular structure to JSON
+    --> starting at object with constructor 'Agent'
+    |     property 'sockets' -> object with constructor 'Object'
+    |     property 'localhost:5001::::::::false:::::::::::::' -> object with constructor 'Array'
+    |     ...
+    |     property '_httpMessage' -> object with constructor 'ClientRequest'
+    --- property 'agent' closes the circle {"stack":"TypeError: Converting circular structure to JSON\n    --> starting at object with constructor 'Agent'\n    |     property 'sockets' -> object with constructor 'Object'\n    |     property 'localhost:5001::::::::false:::::::::::::' -> object with constructor 'Array'\n    |     ...\n    |     property '_httpMessage' -> object with constructor 'ClientRequest'\n    --- property 'agent' closes the circle\n    at JSON.stringify (<anonymous>)\n    at Printf.template (/Users/romankr/Dev/MayBursa/src/apps/ibkr-gateway/src/utils/logger.ts:11:23)\n    at Printf.transform (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/logform@2.7.0/node_modules/logform/printf.js:11:26)\n    at Format.transform (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/logform@2.7.0/node_modules/logform/combine.js:20:24)\n    at DerivedLogger._transform (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/winston@3.17.0/node_modules/winston/lib/winston/logger.js:314:29)\n    at DerivedLogger.Transform._read (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/readable-stream@3.6.2/node_modules/readable-stream/lib/_stream_transform.js:166:10)\n    at DerivedLogger.Transform._write (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/readable-stream@3.6.2/node_modules/readable-stream/lib/_stream_transform.js:155:83)\n    at doWrite (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/readable-stream@3.6.2/node_modules/readable-stream/lib/_stream_writable.js:390:139)\n    at writeOrBuffer (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/readable-stream@3.6.2/node_modules/readable-stream/lib/_stream_writable.js:381:5)\n    at DerivedLogger.Writable.write (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/readable-stream@3.6.2/node_modules/readable-stream/lib/_stream_writable.js:302:11)"}
+2025-08-04 11:13:00 [ERROR] Failed to get auth status: Converting circular structure to JSON
+    --> starting at object with constructor 'Agent'
+    |     property 'sockets' -> object with constructor 'Object'
+    |     property 'localhost:5001::::::::false:::::::::::::' -> object with constructor 'Array'
+    |     ...
+    |     property '_httpMessage' -> object with constructor 'ClientRequest'
+    --- property 'agent' closes the circle {"stack":"TypeError: Converting circular structure to JSON\n    --> starting at object with constructor 'Agent'\n    |     property 'sockets' -> object with constructor 'Object'\n    |     property 'localhost:5001::::::::false:::::::::::::' -> object with constructor 'Array'\n    |     ...\n    |     property '_httpMessage' -> object with constructor 'ClientRequest'\n    --- property 'agent' closes the circle\n    at JSON.stringify (<anonymous>)\n    at Printf.template (/Users/romankr/Dev/MayBursa/src/apps/ibkr-gateway/src/utils/logger.ts:11:23)\n    at Printf.transform (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/logform@2.7.0/node_modules/logform/printf.js:11:26)\n    at Format.transform (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/logform@2.7.0/node_modules/logform/combine.js:20:24)\n    at DerivedLogger._transform (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/winston@3.17.0/node_modules/winston/lib/winston/logger.js:314:29)\n    at DerivedLogger.Transform._read (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/readable-stream@3.6.2/node_modules/readable-stream/lib/_stream_transform.js:166:10)\n    at DerivedLogger.Transform._write (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/readable-stream@3.6.2/node_modules/readable-stream/lib/_stream_transform.js:155:83)\n    at doWrite (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/readable-stream@3.6.2/node_modules/readable-stream/lib/_stream_writable.js:390:139)\n    at writeOrBuffer (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/readable-stream@3.6.2/node_modules/readable-stream/lib/_stream_writable.js:381:5)\n    at DerivedLogger.Writable.write (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/readable-stream@3.6.2/node_modules/readable-stream/lib/_stream_writable.js:302:11)"}
+2025-08-04 11:15:59 [INFO] Starting IBKR Gateway Manager...
+2025-08-04 11:15:59 [INFO] ========================================
+2025-08-04 11:15:59 [INFO] Starting IBKR Gateway in PAPER MODE
+2025-08-04 11:15:59 [INFO] ========================================
+2025-08-04 11:15:59 [INFO] Initializing IBKR Gateway...
+2025-08-04 11:15:59 [INFO] Killing any existing gateway processes...
+2025-08-04 11:15:59 [INFO] Killed any existing gateway processes
+2025-08-04 11:15:59 [INFO] IBKR Gateway Manager running on http://localhost:3000
+2025-08-04 11:15:59 [INFO] Control Panel UI available at root path /
+2025-08-04 11:16:00 [ERROR] Failed to get gateway status: Converting circular structure to JSON
+    --> starting at object with constructor 'Agent'
+    |     property 'sockets' -> object with constructor 'Object'
+    |     property 'localhost:5001::::::::false:::::::::::::' -> object with constructor 'Array'
+    |     ...
+    |     property '_httpMessage' -> object with constructor 'ClientRequest'
+    --- property 'agent' closes the circle {"stack":"TypeError: Converting circular structure to JSON\n    --> starting at object with constructor 'Agent'\n    |     property 'sockets' -> object with constructor 'Object'\n    |     property 'localhost:5001::::::::false:::::::::::::' -> object with constructor 'Array'\n    |     ...\n    |     property '_httpMessage' -> object with constructor 'ClientRequest'\n    --- property 'agent' closes the circle\n    at JSON.stringify (<anonymous>)\n    at Printf.template (/Users/romankr/Dev/MayBursa/src/apps/ibkr-gateway/src/utils/logger.ts:11:23)\n    at Printf.transform (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/logform@2.7.0/node_modules/logform/printf.js:11:26)\n    at Format.transform (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/logform@2.7.0/node_modules/logform/combine.js:20:24)\n    at DerivedLogger._transform (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/winston@3.17.0/node_modules/winston/lib/winston/logger.js:314:29)\n    at DerivedLogger.Transform._read (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/readable-stream@3.6.2/node_modules/readable-stream/lib/_stream_transform.js:166:10)\n    at DerivedLogger.Transform._write (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/readable-stream@3.6.2/node_modules/readable-stream/lib/_stream_transform.js:155:83)\n    at doWrite (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/readable-stream@3.6.2/node_modules/readable-stream/lib/_stream_writable.js:390:139)\n    at writeOrBuffer (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/readable-stream@3.6.2/node_modules/readable-stream/lib/_stream_writable.js:381:5)\n    at DerivedLogger.Writable.write (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/readable-stream@3.6.2/node_modules/readable-stream/lib/_stream_writable.js:302:11)"}
+2025-08-04 11:16:00 [ERROR] Failed to get auth status: Converting circular structure to JSON
+    --> starting at object with constructor 'Agent'
+    |     property 'sockets' -> object with constructor 'Object'
+    |     property 'localhost:5001::::::::false:::::::::::::' -> object with constructor 'Array'
+    |     ...
+    |     property '_httpMessage' -> object with constructor 'ClientRequest'
+    --- property 'agent' closes the circle {"stack":"TypeError: Converting circular structure to JSON\n    --> starting at object with constructor 'Agent'\n    |     property 'sockets' -> object with constructor 'Object'\n    |     property 'localhost:5001::::::::false:::::::::::::' -> object with constructor 'Array'\n    |     ...\n    |     property '_httpMessage' -> object with constructor 'ClientRequest'\n    --- property 'agent' closes the circle\n    at JSON.stringify (<anonymous>)\n    at Printf.template (/Users/romankr/Dev/MayBursa/src/apps/ibkr-gateway/src/utils/logger.ts:11:23)\n    at Printf.transform (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/logform@2.7.0/node_modules/logform/printf.js:11:26)\n    at Format.transform (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/logform@2.7.0/node_modules/logform/combine.js:20:24)\n    at DerivedLogger._transform (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/winston@3.17.0/node_modules/winston/lib/winston/logger.js:314:29)\n    at DerivedLogger.Transform._read (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/readable-stream@3.6.2/node_modules/readable-stream/lib/_stream_transform.js:166:10)\n    at DerivedLogger.Transform._write (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/readable-stream@3.6.2/node_modules/readable-stream/lib/_stream_transform.js:155:83)\n    at doWrite (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/readable-stream@3.6.2/node_modules/readable-stream/lib/_stream_writable.js:390:139)\n    at writeOrBuffer (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/readable-stream@3.6.2/node_modules/readable-stream/lib/_stream_writable.js:381:5)\n    at DerivedLogger.Writable.write (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/readable-stream@3.6.2/node_modules/readable-stream/lib/_stream_writable.js:302:11)"}
+2025-08-04 11:16:01 [INFO] Starting gateway process...
+2025-08-04 11:16:01 [INFO] Java installation verified
+2025-08-04 11:16:01 [INFO] Killed any existing gateway processes
+2025-08-04 11:16:03 [INFO] Starting gateway from /Users/romankr/Dev/MayBursa/src/apps/ibkr-gateway/clientportal.gw
+2025-08-04 11:16:03 [INFO] Using config: /Users/romankr/Dev/MayBursa/src/apps/ibkr-gateway/conf-custom.yaml
+2025-08-04 11:16:03 [INFO] Gateway started with PID: 70525
+2025-08-04 11:16:03 [INFO] Waiting for gateway connection...
+2025-08-04 11:16:03 [INFO] Waiting for gateway connection...
+2025-08-04 11:16:03 [ERROR] Failed to initialize gateway: Converting circular structure to JSON
+    --> starting at object with constructor 'Agent'
+    |     property 'sockets' -> object with constructor 'Object'
+    |     property 'localhost:5001::::::::false:::::::::::::' -> object with constructor 'Array'
+    |     ...
+    |     property '_httpMessage' -> object with constructor 'ClientRequest'
+    --- property 'agent' closes the circle {"stack":"TypeError: Converting circular structure to JSON\n    --> starting at object with constructor 'Agent'\n    |     property 'sockets' -> object with constructor 'Object'\n    |     property 'localhost:5001::::::::false:::::::::::::' -> object with constructor 'Array'\n    |     ...\n    |     property '_httpMessage' -> object with constructor 'ClientRequest'\n    --- property 'agent' closes the circle\n    at JSON.stringify (<anonymous>)\n    at Printf.template (/Users/romankr/Dev/MayBursa/src/apps/ibkr-gateway/src/utils/logger.ts:11:23)\n    at Printf.transform (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/logform@2.7.0/node_modules/logform/printf.js:11:26)\n    at Format.transform (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/logform@2.7.0/node_modules/logform/combine.js:20:24)\n    at DerivedLogger._transform (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/winston@3.17.0/node_modules/winston/lib/winston/logger.js:314:29)\n    at DerivedLogger.Transform._read (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/readable-stream@3.6.2/node_modules/readable-stream/lib/_stream_transform.js:166:10)\n    at DerivedLogger.Transform._write (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/readable-stream@3.6.2/node_modules/readable-stream/lib/_stream_transform.js:155:83)\n    at doWrite (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/readable-stream@3.6.2/node_modules/readable-stream/lib/_stream_writable.js:390:139)\n    at writeOrBuffer (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/readable-stream@3.6.2/node_modules/readable-stream/lib/_stream_writable.js:381:5)\n    at DerivedLogger.Writable.write (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/readable-stream@3.6.2/node_modules/readable-stream/lib/_stream_writable.js:302:11)"}
+2025-08-04 11:16:03 [ERROR] Gateway initialization failed: Converting circular structure to JSON
+    --> starting at object with constructor 'Agent'
+    |     property 'sockets' -> object with constructor 'Object'
+    |     property 'localhost:5001::::::::false:::::::::::::' -> object with constructor 'Array'
+    |     ...
+    |     property '_httpMessage' -> object with constructor 'ClientRequest'
+    --- property 'agent' closes the circle {"stack":"TypeError: Converting circular structure to JSON\n    --> starting at object with constructor 'Agent'\n    |     property 'sockets' -> object with constructor 'Object'\n    |     property 'localhost:5001::::::::false:::::::::::::' -> object with constructor 'Array'\n    |     ...\n    |     property '_httpMessage' -> object with constructor 'ClientRequest'\n    --- property 'agent' closes the circle\n    at JSON.stringify (<anonymous>)\n    at Printf.template (/Users/romankr/Dev/MayBursa/src/apps/ibkr-gateway/src/utils/logger.ts:11:23)\n    at Printf.transform (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/logform@2.7.0/node_modules/logform/printf.js:11:26)\n    at Format.transform (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/logform@2.7.0/node_modules/logform/combine.js:20:24)\n    at DerivedLogger._transform (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/winston@3.17.0/node_modules/winston/lib/winston/logger.js:314:29)\n    at DerivedLogger.Transform._read (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/readable-stream@3.6.2/node_modules/readable-stream/lib/_stream_transform.js:166:10)\n    at DerivedLogger.Transform._write (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/readable-stream@3.6.2/node_modules/readable-stream/lib/_stream_transform.js:155:83)\n    at doWrite (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/readable-stream@3.6.2/node_modules/readable-stream/lib/_stream_writable.js:390:139)\n    at writeOrBuffer (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/readable-stream@3.6.2/node_modules/readable-stream/lib/_stream_writable.js:381:5)\n    at DerivedLogger.Writable.write (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/readable-stream@3.6.2/node_modules/readable-stream/lib/_stream_writable.js:302:11)"}
+2025-08-04 11:16:04 [INFO] Gateway: running  
+ runtime path : /Users/romankr/Dev/MayBursa/src/apps/ibkr-gateway:dist/ibgroup.web.core.iblink.router.clientportal.gw.jar:build/lib/runtime/*
+2025-08-04 11:16:04 [INFO] Gateway: config file  : /Users/romankr/Dev/MayBursa/src/apps/ibkr-gateway/conf-custom.yaml
+2025-08-04 11:16:04 [ERROR] Gateway Error: Failed to load configuration file: ..//Users/romankr/Dev/MayBursa/src/apps/ibkr-gateway/conf-custom.yaml
+java.io.IOException: Stream closed
+2025-08-04 11:16:04 [INFO] Gateway: 11:16:04.348 [main] ERROR ibgroup.web.core.clientportal.gw.GatewayStart - loading configuration file error:java.io.IOException: Stream closed
+2025-08-04 11:16:04 [INFO] Gateway process exited with code 1 and signal null
+2025-08-04 11:16:10 [ERROR] Failed to get gateway status: Converting circular structure to JSON
+    --> starting at object with constructor 'Agent'
+    |     property 'sockets' -> object with constructor 'Object'
+    |     property 'localhost:5001::::::::false:::::::::::::' -> object with constructor 'Array'
+    |     ...
+    |     property '_httpMessage' -> object with constructor 'ClientRequest'
+    --- property 'agent' closes the circle {"stack":"TypeError: Converting circular structure to JSON\n    --> starting at object with constructor 'Agent'\n    |     property 'sockets' -> object with constructor 'Object'\n    |     property 'localhost:5001::::::::false:::::::::::::' -> object with constructor 'Array'\n    |     ...\n    |     property '_httpMessage' -> object with constructor 'ClientRequest'\n    --- property 'agent' closes the circle\n    at JSON.stringify (<anonymous>)\n    at Printf.template (/Users/romankr/Dev/MayBursa/src/apps/ibkr-gateway/src/utils/logger.ts:11:23)\n    at Printf.transform (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/logform@2.7.0/node_modules/logform/printf.js:11:26)\n    at Format.transform (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/logform@2.7.0/node_modules/logform/combine.js:20:24)\n    at DerivedLogger._transform (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/winston@3.17.0/node_modules/winston/lib/winston/logger.js:314:29)\n    at DerivedLogger.Transform._read (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/readable-stream@3.6.2/node_modules/readable-stream/lib/_stream_transform.js:166:10)\n    at DerivedLogger.Transform._write (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/readable-stream@3.6.2/node_modules/readable-stream/lib/_stream_transform.js:155:83)\n    at doWrite (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/readable-stream@3.6.2/node_modules/readable-stream/lib/_stream_writable.js:390:139)\n    at writeOrBuffer (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/readable-stream@3.6.2/node_modules/readable-stream/lib/_stream_writable.js:381:5)\n    at DerivedLogger.Writable.write (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/readable-stream@3.6.2/node_modules/readable-stream/lib/_stream_writable.js:302:11)"}
+2025-08-04 11:16:10 [ERROR] Failed to get auth status: Converting circular structure to JSON
+    --> starting at object with constructor 'Agent'
+    |     property 'sockets' -> object with constructor 'Object'
+    |     property 'localhost:5001::::::::false:::::::::::::' -> object with constructor 'Array'
+    |     ...
+    |     property '_httpMessage' -> object with constructor 'ClientRequest'
+    --- property 'agent' closes the circle {"stack":"TypeError: Converting circular structure to JSON\n    --> starting at object with constructor 'Agent'\n    |     property 'sockets' -> object with constructor 'Object'\n    |     property 'localhost:5001::::::::false:::::::::::::' -> object with constructor 'Array'\n    |     ...\n    |     property '_httpMessage' -> object with constructor 'ClientRequest'\n    --- property 'agent' closes the circle\n    at JSON.stringify (<anonymous>)\n    at Printf.template (/Users/romankr/Dev/MayBursa/src/apps/ibkr-gateway/src/utils/logger.ts:11:23)\n    at Printf.transform (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/logform@2.7.0/node_modules/logform/printf.js:11:26)\n    at Format.transform (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/logform@2.7.0/node_modules/logform/combine.js:20:24)\n    at DerivedLogger._transform (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/winston@3.17.0/node_modules/winston/lib/winston/logger.js:314:29)\n    at DerivedLogger.Transform._read (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/readable-stream@3.6.2/node_modules/readable-stream/lib/_stream_transform.js:166:10)\n    at DerivedLogger.Transform._write (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/readable-stream@3.6.2/node_modules/readable-stream/lib/_stream_transform.js:155:83)\n    at doWrite (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/readable-stream@3.6.2/node_modules/readable-stream/lib/_stream_writable.js:390:139)\n    at writeOrBuffer (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/readable-stream@3.6.2/node_modules/readable-stream/lib/_stream_writable.js:381:5)\n    at DerivedLogger.Writable.write (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/readable-stream@3.6.2/node_modules/readable-stream/lib/_stream_writable.js:302:11)"}
+2025-08-04 11:16:20 [ERROR] Failed to get gateway status: Converting circular structure to JSON
+    --> starting at object with constructor 'Agent'
+    |     property 'sockets' -> object with constructor 'Object'
+    |     property 'localhost:5001::::::::false:::::::::::::' -> object with constructor 'Array'
+    |     ...
+    |     property '_httpMessage' -> object with constructor 'ClientRequest'
+    --- property 'agent' closes the circle {"stack":"TypeError: Converting circular structure to JSON\n    --> starting at object with constructor 'Agent'\n    |     property 'sockets' -> object with constructor 'Object'\n    |     property 'localhost:5001::::::::false:::::::::::::' -> object with constructor 'Array'\n    |     ...\n    |     property '_httpMessage' -> object with constructor 'ClientRequest'\n    --- property 'agent' closes the circle\n    at JSON.stringify (<anonymous>)\n    at Printf.template (/Users/romankr/Dev/MayBursa/src/apps/ibkr-gateway/src/utils/logger.ts:11:23)\n    at Printf.transform (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/logform@2.7.0/node_modules/logform/printf.js:11:26)\n    at Format.transform (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/logform@2.7.0/node_modules/logform/combine.js:20:24)\n    at DerivedLogger._transform (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/winston@3.17.0/node_modules/winston/lib/winston/logger.js:314:29)\n    at DerivedLogger.Transform._read (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/readable-stream@3.6.2/node_modules/readable-stream/lib/_stream_transform.js:166:10)\n    at DerivedLogger.Transform._write (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/readable-stream@3.6.2/node_modules/readable-stream/lib/_stream_transform.js:155:83)\n    at doWrite (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/readable-stream@3.6.2/node_modules/readable-stream/lib/_stream_writable.js:390:139)\n    at writeOrBuffer (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/readable-stream@3.6.2/node_modules/readable-stream/lib/_stream_writable.js:381:5)\n    at DerivedLogger.Writable.write (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/readable-stream@3.6.2/node_modules/readable-stream/lib/_stream_writable.js:302:11)"}
+2025-08-04 11:16:20 [ERROR] Failed to get auth status: Converting circular structure to JSON
+    --> starting at object with constructor 'Agent'
+    |     property 'sockets' -> object with constructor 'Object'
+    |     property 'localhost:5001::::::::false:::::::::::::' -> object with constructor 'Array'
+    |     ...
+    |     property '_httpMessage' -> object with constructor 'ClientRequest'
+    --- property 'agent' closes the circle {"stack":"TypeError: Converting circular structure to JSON\n    --> starting at object with constructor 'Agent'\n    |     property 'sockets' -> object with constructor 'Object'\n    |     property 'localhost:5001::::::::false:::::::::::::' -> object with constructor 'Array'\n    |     ...\n    |     property '_httpMessage' -> object with constructor 'ClientRequest'\n    --- property 'agent' closes the circle\n    at JSON.stringify (<anonymous>)\n    at Printf.template (/Users/romankr/Dev/MayBursa/src/apps/ibkr-gateway/src/utils/logger.ts:11:23)\n    at Printf.transform (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/logform@2.7.0/node_modules/logform/printf.js:11:26)\n    at Format.transform (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/logform@2.7.0/node_modules/logform/combine.js:20:24)\n    at DerivedLogger._transform (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/winston@3.17.0/node_modules/winston/lib/winston/logger.js:314:29)\n    at DerivedLogger.Transform._read (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/readable-stream@3.6.2/node_modules/readable-stream/lib/_stream_transform.js:166:10)\n    at DerivedLogger.Transform._write (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/readable-stream@3.6.2/node_modules/readable-stream/lib/_stream_transform.js:155:83)\n    at doWrite (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/readable-stream@3.6.2/node_modules/readable-stream/lib/_stream_writable.js:390:139)\n    at writeOrBuffer (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/readable-stream@3.6.2/node_modules/readable-stream/lib/_stream_writable.js:381:5)\n    at DerivedLogger.Writable.write (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/readable-stream@3.6.2/node_modules/readable-stream/lib/_stream_writable.js:302:11)"}
+2025-08-04 11:16:30 [ERROR] Failed to get gateway status: Converting circular structure to JSON
+    --> starting at object with constructor 'Agent'
+    |     property 'sockets' -> object with constructor 'Object'
+    |     property 'localhost:5001::::::::false:::::::::::::' -> object with constructor 'Array'
+    |     ...
+    |     property '_httpMessage' -> object with constructor 'ClientRequest'
+    --- property 'agent' closes the circle {"stack":"TypeError: Converting circular structure to JSON\n    --> starting at object with constructor 'Agent'\n    |     property 'sockets' -> object with constructor 'Object'\n    |     property 'localhost:5001::::::::false:::::::::::::' -> object with constructor 'Array'\n    |     ...\n    |     property '_httpMessage' -> object with constructor 'ClientRequest'\n    --- property 'agent' closes the circle\n    at JSON.stringify (<anonymous>)\n    at Printf.template (/Users/romankr/Dev/MayBursa/src/apps/ibkr-gateway/src/utils/logger.ts:11:23)\n    at Printf.transform (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/logform@2.7.0/node_modules/logform/printf.js:11:26)\n    at Format.transform (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/logform@2.7.0/node_modules/logform/combine.js:20:24)\n    at DerivedLogger._transform (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/winston@3.17.0/node_modules/winston/lib/winston/logger.js:314:29)\n    at DerivedLogger.Transform._read (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/readable-stream@3.6.2/node_modules/readable-stream/lib/_stream_transform.js:166:10)\n    at DerivedLogger.Transform._write (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/readable-stream@3.6.2/node_modules/readable-stream/lib/_stream_transform.js:155:83)\n    at doWrite (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/readable-stream@3.6.2/node_modules/readable-stream/lib/_stream_writable.js:390:139)\n    at writeOrBuffer (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/readable-stream@3.6.2/node_modules/readable-stream/lib/_stream_writable.js:381:5)\n    at DerivedLogger.Writable.write (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/readable-stream@3.6.2/node_modules/readable-stream/lib/_stream_writable.js:302:11)"}
+2025-08-04 11:16:30 [ERROR] Failed to get auth status: Converting circular structure to JSON
+    --> starting at object with constructor 'Agent'
+    |     property 'sockets' -> object with constructor 'Object'
+    |     property 'localhost:5001::::::::false:::::::::::::' -> object with constructor 'Array'
+    |     ...
+    |     property '_httpMessage' -> object with constructor 'ClientRequest'
+    --- property 'agent' closes the circle {"stack":"TypeError: Converting circular structure to JSON\n    --> starting at object with constructor 'Agent'\n    |     property 'sockets' -> object with constructor 'Object'\n    |     property 'localhost:5001::::::::false:::::::::::::' -> object with constructor 'Array'\n    |     ...\n    |     property '_httpMessage' -> object with constructor 'ClientRequest'\n    --- property 'agent' closes the circle\n    at JSON.stringify (<anonymous>)\n    at Printf.template (/Users/romankr/Dev/MayBursa/src/apps/ibkr-gateway/src/utils/logger.ts:11:23)\n    at Printf.transform (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/logform@2.7.0/node_modules/logform/printf.js:11:26)\n    at Format.transform (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/logform@2.7.0/node_modules/logform/combine.js:20:24)\n    at DerivedLogger._transform (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/winston@3.17.0/node_modules/winston/lib/winston/logger.js:314:29)\n    at DerivedLogger.Transform._read (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/readable-stream@3.6.2/node_modules/readable-stream/lib/_stream_transform.js:166:10)\n    at DerivedLogger.Transform._write (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/readable-stream@3.6.2/node_modules/readable-stream/lib/_stream_transform.js:155:83)\n    at doWrite (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/readable-stream@3.6.2/node_modules/readable-stream/lib/_stream_writable.js:390:139)\n    at writeOrBuffer (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/readable-stream@3.6.2/node_modules/readable-stream/lib/_stream_writable.js:381:5)\n    at DerivedLogger.Writable.write (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/readable-stream@3.6.2/node_modules/readable-stream/lib/_stream_writable.js:302:11)"}
+2025-08-04 11:16:40 [ERROR] Failed to get gateway status: Converting circular structure to JSON
+    --> starting at object with constructor 'Agent'
+    |     property 'sockets' -> object with constructor 'Object'
+    |     property 'localhost:5001::::::::false:::::::::::::' -> object with constructor 'Array'
+    |     ...
+    |     property '_httpMessage' -> object with constructor 'ClientRequest'
+    --- property 'agent' closes the circle {"stack":"TypeError: Converting circular structure to JSON\n    --> starting at object with constructor 'Agent'\n    |     property 'sockets' -> object with constructor 'Object'\n    |     property 'localhost:5001::::::::false:::::::::::::' -> object with constructor 'Array'\n    |     ...\n    |     property '_httpMessage' -> object with constructor 'ClientRequest'\n    --- property 'agent' closes the circle\n    at JSON.stringify (<anonymous>)\n    at Printf.template (/Users/romankr/Dev/MayBursa/src/apps/ibkr-gateway/src/utils/logger.ts:11:23)\n    at Printf.transform (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/logform@2.7.0/node_modules/logform/printf.js:11:26)\n    at Format.transform (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/logform@2.7.0/node_modules/logform/combine.js:20:24)\n    at DerivedLogger._transform (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/winston@3.17.0/node_modules/winston/lib/winston/logger.js:314:29)\n    at DerivedLogger.Transform._read (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/readable-stream@3.6.2/node_modules/readable-stream/lib/_stream_transform.js:166:10)\n    at DerivedLogger.Transform._write (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/readable-stream@3.6.2/node_modules/readable-stream/lib/_stream_transform.js:155:83)\n    at doWrite (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/readable-stream@3.6.2/node_modules/readable-stream/lib/_stream_writable.js:390:139)\n    at writeOrBuffer (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/readable-stream@3.6.2/node_modules/readable-stream/lib/_stream_writable.js:381:5)\n    at DerivedLogger.Writable.write (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/readable-stream@3.6.2/node_modules/readable-stream/lib/_stream_writable.js:302:11)"}
+2025-08-04 11:16:40 [ERROR] Failed to get auth status: Converting circular structure to JSON
+    --> starting at object with constructor 'Agent'
+    |     property 'sockets' -> object with constructor 'Object'
+    |     property 'localhost:5001::::::::false:::::::::::::' -> object with constructor 'Array'
+    |     ...
+    |     property '_httpMessage' -> object with constructor 'ClientRequest'
+    --- property 'agent' closes the circle {"stack":"TypeError: Converting circular structure to JSON\n    --> starting at object with constructor 'Agent'\n    |     property 'sockets' -> object with constructor 'Object'\n    |     property 'localhost:5001::::::::false:::::::::::::' -> object with constructor 'Array'\n    |     ...\n    |     property '_httpMessage' -> object with constructor 'ClientRequest'\n    --- property 'agent' closes the circle\n    at JSON.stringify (<anonymous>)\n    at Printf.template (/Users/romankr/Dev/MayBursa/src/apps/ibkr-gateway/src/utils/logger.ts:11:23)\n    at Printf.transform (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/logform@2.7.0/node_modules/logform/printf.js:11:26)\n    at Format.transform (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/logform@2.7.0/node_modules/logform/combine.js:20:24)\n    at DerivedLogger._transform (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/winston@3.17.0/node_modules/winston/lib/winston/logger.js:314:29)\n    at DerivedLogger.Transform._read (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/readable-stream@3.6.2/node_modules/readable-stream/lib/_stream_transform.js:166:10)\n    at DerivedLogger.Transform._write (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/readable-stream@3.6.2/node_modules/readable-stream/lib/_stream_transform.js:155:83)\n    at doWrite (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/readable-stream@3.6.2/node_modules/readable-stream/lib/_stream_writable.js:390:139)\n    at writeOrBuffer (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/readable-stream@3.6.2/node_modules/readable-stream/lib/_stream_writable.js:381:5)\n    at DerivedLogger.Writable.write (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/readable-stream@3.6.2/node_modules/readable-stream/lib/_stream_writable.js:302:11)"}
+2025-08-04 11:18:50 [INFO] Starting IBKR Gateway Manager...
+2025-08-04 11:18:50 [INFO] ========================================
+2025-08-04 11:18:50 [INFO] Starting IBKR Gateway in PAPER MODE
+2025-08-04 11:18:50 [INFO] ========================================
+2025-08-04 11:18:50 [INFO] Initializing IBKR Gateway...
+2025-08-04 11:18:50 [INFO] Killing any existing gateway processes...
+2025-08-04 11:18:50 [INFO] Killed any existing gateway processes
+2025-08-04 11:18:50 [INFO] IBKR Gateway Manager running on http://localhost:3000
+2025-08-04 11:18:50 [INFO] Control Panel UI available at root path /
+2025-08-04 11:18:50 [ERROR] Failed to get gateway status: Converting circular structure to JSON
+    --> starting at object with constructor 'Agent'
+    |     property 'sockets' -> object with constructor 'Object'
+    |     property 'localhost:5001::::::::false:::::::::::::' -> object with constructor 'Array'
+    |     ...
+    |     property '_httpMessage' -> object with constructor 'ClientRequest'
+    --- property 'agent' closes the circle {"stack":"TypeError: Converting circular structure to JSON\n    --> starting at object with constructor 'Agent'\n    |     property 'sockets' -> object with constructor 'Object'\n    |     property 'localhost:5001::::::::false:::::::::::::' -> object with constructor 'Array'\n    |     ...\n    |     property '_httpMessage' -> object with constructor 'ClientRequest'\n    --- property 'agent' closes the circle\n    at JSON.stringify (<anonymous>)\n    at Printf.template (/Users/romankr/Dev/MayBursa/src/apps/ibkr-gateway/src/utils/logger.ts:11:23)\n    at Printf.transform (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/logform@2.7.0/node_modules/logform/printf.js:11:26)\n    at Format.transform (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/logform@2.7.0/node_modules/logform/combine.js:20:24)\n    at DerivedLogger._transform (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/winston@3.17.0/node_modules/winston/lib/winston/logger.js:314:29)\n    at DerivedLogger.Transform._read (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/readable-stream@3.6.2/node_modules/readable-stream/lib/_stream_transform.js:166:10)\n    at DerivedLogger.Transform._write (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/readable-stream@3.6.2/node_modules/readable-stream/lib/_stream_transform.js:155:83)\n    at doWrite (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/readable-stream@3.6.2/node_modules/readable-stream/lib/_stream_writable.js:390:139)\n    at writeOrBuffer (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/readable-stream@3.6.2/node_modules/readable-stream/lib/_stream_writable.js:381:5)\n    at DerivedLogger.Writable.write (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/readable-stream@3.6.2/node_modules/readable-stream/lib/_stream_writable.js:302:11)"}
+2025-08-04 11:18:50 [ERROR] Failed to get auth status: Converting circular structure to JSON
+    --> starting at object with constructor 'Agent'
+    |     property 'sockets' -> object with constructor 'Object'
+    |     property 'localhost:5001::::::::false:::::::::::::' -> object with constructor 'Array'
+    |     ...
+    |     property '_httpMessage' -> object with constructor 'ClientRequest'
+    --- property 'agent' closes the circle {"stack":"TypeError: Converting circular structure to JSON\n    --> starting at object with constructor 'Agent'\n    |     property 'sockets' -> object with constructor 'Object'\n    |     property 'localhost:5001::::::::false:::::::::::::' -> object with constructor 'Array'\n    |     ...\n    |     property '_httpMessage' -> object with constructor 'ClientRequest'\n    --- property 'agent' closes the circle\n    at JSON.stringify (<anonymous>)\n    at Printf.template (/Users/romankr/Dev/MayBursa/src/apps/ibkr-gateway/src/utils/logger.ts:11:23)\n    at Printf.transform (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/logform@2.7.0/node_modules/logform/printf.js:11:26)\n    at Format.transform (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/logform@2.7.0/node_modules/logform/combine.js:20:24)\n    at DerivedLogger._transform (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/winston@3.17.0/node_modules/winston/lib/winston/logger.js:314:29)\n    at DerivedLogger.Transform._read (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/readable-stream@3.6.2/node_modules/readable-stream/lib/_stream_transform.js:166:10)\n    at DerivedLogger.Transform._write (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/readable-stream@3.6.2/node_modules/readable-stream/lib/_stream_transform.js:155:83)\n    at doWrite (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/readable-stream@3.6.2/node_modules/readable-stream/lib/_stream_writable.js:390:139)\n    at writeOrBuffer (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/readable-stream@3.6.2/node_modules/readable-stream/lib/_stream_writable.js:381:5)\n    at DerivedLogger.Writable.write (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/readable-stream@3.6.2/node_modules/readable-stream/lib/_stream_writable.js:302:11)"}
+2025-08-04 11:18:52 [INFO] Starting gateway process...
+2025-08-04 11:18:52 [INFO] Java installation verified
+2025-08-04 11:18:52 [INFO] Killed any existing gateway processes
+2025-08-04 11:18:54 [INFO] Starting gateway from /Users/romankr/Dev/MayBursa/src/apps/ibkr-gateway/clientportal.gw
+2025-08-04 11:18:54 [INFO] Using config: /Users/romankr/Dev/MayBursa/src/apps/ibkr-gateway/conf-custom.yaml
+2025-08-04 11:18:54 [INFO] Gateway started with PID: 72700
+2025-08-04 11:18:54 [INFO] Waiting for gateway connection...
+2025-08-04 11:18:54 [INFO] Waiting for gateway connection...
+2025-08-04 11:18:54 [ERROR] Failed to initialize gateway: Converting circular structure to JSON
+    --> starting at object with constructor 'Agent'
+    |     property 'sockets' -> object with constructor 'Object'
+    |     property 'localhost:5001::::::::false:::::::::::::' -> object with constructor 'Array'
+    |     ...
+    |     property '_httpMessage' -> object with constructor 'ClientRequest'
+    --- property 'agent' closes the circle {"stack":"TypeError: Converting circular structure to JSON\n    --> starting at object with constructor 'Agent'\n    |     property 'sockets' -> object with constructor 'Object'\n    |     property 'localhost:5001::::::::false:::::::::::::' -> object with constructor 'Array'\n    |     ...\n    |     property '_httpMessage' -> object with constructor 'ClientRequest'\n    --- property 'agent' closes the circle\n    at JSON.stringify (<anonymous>)\n    at Printf.template (/Users/romankr/Dev/MayBursa/src/apps/ibkr-gateway/src/utils/logger.ts:11:23)\n    at Printf.transform (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/logform@2.7.0/node_modules/logform/printf.js:11:26)\n    at Format.transform (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/logform@2.7.0/node_modules/logform/combine.js:20:24)\n    at DerivedLogger._transform (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/winston@3.17.0/node_modules/winston/lib/winston/logger.js:314:29)\n    at DerivedLogger.Transform._read (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/readable-stream@3.6.2/node_modules/readable-stream/lib/_stream_transform.js:166:10)\n    at DerivedLogger.Transform._write (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/readable-stream@3.6.2/node_modules/readable-stream/lib/_stream_transform.js:155:83)\n    at doWrite (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/readable-stream@3.6.2/node_modules/readable-stream/lib/_stream_writable.js:390:139)\n    at writeOrBuffer (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/readable-stream@3.6.2/node_modules/readable-stream/lib/_stream_writable.js:381:5)\n    at DerivedLogger.Writable.write (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/readable-stream@3.6.2/node_modules/readable-stream/lib/_stream_writable.js:302:11)"}
+2025-08-04 11:18:54 [ERROR] Gateway initialization failed: Converting circular structure to JSON
+    --> starting at object with constructor 'Agent'
+    |     property 'sockets' -> object with constructor 'Object'
+    |     property 'localhost:5001::::::::false:::::::::::::' -> object with constructor 'Array'
+    |     ...
+    |     property '_httpMessage' -> object with constructor 'ClientRequest'
+    --- property 'agent' closes the circle {"stack":"TypeError: Converting circular structure to JSON\n    --> starting at object with constructor 'Agent'\n    |     property 'sockets' -> object with constructor 'Object'\n    |     property 'localhost:5001::::::::false:::::::::::::' -> object with constructor 'Array'\n    |     ...\n    |     property '_httpMessage' -> object with constructor 'ClientRequest'\n    --- property 'agent' closes the circle\n    at JSON.stringify (<anonymous>)\n    at Printf.template (/Users/romankr/Dev/MayBursa/src/apps/ibkr-gateway/src/utils/logger.ts:11:23)\n    at Printf.transform (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/logform@2.7.0/node_modules/logform/printf.js:11:26)\n    at Format.transform (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/logform@2.7.0/node_modules/logform/combine.js:20:24)\n    at DerivedLogger._transform (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/winston@3.17.0/node_modules/winston/lib/winston/logger.js:314:29)\n    at DerivedLogger.Transform._read (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/readable-stream@3.6.2/node_modules/readable-stream/lib/_stream_transform.js:166:10)\n    at DerivedLogger.Transform._write (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/readable-stream@3.6.2/node_modules/readable-stream/lib/_stream_transform.js:155:83)\n    at doWrite (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/readable-stream@3.6.2/node_modules/readable-stream/lib/_stream_writable.js:390:139)\n    at writeOrBuffer (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/readable-stream@3.6.2/node_modules/readable-stream/lib/_stream_writable.js:381:5)\n    at DerivedLogger.Writable.write (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/readable-stream@3.6.2/node_modules/readable-stream/lib/_stream_writable.js:302:11)"}
+2025-08-04 11:18:54 [INFO] Gateway: running
+2025-08-04 11:18:54 [INFO] Gateway: runtime path : /Users/romankr/Dev/MayBursa/src/apps/ibkr-gateway:dist/ibgroup.web.core.iblink.router.clientportal.gw.jar:build/lib/runtime/*
+ config file  : /Users/romankr/Dev/MayBursa/src/apps/ibkr-gateway/conf-custom.yaml
+2025-08-04 11:18:54 [ERROR] Gateway Error: Failed to load configuration file: ..//Users/romankr/Dev/MayBursa/src/apps/ibkr-gateway/conf-custom.yaml
+java.io.IOException: Stream closed
+2025-08-04 11:18:54 [INFO] Gateway: 11:18:54.810 [main] ERROR ibgroup.web.core.clientportal.gw.GatewayStart - loading configuration file error:java.io.IOException: Stream closed
+2025-08-04 11:18:54 [INFO] Gateway process exited with code 1 and signal null
+2025-08-04 11:19:00 [ERROR] Failed to get gateway status: Converting circular structure to JSON
+    --> starting at object with constructor 'Agent'
+    |     property 'sockets' -> object with constructor 'Object'
+    |     property 'localhost:5001::::::::false:::::::::::::' -> object with constructor 'Array'
+    |     ...
+    |     property '_httpMessage' -> object with constructor 'ClientRequest'
+    --- property 'agent' closes the circle {"stack":"TypeError: Converting circular structure to JSON\n    --> starting at object with constructor 'Agent'\n    |     property 'sockets' -> object with constructor 'Object'\n    |     property 'localhost:5001::::::::false:::::::::::::' -> object with constructor 'Array'\n    |     ...\n    |     property '_httpMessage' -> object with constructor 'ClientRequest'\n    --- property 'agent' closes the circle\n    at JSON.stringify (<anonymous>)\n    at Printf.template (/Users/romankr/Dev/MayBursa/src/apps/ibkr-gateway/src/utils/logger.ts:11:23)\n    at Printf.transform (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/logform@2.7.0/node_modules/logform/printf.js:11:26)\n    at Format.transform (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/logform@2.7.0/node_modules/logform/combine.js:20:24)\n    at DerivedLogger._transform (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/winston@3.17.0/node_modules/winston/lib/winston/logger.js:314:29)\n    at DerivedLogger.Transform._read (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/readable-stream@3.6.2/node_modules/readable-stream/lib/_stream_transform.js:166:10)\n    at DerivedLogger.Transform._write (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/readable-stream@3.6.2/node_modules/readable-stream/lib/_stream_transform.js:155:83)\n    at doWrite (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/readable-stream@3.6.2/node_modules/readable-stream/lib/_stream_writable.js:390:139)\n    at writeOrBuffer (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/readable-stream@3.6.2/node_modules/readable-stream/lib/_stream_writable.js:381:5)\n    at DerivedLogger.Writable.write (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/readable-stream@3.6.2/node_modules/readable-stream/lib/_stream_writable.js:302:11)"}
+2025-08-04 11:19:00 [ERROR] Failed to get auth status: Converting circular structure to JSON
+    --> starting at object with constructor 'Agent'
+    |     property 'sockets' -> object with constructor 'Object'
+    |     property 'localhost:5001::::::::false:::::::::::::' -> object with constructor 'Array'
+    |     ...
+    |     property '_httpMessage' -> object with constructor 'ClientRequest'
+    --- property 'agent' closes the circle {"stack":"TypeError: Converting circular structure to JSON\n    --> starting at object with constructor 'Agent'\n    |     property 'sockets' -> object with constructor 'Object'\n    |     property 'localhost:5001::::::::false:::::::::::::' -> object with constructor 'Array'\n    |     ...\n    |     property '_httpMessage' -> object with constructor 'ClientRequest'\n    --- property 'agent' closes the circle\n    at JSON.stringify (<anonymous>)\n    at Printf.template (/Users/romankr/Dev/MayBursa/src/apps/ibkr-gateway/src/utils/logger.ts:11:23)\n    at Printf.transform (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/logform@2.7.0/node_modules/logform/printf.js:11:26)\n    at Format.transform (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/logform@2.7.0/node_modules/logform/combine.js:20:24)\n    at DerivedLogger._transform (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/winston@3.17.0/node_modules/winston/lib/winston/logger.js:314:29)\n    at DerivedLogger.Transform._read (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/readable-stream@3.6.2/node_modules/readable-stream/lib/_stream_transform.js:166:10)\n    at DerivedLogger.Transform._write (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/readable-stream@3.6.2/node_modules/readable-stream/lib/_stream_transform.js:155:83)\n    at doWrite (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/readable-stream@3.6.2/node_modules/readable-stream/lib/_stream_writable.js:390:139)\n    at writeOrBuffer (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/readable-stream@3.6.2/node_modules/readable-stream/lib/_stream_writable.js:381:5)\n    at DerivedLogger.Writable.write (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/readable-stream@3.6.2/node_modules/readable-stream/lib/_stream_writable.js:302:11)"}
+2025-08-04 11:19:10 [ERROR] Failed to get gateway status: Converting circular structure to JSON
+    --> starting at object with constructor 'Agent'
+    |     property 'sockets' -> object with constructor 'Object'
+    |     property 'localhost:5001::::::::false:::::::::::::' -> object with constructor 'Array'
+    |     ...
+    |     property '_httpMessage' -> object with constructor 'ClientRequest'
+    --- property 'agent' closes the circle {"stack":"TypeError: Converting circular structure to JSON\n    --> starting at object with constructor 'Agent'\n    |     property 'sockets' -> object with constructor 'Object'\n    |     property 'localhost:5001::::::::false:::::::::::::' -> object with constructor 'Array'\n    |     ...\n    |     property '_httpMessage' -> object with constructor 'ClientRequest'\n    --- property 'agent' closes the circle\n    at JSON.stringify (<anonymous>)\n    at Printf.template (/Users/romankr/Dev/MayBursa/src/apps/ibkr-gateway/src/utils/logger.ts:11:23)\n    at Printf.transform (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/logform@2.7.0/node_modules/logform/printf.js:11:26)\n    at Format.transform (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/logform@2.7.0/node_modules/logform/combine.js:20:24)\n    at DerivedLogger._transform (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/winston@3.17.0/node_modules/winston/lib/winston/logger.js:314:29)\n    at DerivedLogger.Transform._read (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/readable-stream@3.6.2/node_modules/readable-stream/lib/_stream_transform.js:166:10)\n    at DerivedLogger.Transform._write (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/readable-stream@3.6.2/node_modules/readable-stream/lib/_stream_transform.js:155:83)\n    at doWrite (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/readable-stream@3.6.2/node_modules/readable-stream/lib/_stream_writable.js:390:139)\n    at writeOrBuffer (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/readable-stream@3.6.2/node_modules/readable-stream/lib/_stream_writable.js:381:5)\n    at DerivedLogger.Writable.write (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/readable-stream@3.6.2/node_modules/readable-stream/lib/_stream_writable.js:302:11)"}
+2025-08-04 11:19:10 [ERROR] Failed to get auth status: Converting circular structure to JSON
+    --> starting at object with constructor 'Agent'
+    |     property 'sockets' -> object with constructor 'Object'
+    |     property 'localhost:5001::::::::false:::::::::::::' -> object with constructor 'Array'
+    |     ...
+    |     property '_httpMessage' -> object with constructor 'ClientRequest'
+    --- property 'agent' closes the circle {"stack":"TypeError: Converting circular structure to JSON\n    --> starting at object with constructor 'Agent'\n    |     property 'sockets' -> object with constructor 'Object'\n    |     property 'localhost:5001::::::::false:::::::::::::' -> object with constructor 'Array'\n    |     ...\n    |     property '_httpMessage' -> object with constructor 'ClientRequest'\n    --- property 'agent' closes the circle\n    at JSON.stringify (<anonymous>)\n    at Printf.template (/Users/romankr/Dev/MayBursa/src/apps/ibkr-gateway/src/utils/logger.ts:11:23)\n    at Printf.transform (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/logform@2.7.0/node_modules/logform/printf.js:11:26)\n    at Format.transform (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/logform@2.7.0/node_modules/logform/combine.js:20:24)\n    at DerivedLogger._transform (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/winston@3.17.0/node_modules/winston/lib/winston/logger.js:314:29)\n    at DerivedLogger.Transform._read (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/readable-stream@3.6.2/node_modules/readable-stream/lib/_stream_transform.js:166:10)\n    at DerivedLogger.Transform._write (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/readable-stream@3.6.2/node_modules/readable-stream/lib/_stream_transform.js:155:83)\n    at doWrite (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/readable-stream@3.6.2/node_modules/readable-stream/lib/_stream_writable.js:390:139)\n    at writeOrBuffer (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/readable-stream@3.6.2/node_modules/readable-stream/lib/_stream_writable.js:381:5)\n    at DerivedLogger.Writable.write (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/readable-stream@3.6.2/node_modules/readable-stream/lib/_stream_writable.js:302:11)"}
+2025-08-04 11:19:20 [ERROR] Failed to get auth status: Converting circular structure to JSON
+    --> starting at object with constructor 'Agent'
+    |     property 'sockets' -> object with constructor 'Object'
+    |     property 'localhost:5001::::::::false:::::::::::::' -> object with constructor 'Array'
+    |     ...
+    |     property '_httpMessage' -> object with constructor 'ClientRequest'
+    --- property 'agent' closes the circle {"stack":"TypeError: Converting circular structure to JSON\n    --> starting at object with constructor 'Agent'\n    |     property 'sockets' -> object with constructor 'Object'\n    |     property 'localhost:5001::::::::false:::::::::::::' -> object with constructor 'Array'\n    |     ...\n    |     property '_httpMessage' -> object with constructor 'ClientRequest'\n    --- property 'agent' closes the circle\n    at JSON.stringify (<anonymous>)\n    at Printf.template (/Users/romankr/Dev/MayBursa/src/apps/ibkr-gateway/src/utils/logger.ts:11:23)\n    at Printf.transform (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/logform@2.7.0/node_modules/logform/printf.js:11:26)\n    at Format.transform (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/logform@2.7.0/node_modules/logform/combine.js:20:24)\n    at DerivedLogger._transform (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/winston@3.17.0/node_modules/winston/lib/winston/logger.js:314:29)\n    at DerivedLogger.Transform._read (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/readable-stream@3.6.2/node_modules/readable-stream/lib/_stream_transform.js:166:10)\n    at DerivedLogger.Transform._write (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/readable-stream@3.6.2/node_modules/readable-stream/lib/_stream_transform.js:155:83)\n    at doWrite (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/readable-stream@3.6.2/node_modules/readable-stream/lib/_stream_writable.js:390:139)\n    at writeOrBuffer (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/readable-stream@3.6.2/node_modules/readable-stream/lib/_stream_writable.js:381:5)\n    at DerivedLogger.Writable.write (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/readable-stream@3.6.2/node_modules/readable-stream/lib/_stream_writable.js:302:11)"}
+2025-08-04 11:19:20 [ERROR] Failed to get gateway status: Converting circular structure to JSON
+    --> starting at object with constructor 'Agent'
+    |     property 'sockets' -> object with constructor 'Object'
+    |     property 'localhost:5001::::::::false:::::::::::::' -> object with constructor 'Array'
+    |     ...
+    |     property '_httpMessage' -> object with constructor 'ClientRequest'
+    --- property 'agent' closes the circle {"stack":"TypeError: Converting circular structure to JSON\n    --> starting at object with constructor 'Agent'\n    |     property 'sockets' -> object with constructor 'Object'\n    |     property 'localhost:5001::::::::false:::::::::::::' -> object with constructor 'Array'\n    |     ...\n    |     property '_httpMessage' -> object with constructor 'ClientRequest'\n    --- property 'agent' closes the circle\n    at JSON.stringify (<anonymous>)\n    at Printf.template (/Users/romankr/Dev/MayBursa/src/apps/ibkr-gateway/src/utils/logger.ts:11:23)\n    at Printf.transform (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/logform@2.7.0/node_modules/logform/printf.js:11:26)\n    at Format.transform (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/logform@2.7.0/node_modules/logform/combine.js:20:24)\n    at DerivedLogger._transform (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/winston@3.17.0/node_modules/winston/lib/winston/logger.js:314:29)\n    at DerivedLogger.Transform._read (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/readable-stream@3.6.2/node_modules/readable-stream/lib/_stream_transform.js:166:10)\n    at DerivedLogger.Transform._write (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/readable-stream@3.6.2/node_modules/readable-stream/lib/_stream_transform.js:155:83)\n    at doWrite (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/readable-stream@3.6.2/node_modules/readable-stream/lib/_stream_writable.js:390:139)\n    at writeOrBuffer (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/readable-stream@3.6.2/node_modules/readable-stream/lib/_stream_writable.js:381:5)\n    at DerivedLogger.Writable.write (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/readable-stream@3.6.2/node_modules/readable-stream/lib/_stream_writable.js:302:11)"}
+2025-08-04 11:19:30 [ERROR] Failed to get gateway status: Converting circular structure to JSON
+    --> starting at object with constructor 'Agent'
+    |     property 'sockets' -> object with constructor 'Object'
+    |     property 'localhost:5001::::::::false:::::::::::::' -> object with constructor 'Array'
+    |     ...
+    |     property '_httpMessage' -> object with constructor 'ClientRequest'
+    --- property 'agent' closes the circle {"stack":"TypeError: Converting circular structure to JSON\n    --> starting at object with constructor 'Agent'\n    |     property 'sockets' -> object with constructor 'Object'\n    |     property 'localhost:5001::::::::false:::::::::::::' -> object with constructor 'Array'\n    |     ...\n    |     property '_httpMessage' -> object with constructor 'ClientRequest'\n    --- property 'agent' closes the circle\n    at JSON.stringify (<anonymous>)\n    at Printf.template (/Users/romankr/Dev/MayBursa/src/apps/ibkr-gateway/src/utils/logger.ts:11:23)\n    at Printf.transform (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/logform@2.7.0/node_modules/logform/printf.js:11:26)\n    at Format.transform (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/logform@2.7.0/node_modules/logform/combine.js:20:24)\n    at DerivedLogger._transform (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/winston@3.17.0/node_modules/winston/lib/winston/logger.js:314:29)\n    at DerivedLogger.Transform._read (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/readable-stream@3.6.2/node_modules/readable-stream/lib/_stream_transform.js:166:10)\n    at DerivedLogger.Transform._write (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/readable-stream@3.6.2/node_modules/readable-stream/lib/_stream_transform.js:155:83)\n    at doWrite (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/readable-stream@3.6.2/node_modules/readable-stream/lib/_stream_writable.js:390:139)\n    at writeOrBuffer (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/readable-stream@3.6.2/node_modules/readable-stream/lib/_stream_writable.js:381:5)\n    at DerivedLogger.Writable.write (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/readable-stream@3.6.2/node_modules/readable-stream/lib/_stream_writable.js:302:11)"}
+2025-08-04 11:19:30 [ERROR] Failed to get auth status: Converting circular structure to JSON
+    --> starting at object with constructor 'Agent'
+    |     property 'sockets' -> object with constructor 'Object'
+    |     property 'localhost:5001::::::::false:::::::::::::' -> object with constructor 'Array'
+    |     ...
+    |     property '_httpMessage' -> object with constructor 'ClientRequest'
+    --- property 'agent' closes the circle {"stack":"TypeError: Converting circular structure to JSON\n    --> starting at object with constructor 'Agent'\n    |     property 'sockets' -> object with constructor 'Object'\n    |     property 'localhost:5001::::::::false:::::::::::::' -> object with constructor 'Array'\n    |     ...\n    |     property '_httpMessage' -> object with constructor 'ClientRequest'\n    --- property 'agent' closes the circle\n    at JSON.stringify (<anonymous>)\n    at Printf.template (/Users/romankr/Dev/MayBursa/src/apps/ibkr-gateway/src/utils/logger.ts:11:23)\n    at Printf.transform (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/logform@2.7.0/node_modules/logform/printf.js:11:26)\n    at Format.transform (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/logform@2.7.0/node_modules/logform/combine.js:20:24)\n    at DerivedLogger._transform (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/winston@3.17.0/node_modules/winston/lib/winston/logger.js:314:29)\n    at DerivedLogger.Transform._read (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/readable-stream@3.6.2/node_modules/readable-stream/lib/_stream_transform.js:166:10)\n    at DerivedLogger.Transform._write (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/readable-stream@3.6.2/node_modules/readable-stream/lib/_stream_transform.js:155:83)\n    at doWrite (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/readable-stream@3.6.2/node_modules/readable-stream/lib/_stream_writable.js:390:139)\n    at writeOrBuffer (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/readable-stream@3.6.2/node_modules/readable-stream/lib/_stream_writable.js:381:5)\n    at DerivedLogger.Writable.write (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/readable-stream@3.6.2/node_modules/readable-stream/lib/_stream_writable.js:302:11)"}
+2025-08-04 11:19:40 [ERROR] Failed to get gateway status: Converting circular structure to JSON
+    --> starting at object with constructor 'Agent'
+    |     property 'sockets' -> object with constructor 'Object'
+    |     property 'localhost:5001::::::::false:::::::::::::' -> object with constructor 'Array'
+    |     ...
+    |     property '_httpMessage' -> object with constructor 'ClientRequest'
+    --- property 'agent' closes the circle {"stack":"TypeError: Converting circular structure to JSON\n    --> starting at object with constructor 'Agent'\n    |     property 'sockets' -> object with constructor 'Object'\n    |     property 'localhost:5001::::::::false:::::::::::::' -> object with constructor 'Array'\n    |     ...\n    |     property '_httpMessage' -> object with constructor 'ClientRequest'\n    --- property 'agent' closes the circle\n    at JSON.stringify (<anonymous>)\n    at Printf.template (/Users/romankr/Dev/MayBursa/src/apps/ibkr-gateway/src/utils/logger.ts:11:23)\n    at Printf.transform (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/logform@2.7.0/node_modules/logform/printf.js:11:26)\n    at Format.transform (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/logform@2.7.0/node_modules/logform/combine.js:20:24)\n    at DerivedLogger._transform (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/winston@3.17.0/node_modules/winston/lib/winston/logger.js:314:29)\n    at DerivedLogger.Transform._read (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/readable-stream@3.6.2/node_modules/readable-stream/lib/_stream_transform.js:166:10)\n    at DerivedLogger.Transform._write (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/readable-stream@3.6.2/node_modules/readable-stream/lib/_stream_transform.js:155:83)\n    at doWrite (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/readable-stream@3.6.2/node_modules/readable-stream/lib/_stream_writable.js:390:139)\n    at writeOrBuffer (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/readable-stream@3.6.2/node_modules/readable-stream/lib/_stream_writable.js:381:5)\n    at DerivedLogger.Writable.write (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/readable-stream@3.6.2/node_modules/readable-stream/lib/_stream_writable.js:302:11)"}
+2025-08-04 11:19:40 [ERROR] Failed to get auth status: Converting circular structure to JSON
+    --> starting at object with constructor 'Agent'
+    |     property 'sockets' -> object with constructor 'Object'
+    |     property 'localhost:5001::::::::false:::::::::::::' -> object with constructor 'Array'
+    |     ...
+    |     property '_httpMessage' -> object with constructor 'ClientRequest'
+    --- property 'agent' closes the circle {"stack":"TypeError: Converting circular structure to JSON\n    --> starting at object with constructor 'Agent'\n    |     property 'sockets' -> object with constructor 'Object'\n    |     property 'localhost:5001::::::::false:::::::::::::' -> object with constructor 'Array'\n    |     ...\n    |     property '_httpMessage' -> object with constructor 'ClientRequest'\n    --- property 'agent' closes the circle\n    at JSON.stringify (<anonymous>)\n    at Printf.template (/Users/romankr/Dev/MayBursa/src/apps/ibkr-gateway/src/utils/logger.ts:11:23)\n    at Printf.transform (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/logform@2.7.0/node_modules/logform/printf.js:11:26)\n    at Format.transform (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/logform@2.7.0/node_modules/logform/combine.js:20:24)\n    at DerivedLogger._transform (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/winston@3.17.0/node_modules/winston/lib/winston/logger.js:314:29)\n    at DerivedLogger.Transform._read (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/readable-stream@3.6.2/node_modules/readable-stream/lib/_stream_transform.js:166:10)\n    at DerivedLogger.Transform._write (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/readable-stream@3.6.2/node_modules/readable-stream/lib/_stream_transform.js:155:83)\n    at doWrite (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/readable-stream@3.6.2/node_modules/readable-stream/lib/_stream_writable.js:390:139)\n    at writeOrBuffer (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/readable-stream@3.6.2/node_modules/readable-stream/lib/_stream_writable.js:381:5)\n    at DerivedLogger.Writable.write (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/readable-stream@3.6.2/node_modules/readable-stream/lib/_stream_writable.js:302:11)"}
+2025-08-04 11:19:50 [ERROR] Failed to get gateway status: Converting circular structure to JSON
+    --> starting at object with constructor 'Agent'
+    |     property 'sockets' -> object with constructor 'Object'
+    |     property 'localhost:5001::::::::false:::::::::::::' -> object with constructor 'Array'
+    |     ...
+    |     property '_httpMessage' -> object with constructor 'ClientRequest'
+    --- property 'agent' closes the circle {"stack":"TypeError: Converting circular structure to JSON\n    --> starting at object with constructor 'Agent'\n    |     property 'sockets' -> object with constructor 'Object'\n    |     property 'localhost:5001::::::::false:::::::::::::' -> object with constructor 'Array'\n    |     ...\n    |     property '_httpMessage' -> object with constructor 'ClientRequest'\n    --- property 'agent' closes the circle\n    at JSON.stringify (<anonymous>)\n    at Printf.template (/Users/romankr/Dev/MayBursa/src/apps/ibkr-gateway/src/utils/logger.ts:11:23)\n    at Printf.transform (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/logform@2.7.0/node_modules/logform/printf.js:11:26)\n    at Format.transform (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/logform@2.7.0/node_modules/logform/combine.js:20:24)\n    at DerivedLogger._transform (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/winston@3.17.0/node_modules/winston/lib/winston/logger.js:314:29)\n    at DerivedLogger.Transform._read (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/readable-stream@3.6.2/node_modules/readable-stream/lib/_stream_transform.js:166:10)\n    at DerivedLogger.Transform._write (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/readable-stream@3.6.2/node_modules/readable-stream/lib/_stream_transform.js:155:83)\n    at doWrite (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/readable-stream@3.6.2/node_modules/readable-stream/lib/_stream_writable.js:390:139)\n    at writeOrBuffer (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/readable-stream@3.6.2/node_modules/readable-stream/lib/_stream_writable.js:381:5)\n    at DerivedLogger.Writable.write (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/readable-stream@3.6.2/node_modules/readable-stream/lib/_stream_writable.js:302:11)"}
+2025-08-04 11:19:50 [ERROR] Failed to get auth status: Converting circular structure to JSON
+    --> starting at object with constructor 'Agent'
+    |     property 'sockets' -> object with constructor 'Object'
+    |     property 'localhost:5001::::::::false:::::::::::::' -> object with constructor 'Array'
+    |     ...
+    |     property '_httpMessage' -> object with constructor 'ClientRequest'
+    --- property 'agent' closes the circle {"stack":"TypeError: Converting circular structure to JSON\n    --> starting at object with constructor 'Agent'\n    |     property 'sockets' -> object with constructor 'Object'\n    |     property 'localhost:5001::::::::false:::::::::::::' -> object with constructor 'Array'\n    |     ...\n    |     property '_httpMessage' -> object with constructor 'ClientRequest'\n    --- property 'agent' closes the circle\n    at JSON.stringify (<anonymous>)\n    at Printf.template (/Users/romankr/Dev/MayBursa/src/apps/ibkr-gateway/src/utils/logger.ts:11:23)\n    at Printf.transform (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/logform@2.7.0/node_modules/logform/printf.js:11:26)\n    at Format.transform (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/logform@2.7.0/node_modules/logform/combine.js:20:24)\n    at DerivedLogger._transform (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/winston@3.17.0/node_modules/winston/lib/winston/logger.js:314:29)\n    at DerivedLogger.Transform._read (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/readable-stream@3.6.2/node_modules/readable-stream/lib/_stream_transform.js:166:10)\n    at DerivedLogger.Transform._write (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/readable-stream@3.6.2/node_modules/readable-stream/lib/_stream_transform.js:155:83)\n    at doWrite (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/readable-stream@3.6.2/node_modules/readable-stream/lib/_stream_writable.js:390:139)\n    at writeOrBuffer (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/readable-stream@3.6.2/node_modules/readable-stream/lib/_stream_writable.js:381:5)\n    at DerivedLogger.Writable.write (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/readable-stream@3.6.2/node_modules/readable-stream/lib/_stream_writable.js:302:11)"}
+2025-08-04 11:20:00 [ERROR] Failed to get gateway status: Converting circular structure to JSON
+    --> starting at object with constructor 'Agent'
+    |     property 'sockets' -> object with constructor 'Object'
+    |     property 'localhost:5001::::::::false:::::::::::::' -> object with constructor 'Array'
+    |     ...
+    |     property '_httpMessage' -> object with constructor 'ClientRequest'
+    --- property 'agent' closes the circle {"stack":"TypeError: Converting circular structure to JSON\n    --> starting at object with constructor 'Agent'\n    |     property 'sockets' -> object with constructor 'Object'\n    |     property 'localhost:5001::::::::false:::::::::::::' -> object with constructor 'Array'\n    |     ...\n    |     property '_httpMessage' -> object with constructor 'ClientRequest'\n    --- property 'agent' closes the circle\n    at JSON.stringify (<anonymous>)\n    at Printf.template (/Users/romankr/Dev/MayBursa/src/apps/ibkr-gateway/src/utils/logger.ts:11:23)\n    at Printf.transform (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/logform@2.7.0/node_modules/logform/printf.js:11:26)\n    at Format.transform (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/logform@2.7.0/node_modules/logform/combine.js:20:24)\n    at DerivedLogger._transform (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/winston@3.17.0/node_modules/winston/lib/winston/logger.js:314:29)\n    at DerivedLogger.Transform._read (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/readable-stream@3.6.2/node_modules/readable-stream/lib/_stream_transform.js:166:10)\n    at DerivedLogger.Transform._write (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/readable-stream@3.6.2/node_modules/readable-stream/lib/_stream_transform.js:155:83)\n    at doWrite (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/readable-stream@3.6.2/node_modules/readable-stream/lib/_stream_writable.js:390:139)\n    at writeOrBuffer (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/readable-stream@3.6.2/node_modules/readable-stream/lib/_stream_writable.js:381:5)\n    at DerivedLogger.Writable.write (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/readable-stream@3.6.2/node_modules/readable-stream/lib/_stream_writable.js:302:11)"}
+2025-08-04 11:20:00 [ERROR] Failed to get auth status: Converting circular structure to JSON
+    --> starting at object with constructor 'Agent'
+    |     property 'sockets' -> object with constructor 'Object'
+    |     property 'localhost:5001::::::::false:::::::::::::' -> object with constructor 'Array'
+    |     ...
+    |     property '_httpMessage' -> object with constructor 'ClientRequest'
+    --- property 'agent' closes the circle {"stack":"TypeError: Converting circular structure to JSON\n    --> starting at object with constructor 'Agent'\n    |     property 'sockets' -> object with constructor 'Object'\n    |     property 'localhost:5001::::::::false:::::::::::::' -> object with constructor 'Array'\n    |     ...\n    |     property '_httpMessage' -> object with constructor 'ClientRequest'\n    --- property 'agent' closes the circle\n    at JSON.stringify (<anonymous>)\n    at Printf.template (/Users/romankr/Dev/MayBursa/src/apps/ibkr-gateway/src/utils/logger.ts:11:23)\n    at Printf.transform (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/logform@2.7.0/node_modules/logform/printf.js:11:26)\n    at Format.transform (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/logform@2.7.0/node_modules/logform/combine.js:20:24)\n    at DerivedLogger._transform (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/winston@3.17.0/node_modules/winston/lib/winston/logger.js:314:29)\n    at DerivedLogger.Transform._read (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/readable-stream@3.6.2/node_modules/readable-stream/lib/_stream_transform.js:166:10)\n    at DerivedLogger.Transform._write (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/readable-stream@3.6.2/node_modules/readable-stream/lib/_stream_transform.js:155:83)\n    at doWrite (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/readable-stream@3.6.2/node_modules/readable-stream/lib/_stream_writable.js:390:139)\n    at writeOrBuffer (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/readable-stream@3.6.2/node_modules/readable-stream/lib/_stream_writable.js:381:5)\n    at DerivedLogger.Writable.write (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/readable-stream@3.6.2/node_modules/readable-stream/lib/_stream_writable.js:302:11)"}
+2025-08-04 11:20:10 [ERROR] Failed to get gateway status: Converting circular structure to JSON
+    --> starting at object with constructor 'Agent'
+    |     property 'sockets' -> object with constructor 'Object'
+    |     property 'localhost:5001::::::::false:::::::::::::' -> object with constructor 'Array'
+    |     ...
+    |     property '_httpMessage' -> object with constructor 'ClientRequest'
+    --- property 'agent' closes the circle {"stack":"TypeError: Converting circular structure to JSON\n    --> starting at object with constructor 'Agent'\n    |     property 'sockets' -> object with constructor 'Object'\n    |     property 'localhost:5001::::::::false:::::::::::::' -> object with constructor 'Array'\n    |     ...\n    |     property '_httpMessage' -> object with constructor 'ClientRequest'\n    --- property 'agent' closes the circle\n    at JSON.stringify (<anonymous>)\n    at Printf.template (/Users/romankr/Dev/MayBursa/src/apps/ibkr-gateway/src/utils/logger.ts:11:23)\n    at Printf.transform (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/logform@2.7.0/node_modules/logform/printf.js:11:26)\n    at Format.transform (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/logform@2.7.0/node_modules/logform/combine.js:20:24)\n    at DerivedLogger._transform (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/winston@3.17.0/node_modules/winston/lib/winston/logger.js:314:29)\n    at DerivedLogger.Transform._read (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/readable-stream@3.6.2/node_modules/readable-stream/lib/_stream_transform.js:166:10)\n    at DerivedLogger.Transform._write (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/readable-stream@3.6.2/node_modules/readable-stream/lib/_stream_transform.js:155:83)\n    at doWrite (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/readable-stream@3.6.2/node_modules/readable-stream/lib/_stream_writable.js:390:139)\n    at writeOrBuffer (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/readable-stream@3.6.2/node_modules/readable-stream/lib/_stream_writable.js:381:5)\n    at DerivedLogger.Writable.write (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/readable-stream@3.6.2/node_modules/readable-stream/lib/_stream_writable.js:302:11)"}
+2025-08-04 11:20:10 [ERROR] Failed to get auth status: Converting circular structure to JSON
+    --> starting at object with constructor 'Agent'
+    |     property 'sockets' -> object with constructor 'Object'
+    |     property 'localhost:5001::::::::false:::::::::::::' -> object with constructor 'Array'
+    |     ...
+    |     property '_httpMessage' -> object with constructor 'ClientRequest'
+    --- property 'agent' closes the circle {"stack":"TypeError: Converting circular structure to JSON\n    --> starting at object with constructor 'Agent'\n    |     property 'sockets' -> object with constructor 'Object'\n    |     property 'localhost:5001::::::::false:::::::::::::' -> object with constructor 'Array'\n    |     ...\n    |     property '_httpMessage' -> object with constructor 'ClientRequest'\n    --- property 'agent' closes the circle\n    at JSON.stringify (<anonymous>)\n    at Printf.template (/Users/romankr/Dev/MayBursa/src/apps/ibkr-gateway/src/utils/logger.ts:11:23)\n    at Printf.transform (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/logform@2.7.0/node_modules/logform/printf.js:11:26)\n    at Format.transform (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/logform@2.7.0/node_modules/logform/combine.js:20:24)\n    at DerivedLogger._transform (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/winston@3.17.0/node_modules/winston/lib/winston/logger.js:314:29)\n    at DerivedLogger.Transform._read (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/readable-stream@3.6.2/node_modules/readable-stream/lib/_stream_transform.js:166:10)\n    at DerivedLogger.Transform._write (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/readable-stream@3.6.2/node_modules/readable-stream/lib/_stream_transform.js:155:83)\n    at doWrite (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/readable-stream@3.6.2/node_modules/readable-stream/lib/_stream_writable.js:390:139)\n    at writeOrBuffer (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/readable-stream@3.6.2/node_modules/readable-stream/lib/_stream_writable.js:381:5)\n    at DerivedLogger.Writable.write (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/readable-stream@3.6.2/node_modules/readable-stream/lib/_stream_writable.js:302:11)"}
+2025-08-04 11:20:20 [ERROR] Failed to get gateway status: Converting circular structure to JSON
+    --> starting at object with constructor 'Agent'
+    |     property 'sockets' -> object with constructor 'Object'
+    |     property 'localhost:5001::::::::false:::::::::::::' -> object with constructor 'Array'
+    |     ...
+    |     property '_httpMessage' -> object with constructor 'ClientRequest'
+    --- property 'agent' closes the circle {"stack":"TypeError: Converting circular structure to JSON\n    --> starting at object with constructor 'Agent'\n    |     property 'sockets' -> object with constructor 'Object'\n    |     property 'localhost:5001::::::::false:::::::::::::' -> object with constructor 'Array'\n    |     ...\n    |     property '_httpMessage' -> object with constructor 'ClientRequest'\n    --- property 'agent' closes the circle\n    at JSON.stringify (<anonymous>)\n    at Printf.template (/Users/romankr/Dev/MayBursa/src/apps/ibkr-gateway/src/utils/logger.ts:11:23)\n    at Printf.transform (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/logform@2.7.0/node_modules/logform/printf.js:11:26)\n    at Format.transform (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/logform@2.7.0/node_modules/logform/combine.js:20:24)\n    at DerivedLogger._transform (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/winston@3.17.0/node_modules/winston/lib/winston/logger.js:314:29)\n    at DerivedLogger.Transform._read (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/readable-stream@3.6.2/node_modules/readable-stream/lib/_stream_transform.js:166:10)\n    at DerivedLogger.Transform._write (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/readable-stream@3.6.2/node_modules/readable-stream/lib/_stream_transform.js:155:83)\n    at doWrite (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/readable-stream@3.6.2/node_modules/readable-stream/lib/_stream_writable.js:390:139)\n    at writeOrBuffer (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/readable-stream@3.6.2/node_modules/readable-stream/lib/_stream_writable.js:381:5)\n    at DerivedLogger.Writable.write (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/readable-stream@3.6.2/node_modules/readable-stream/lib/_stream_writable.js:302:11)"}
+2025-08-04 11:20:20 [ERROR] Failed to get auth status: Converting circular structure to JSON
+    --> starting at object with constructor 'Agent'
+    |     property 'sockets' -> object with constructor 'Object'
+    |     property 'localhost:5001::::::::false:::::::::::::' -> object with constructor 'Array'
+    |     ...
+    |     property '_httpMessage' -> object with constructor 'ClientRequest'
+    --- property 'agent' closes the circle {"stack":"TypeError: Converting circular structure to JSON\n    --> starting at object with constructor 'Agent'\n    |     property 'sockets' -> object with constructor 'Object'\n    |     property 'localhost:5001::::::::false:::::::::::::' -> object with constructor 'Array'\n    |     ...\n    |     property '_httpMessage' -> object with constructor 'ClientRequest'\n    --- property 'agent' closes the circle\n    at JSON.stringify (<anonymous>)\n    at Printf.template (/Users/romankr/Dev/MayBursa/src/apps/ibkr-gateway/src/utils/logger.ts:11:23)\n    at Printf.transform (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/logform@2.7.0/node_modules/logform/printf.js:11:26)\n    at Format.transform (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/logform@2.7.0/node_modules/logform/combine.js:20:24)\n    at DerivedLogger._transform (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/winston@3.17.0/node_modules/winston/lib/winston/logger.js:314:29)\n    at DerivedLogger.Transform._read (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/readable-stream@3.6.2/node_modules/readable-stream/lib/_stream_transform.js:166:10)\n    at DerivedLogger.Transform._write (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/readable-stream@3.6.2/node_modules/readable-stream/lib/_stream_transform.js:155:83)\n    at doWrite (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/readable-stream@3.6.2/node_modules/readable-stream/lib/_stream_writable.js:390:139)\n    at writeOrBuffer (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/readable-stream@3.6.2/node_modules/readable-stream/lib/_stream_writable.js:381:5)\n    at DerivedLogger.Writable.write (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/readable-stream@3.6.2/node_modules/readable-stream/lib/_stream_writable.js:302:11)"}
+2025-08-04 11:20:30 [ERROR] Failed to get gateway status: Converting circular structure to JSON
+    --> starting at object with constructor 'Agent'
+    |     property 'sockets' -> object with constructor 'Object'
+    |     property 'localhost:5001::::::::false:::::::::::::' -> object with constructor 'Array'
+    |     ...
+    |     property '_httpMessage' -> object with constructor 'ClientRequest'
+    --- property 'agent' closes the circle {"stack":"TypeError: Converting circular structure to JSON\n    --> starting at object with constructor 'Agent'\n    |     property 'sockets' -> object with constructor 'Object'\n    |     property 'localhost:5001::::::::false:::::::::::::' -> object with constructor 'Array'\n    |     ...\n    |     property '_httpMessage' -> object with constructor 'ClientRequest'\n    --- property 'agent' closes the circle\n    at JSON.stringify (<anonymous>)\n    at Printf.template (/Users/romankr/Dev/MayBursa/src/apps/ibkr-gateway/src/utils/logger.ts:11:23)\n    at Printf.transform (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/logform@2.7.0/node_modules/logform/printf.js:11:26)\n    at Format.transform (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/logform@2.7.0/node_modules/logform/combine.js:20:24)\n    at DerivedLogger._transform (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/winston@3.17.0/node_modules/winston/lib/winston/logger.js:314:29)\n    at DerivedLogger.Transform._read (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/readable-stream@3.6.2/node_modules/readable-stream/lib/_stream_transform.js:166:10)\n    at DerivedLogger.Transform._write (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/readable-stream@3.6.2/node_modules/readable-stream/lib/_stream_transform.js:155:83)\n    at doWrite (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/readable-stream@3.6.2/node_modules/readable-stream/lib/_stream_writable.js:390:139)\n    at writeOrBuffer (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/readable-stream@3.6.2/node_modules/readable-stream/lib/_stream_writable.js:381:5)\n    at DerivedLogger.Writable.write (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/readable-stream@3.6.2/node_modules/readable-stream/lib/_stream_writable.js:302:11)"}
+2025-08-04 11:20:30 [ERROR] Failed to get auth status: Converting circular structure to JSON
+    --> starting at object with constructor 'Agent'
+    |     property 'sockets' -> object with constructor 'Object'
+    |     property 'localhost:5001::::::::false:::::::::::::' -> object with constructor 'Array'
+    |     ...
+    |     property '_httpMessage' -> object with constructor 'ClientRequest'
+    --- property 'agent' closes the circle {"stack":"TypeError: Converting circular structure to JSON\n    --> starting at object with constructor 'Agent'\n    |     property 'sockets' -> object with constructor 'Object'\n    |     property 'localhost:5001::::::::false:::::::::::::' -> object with constructor 'Array'\n    |     ...\n    |     property '_httpMessage' -> object with constructor 'ClientRequest'\n    --- property 'agent' closes the circle\n    at JSON.stringify (<anonymous>)\n    at Printf.template (/Users/romankr/Dev/MayBursa/src/apps/ibkr-gateway/src/utils/logger.ts:11:23)\n    at Printf.transform (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/logform@2.7.0/node_modules/logform/printf.js:11:26)\n    at Format.transform (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/logform@2.7.0/node_modules/logform/combine.js:20:24)\n    at DerivedLogger._transform (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/winston@3.17.0/node_modules/winston/lib/winston/logger.js:314:29)\n    at DerivedLogger.Transform._read (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/readable-stream@3.6.2/node_modules/readable-stream/lib/_stream_transform.js:166:10)\n    at DerivedLogger.Transform._write (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/readable-stream@3.6.2/node_modules/readable-stream/lib/_stream_transform.js:155:83)\n    at doWrite (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/readable-stream@3.6.2/node_modules/readable-stream/lib/_stream_writable.js:390:139)\n    at writeOrBuffer (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/readable-stream@3.6.2/node_modules/readable-stream/lib/_stream_writable.js:381:5)\n    at DerivedLogger.Writable.write (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/readable-stream@3.6.2/node_modules/readable-stream/lib/_stream_writable.js:302:11)"}
+2025-08-04 11:20:40 [ERROR] Failed to get gateway status: Converting circular structure to JSON
+    --> starting at object with constructor 'Agent'
+    |     property 'sockets' -> object with constructor 'Object'
+    |     property 'localhost:5001::::::::false:::::::::::::' -> object with constructor 'Array'
+    |     ...
+    |     property '_httpMessage' -> object with constructor 'ClientRequest'
+    --- property 'agent' closes the circle {"stack":"TypeError: Converting circular structure to JSON\n    --> starting at object with constructor 'Agent'\n    |     property 'sockets' -> object with constructor 'Object'\n    |     property 'localhost:5001::::::::false:::::::::::::' -> object with constructor 'Array'\n    |     ...\n    |     property '_httpMessage' -> object with constructor 'ClientRequest'\n    --- property 'agent' closes the circle\n    at JSON.stringify (<anonymous>)\n    at Printf.template (/Users/romankr/Dev/MayBursa/src/apps/ibkr-gateway/src/utils/logger.ts:11:23)\n    at Printf.transform (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/logform@2.7.0/node_modules/logform/printf.js:11:26)\n    at Format.transform (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/logform@2.7.0/node_modules/logform/combine.js:20:24)\n    at DerivedLogger._transform (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/winston@3.17.0/node_modules/winston/lib/winston/logger.js:314:29)\n    at DerivedLogger.Transform._read (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/readable-stream@3.6.2/node_modules/readable-stream/lib/_stream_transform.js:166:10)\n    at DerivedLogger.Transform._write (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/readable-stream@3.6.2/node_modules/readable-stream/lib/_stream_transform.js:155:83)\n    at doWrite (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/readable-stream@3.6.2/node_modules/readable-stream/lib/_stream_writable.js:390:139)\n    at writeOrBuffer (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/readable-stream@3.6.2/node_modules/readable-stream/lib/_stream_writable.js:381:5)\n    at DerivedLogger.Writable.write (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/readable-stream@3.6.2/node_modules/readable-stream/lib/_stream_writable.js:302:11)"}
+2025-08-04 11:20:40 [ERROR] Failed to get auth status: Converting circular structure to JSON
+    --> starting at object with constructor 'Agent'
+    |     property 'sockets' -> object with constructor 'Object'
+    |     property 'localhost:5001::::::::false:::::::::::::' -> object with constructor 'Array'
+    |     ...
+    |     property '_httpMessage' -> object with constructor 'ClientRequest'
+    --- property 'agent' closes the circle {"stack":"TypeError: Converting circular structure to JSON\n    --> starting at object with constructor 'Agent'\n    |     property 'sockets' -> object with constructor 'Object'\n    |     property 'localhost:5001::::::::false:::::::::::::' -> object with constructor 'Array'\n    |     ...\n    |     property '_httpMessage' -> object with constructor 'ClientRequest'\n    --- property 'agent' closes the circle\n    at JSON.stringify (<anonymous>)\n    at Printf.template (/Users/romankr/Dev/MayBursa/src/apps/ibkr-gateway/src/utils/logger.ts:11:23)\n    at Printf.transform (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/logform@2.7.0/node_modules/logform/printf.js:11:26)\n    at Format.transform (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/logform@2.7.0/node_modules/logform/combine.js:20:24)\n    at DerivedLogger._transform (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/winston@3.17.0/node_modules/winston/lib/winston/logger.js:314:29)\n    at DerivedLogger.Transform._read (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/readable-stream@3.6.2/node_modules/readable-stream/lib/_stream_transform.js:166:10)\n    at DerivedLogger.Transform._write (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/readable-stream@3.6.2/node_modules/readable-stream/lib/_stream_transform.js:155:83)\n    at doWrite (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/readable-stream@3.6.2/node_modules/readable-stream/lib/_stream_writable.js:390:139)\n    at writeOrBuffer (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/readable-stream@3.6.2/node_modules/readable-stream/lib/_stream_writable.js:381:5)\n    at DerivedLogger.Writable.write (/Users/romankr/Dev/MayBursa/node_modules/.pnpm/readable-stream@3.6.2/node_modules/readable-stream/lib/_stream_writable.js:302:11)"}
+2025-08-04 11:23:50 [INFO] Starting IBKR Gateway Manager...
+2025-08-04 11:23:50 [INFO] ========================================
+2025-08-04 11:23:50 [INFO] Starting IBKR Gateway in PAPER MODE
+2025-08-04 11:23:50 [INFO] ========================================
+2025-08-04 11:23:50 [INFO] Initializing IBKR Gateway...
+2025-08-04 11:23:50 [INFO] Killing any existing gateway processes...
+2025-08-04 11:23:50 [INFO] Killed any existing gateway processes
+2025-08-04 11:23:50 [INFO] IBKR Gateway Manager running on http://localhost:3000
+2025-08-04 11:23:50 [INFO] Control Panel UI available at root path /
+2025-08-04 11:23:50 [ERROR] Gateway connection check failed:
+2025-08-04 11:23:50 [ERROR] Failed to check auth status:
+2025-08-04 11:23:50 [ERROR] Failed to check auth status:
+2025-08-04 11:23:52 [INFO] Starting gateway process...
+2025-08-04 11:23:52 [INFO] Java installation verified
+2025-08-04 11:23:52 [INFO] Killed any existing gateway processes
+2025-08-04 11:23:54 [INFO] Starting gateway from /Users/romankr/Dev/MayBursa/src/apps/ibkr-gateway/clientportal.gw
+2025-08-04 11:23:54 [INFO] Using config: /Users/romankr/Dev/MayBursa/src/apps/ibkr-gateway/conf-custom.yaml
+2025-08-04 11:23:54 [INFO] Gateway started with PID: 76082
+2025-08-04 11:23:54 [INFO] Waiting for gateway connection...
+2025-08-04 11:23:54 [INFO] Waiting for gateway connection...
+2025-08-04 11:23:54 [ERROR] Gateway connection check failed:
+2025-08-04 11:23:54 [INFO] Gateway: running
+2025-08-04 11:23:54 [INFO] Gateway: runtime path : /Users/romankr/Dev/MayBursa/src/apps/ibkr-gateway:dist/ibgroup.web.core.iblink.router.clientportal.gw.jar:build/lib/runtime/*
+ config file  : /Users/romankr/Dev/MayBursa/src/apps/ibkr-gateway/conf-custom.yaml
+2025-08-04 11:23:54 [ERROR] Gateway Error: Failed to load configuration file: ..//Users/romankr/Dev/MayBursa/src/apps/ibkr-gateway/conf-custom.yaml
+java.io.IOException: Stream closed
+2025-08-04 11:23:54 [INFO] Gateway: 11:23:54.750 [main] ERROR ibgroup.web.core.clientportal.gw.GatewayStart - loading configuration file error:java.io.IOException: Stream closed
+2025-08-04 11:23:54 [INFO] Gateway process exited with code 1 and signal null
+2025-08-04 11:23:55 [ERROR] Gateway connection check failed:
+2025-08-04 11:23:57 [ERROR] Gateway connection check failed:
+2025-08-04 11:24:00 [ERROR] Failed to check auth status:
+2025-08-04 11:24:00 [ERROR] Gateway connection check failed:
+2025-08-04 11:24:00 [ERROR] Failed to check auth status:
+2025-08-04 11:24:02 [ERROR] Gateway connection check failed:
+2025-08-04 11:24:03 [ERROR] Gateway connection check failed:
+2025-08-04 11:24:05 [ERROR] Gateway connection check failed:
+2025-08-04 11:24:10 [ERROR] Gateway connection check failed:
+2025-08-04 11:24:10 [ERROR] Gateway connection check failed:
+2025-08-04 11:24:10 [ERROR] Failed to check auth status:
+2025-08-04 11:24:10 [ERROR] Failed to check auth status:
+2025-08-04 11:24:11 [ERROR] Gateway connection check failed:
+2025-08-04 11:24:13 [ERROR] Gateway connection check failed:
+2025-08-04 11:24:17 [ERROR] Gateway connection check failed:
+2025-08-04 11:25:06 [INFO] Starting IBKR Gateway Manager...
+2025-08-04 11:25:06 [INFO] ========================================
+2025-08-04 11:25:06 [INFO] Starting IBKR Gateway in PAPER MODE
+2025-08-04 11:25:06 [INFO] ========================================
+2025-08-04 11:25:06 [INFO] Initializing IBKR Gateway...
+2025-08-04 11:25:06 [INFO] Killing any existing gateway processes...
+2025-08-04 11:25:06 [INFO] Killed any existing gateway processes
+2025-08-04 11:25:06 [INFO] IBKR Gateway Manager running on http://localhost:3000
+2025-08-04 11:25:06 [INFO] Control Panel UI available at root path /
+2025-08-04 11:25:08 [INFO] Starting gateway process...
+2025-08-04 11:25:08 [INFO] Java installation verified
+2025-08-04 11:25:08 [INFO] Killed any existing gateway processes
+2025-08-04 11:25:10 [ERROR] Gateway connection check failed:
+2025-08-04 11:25:10 [ERROR] Failed to check auth status:
+2025-08-04 11:25:10 [ERROR] Failed to check auth status:
+2025-08-04 11:25:10 [INFO] Starting gateway from /Users/romankr/Dev/MayBursa/src/apps/ibkr-gateway/clientportal.gw
+2025-08-04 11:25:10 [INFO] Using config: /Users/romankr/Dev/MayBursa/src/apps/conf-custom.yaml
+2025-08-04 11:25:10 [INFO] Gateway started with PID: 77049
+2025-08-04 11:25:10 [INFO] Waiting for gateway connection...
+2025-08-04 11:25:10 [INFO] Waiting for gateway connection...
+2025-08-04 11:25:10 [ERROR] Gateway connection check failed:
+2025-08-04 11:25:10 [INFO] Gateway: running  
+ runtime path : /Users/romankr/Dev/MayBursa/src/apps:dist/ibgroup.web.core.iblink.router.clientportal.gw.jar:build/lib/runtime/*
+ config file  : /Users/romankr/Dev/MayBursa/src/apps/conf-custom.yaml
+2025-08-04 11:25:11 [ERROR] Gateway Error: Failed to load configuration file: ..//Users/romankr/Dev/MayBursa/src/apps/conf-custom.yaml
+java.io.IOException: Stream closed
+2025-08-04 11:25:11 [ERROR] Gateway Error: 
+2025-08-04 11:25:11 [INFO] Gateway: 11:25:11.163 [main] ERROR ibgroup.web.core.clientportal.gw.GatewayStart - loading configuration file error:java.io.IOException: Stream closed
+2025-08-04 11:25:11 [INFO] Gateway process exited with code 1 and signal null
+2025-08-04 11:25:12 [ERROR] Gateway connection check failed:
+2025-08-04 11:25:14 [ERROR] Gateway connection check failed:
+2025-08-04 11:25:18 [ERROR] Gateway connection check failed:
+2025-08-04 11:25:20 [ERROR] Gateway connection check failed:
+2025-08-04 11:25:22 [ERROR] Gateway connection check failed:
+2025-08-04 11:25:26 [ERROR] Gateway connection check failed:
+2025-08-04 11:25:27 [ERROR] Gateway connection check failed:
+2025-08-04 11:25:30 [ERROR] Gateway connection check failed:
+2025-08-04 11:25:57 [INFO] Starting IBKR Gateway Manager...
+2025-08-04 11:25:57 [INFO] ========================================
+2025-08-04 11:25:57 [INFO] Starting IBKR Gateway in PAPER MODE
+2025-08-04 11:25:57 [INFO] ========================================
+2025-08-04 11:25:57 [INFO] Initializing IBKR Gateway...
+2025-08-04 11:25:57 [INFO] Killing any existing gateway processes...
+2025-08-04 11:25:57 [INFO] Killed any existing gateway processes
+2025-08-04 11:25:57 [INFO] IBKR Gateway Manager running on http://localhost:3000
+2025-08-04 11:25:57 [INFO] Control Panel UI available at root path /
+2025-08-04 11:25:59 [INFO] Starting gateway process...
+2025-08-04 11:25:59 [INFO] Java installation verified
+2025-08-04 11:26:00 [INFO] Killed any existing gateway processes
+2025-08-04 11:26:02 [ERROR] Failed to initialize gateway: Config file not found at /Users/romankr/Dev/MayBursa/src/apps/ibkr-gateway/src/apps/ibkr-gateway/conf-custom.yaml {"stack":"Error: Config file not found at /Users/romankr/Dev/MayBursa/src/apps/ibkr-gateway/src/apps/ibkr-gateway/conf-custom.yaml\n    at ClientPortalManager.startGateway (/Users/romankr/Dev/MayBursa/src/apps/ibkr-gateway/src/services/clientPortalManager.ts:73:13)\n    at initializeGateway (/Users/romankr/Dev/MayBursa/src/apps/ibkr-gateway/src/server.ts:30:5)"}
+2025-08-04 11:26:02 [ERROR] Gateway initialization failed: Config file not found at /Users/romankr/Dev/MayBursa/src/apps/ibkr-gateway/src/apps/ibkr-gateway/conf-custom.yaml {"stack":"Error: Config file not found at /Users/romankr/Dev/MayBursa/src/apps/ibkr-gateway/src/apps/ibkr-gateway/conf-custom.yaml\n    at ClientPortalManager.startGateway (/Users/romankr/Dev/MayBursa/src/apps/ibkr-gateway/src/services/clientPortalManager.ts:73:13)\n    at initializeGateway (/Users/romankr/Dev/MayBursa/src/apps/ibkr-gateway/src/server.ts:30:5)"}
+2025-08-04 11:26:04 [ERROR] Gateway connection check failed:
+2025-08-04 11:26:04 [ERROR] Failed to check auth status:
+2025-08-04 11:26:04 [ERROR] Failed to check auth status:
+2025-08-04 11:26:47 [INFO] Starting IBKR Gateway Manager...
+2025-08-04 11:26:47 [INFO] ========================================
+2025-08-04 11:26:47 [INFO] Starting IBKR Gateway in PAPER MODE
+2025-08-04 11:26:47 [INFO] ========================================
+2025-08-04 11:26:47 [INFO] Initializing IBKR Gateway...
+2025-08-04 11:26:47 [INFO] Killing any existing gateway processes...
+2025-08-04 11:26:47 [INFO] Killed any existing gateway processes
+2025-08-04 11:26:47 [INFO] IBKR Gateway Manager running on http://localhost:3000
+2025-08-04 11:26:47 [INFO] Control Panel UI available at root path /
+2025-08-04 11:26:49 [INFO] Starting gateway process...
+2025-08-04 11:26:49 [INFO] Java installation verified
+2025-08-04 11:26:49 [INFO] Killed any existing gateway processes
+2025-08-04 11:26:51 [INFO] Starting gateway from /Users/romankr/Dev/MayBursa/src/apps/ibkr-gateway/clientportal.gw
+2025-08-04 11:26:51 [INFO] Using config: /Users/romankr/Dev/MayBursa/src/apps/ibkr-gateway/conf-custom.yaml
+2025-08-04 11:26:51 [INFO] Gateway started with PID: 78406
+2025-08-04 11:26:51 [INFO] Waiting for gateway connection...
+2025-08-04 11:26:51 [INFO] Waiting for gateway connection...
+2025-08-04 11:26:51 [INFO] Gateway: running  
+ runtime path : /Users/romankr/Dev/MayBursa/src/apps/ibkr-gateway:dist/ibgroup.web.core.iblink.router.clientportal.gw.jar:build/lib/runtime/*
+ config file  : /Users/romankr/Dev/MayBursa/src/apps/ibkr-gateway/conf-custom.yaml
+2025-08-04 11:26:51 [ERROR] Gateway connection check failed:
+2025-08-04 11:26:51 [ERROR] Gateway Error: Failed to load configuration file: ..//Users/romankr/Dev/MayBursa/src/apps/ibkr-gateway/conf-custom.yaml
+java.io.IOException: Stream closed
+2025-08-04 11:26:51 [INFO] Gateway: 11:26:51.798 [main] ERROR ibgroup.web.core.clientportal.gw.GatewayStart - loading configuration file error:java.io.IOException: Stream closed
+2025-08-04 11:26:51 [INFO] Gateway process exited with code 1 and signal null
+2025-08-04 11:26:53 [ERROR] Gateway connection check failed:
+2025-08-04 11:26:55 [ERROR] Gateway connection check failed:
+2025-08-04 11:26:59 [ERROR] Gateway connection check failed:
+2025-08-04 11:27:00 [ERROR] Gateway connection check failed:
+2025-08-04 11:27:02 [ERROR] Gateway connection check failed:
+2025-08-04 11:27:04 [ERROR] Gateway connection check failed:
+2025-08-04 11:27:04 [ERROR] Failed to check auth status:
+2025-08-04 11:27:04 [ERROR] Failed to check auth status:
+2025-08-04 11:27:07 [ERROR] Gateway connection check failed:
+2025-08-04 11:27:08 [ERROR] Gateway connection check failed:
+2025-08-04 11:27:10 [ERROR] Gateway connection check failed:
+2025-08-04 11:27:14 [ERROR] Gateway connection check failed:
+2025-08-04 11:27:15 [ERROR] Gateway connection check failed:
+2025-08-04 11:27:17 [ERROR] Gateway connection check failed:
+2025-08-04 11:27:22 [ERROR] Gateway connection check failed:
+2025-08-04 11:27:23 [ERROR] Gateway connection check failed:
+2025-08-04 11:27:25 [ERROR] Gateway connection check failed:
+2025-08-04 11:27:30 [ERROR] Gateway connection check failed:
+2025-08-04 11:27:31 [ERROR] Gateway connection check failed:
+2025-08-04 11:27:33 [ERROR] Gateway connection check failed:
+2025-08-04 11:27:37 [ERROR] Gateway connection check failed:
+2025-08-04 11:27:39 [ERROR] Gateway connection check failed:
+2025-08-04 11:27:41 [ERROR] Gateway connection check failed:
+2025-08-04 11:28:19 [INFO] Starting IBKR Gateway Manager...
+2025-08-04 11:28:19 [INFO] ========================================
+2025-08-04 11:28:19 [INFO] Starting IBKR Gateway in PAPER MODE
+2025-08-04 11:28:19 [INFO] ========================================
+2025-08-04 11:28:19 [INFO] Initializing IBKR Gateway...
+2025-08-04 11:28:19 [INFO] Killing any existing gateway processes...
+2025-08-04 11:28:19 [INFO] Killed any existing gateway processes
+2025-08-04 11:28:19 [INFO] IBKR Gateway Manager running on http://localhost:3000
+2025-08-04 11:28:19 [INFO] Control Panel UI available at root path /
+2025-08-04 11:28:21 [INFO] Starting gateway process...
+2025-08-04 11:28:22 [INFO] Java installation verified
+2025-08-04 11:28:22 [INFO] Killed any existing gateway processes
+2025-08-04 11:28:24 [ERROR] Failed to initialize gateway: Config file not found at /Users/romankr/Dev/MayBursa/src/apps/ibkr-gateway/clientportal.gw/conf-custom.yaml {"stack":"Error: Config file not found at /Users/romankr/Dev/MayBursa/src/apps/ibkr-gateway/clientportal.gw/conf-custom.yaml\n    at ClientPortalManager.startGateway (/Users/romankr/Dev/MayBursa/src/apps/ibkr-gateway/src/services/clientPortalManager.ts:75:13)\n    at initializeGateway (/Users/romankr/Dev/MayBursa/src/apps/ibkr-gateway/src/server.ts:30:5)"}
+2025-08-04 11:28:24 [ERROR] Gateway initialization failed: Config file not found at /Users/romankr/Dev/MayBursa/src/apps/ibkr-gateway/clientportal.gw/conf-custom.yaml {"stack":"Error: Config file not found at /Users/romankr/Dev/MayBursa/src/apps/ibkr-gateway/clientportal.gw/conf-custom.yaml\n    at ClientPortalManager.startGateway (/Users/romankr/Dev/MayBursa/src/apps/ibkr-gateway/src/services/clientPortalManager.ts:75:13)\n    at initializeGateway (/Users/romankr/Dev/MayBursa/src/apps/ibkr-gateway/src/server.ts:30:5)"}
+2025-08-04 11:29:04 [ERROR] Gateway connection check failed:
+2025-08-04 11:29:04 [ERROR] Failed to check auth status:
+2025-08-04 11:29:04 [ERROR] Failed to check auth status:
+2025-08-04 11:30:18 [INFO] Starting IBKR Gateway Manager...
+2025-08-04 11:30:18 [INFO] ========================================
+2025-08-04 11:30:18 [INFO] Starting IBKR Gateway in PAPER MODE
+2025-08-04 11:30:18 [INFO] ========================================
+2025-08-04 11:30:18 [INFO] Initializing IBKR Gateway...
+2025-08-04 11:30:18 [INFO] Killing any existing gateway processes...
+2025-08-04 11:30:18 [INFO] Killed any existing gateway processes
+2025-08-04 11:30:18 [INFO] IBKR Gateway Manager running on http://localhost:3000
+2025-08-04 11:30:18 [INFO] Control Panel UI available at root path /
+2025-08-04 11:30:20 [INFO] Starting gateway process...
+2025-08-04 11:30:20 [INFO] Java installation verified
+2025-08-04 11:30:20 [INFO] Killed any existing gateway processes
+2025-08-04 11:30:22 [INFO] Starting gateway from /Users/romankr/Dev/MayBursa/src/apps/ibkr-gateway/clientportal.gw
+2025-08-04 11:30:22 [INFO] Using config: /Users/romankr/Dev/MayBursa/src/apps/ibkr-gateway/clientportal.gw/conf-custom.yaml
+2025-08-04 11:30:22 [INFO] Gateway started with PID: 80831
+2025-08-04 11:30:22 [INFO] Waiting for gateway connection...
+2025-08-04 11:30:22 [INFO] Waiting for gateway connection...
+2025-08-04 11:30:22 [INFO] Gateway: running  
+ runtime path : .:dist/ibgroup.web.core.iblink.router.clientportal.gw.jar:build/lib/runtime/*
+ config file  : conf-custom.yaml
+2025-08-04 11:30:22 [ERROR] Gateway connection check failed:
+2025-08-04 11:30:22 [ERROR] Gateway Error: Failed to load configuration file: ../conf-custom.yaml
+java.io.IOException: Stream closed
+2025-08-04 11:30:22 [INFO] Gateway: 11:30:22.508 [main] ERROR ibgroup.web.core.clientportal.gw.GatewayStart - loading configuration file error:java.io.IOException: Stream closed
+2025-08-04 11:30:22 [INFO] Gateway process exited with code 1 and signal null
+2025-08-04 11:30:23 [ERROR] Gateway connection check failed:
+2025-08-04 11:30:25 [ERROR] Gateway connection check failed:
+2025-08-04 11:30:29 [ERROR] Gateway connection check failed:
+2025-08-04 11:30:31 [ERROR] Gateway connection check failed:
+2025-08-04 11:30:33 [ERROR] Gateway connection check failed:
+2025-08-04 11:30:37 [ERROR] Gateway connection check failed:
+2025-08-04 11:30:38 [ERROR] Gateway connection check failed:
+2025-08-04 11:30:40 [ERROR] Gateway connection check failed:
+2025-08-04 11:30:44 [ERROR] Gateway connection check failed:
+2025-08-04 11:30:45 [ERROR] Gateway connection check failed:
+2025-08-04 11:30:48 [ERROR] Gateway connection check failed:
+2025-08-04 11:30:52 [ERROR] Gateway connection check failed:
+2025-08-04 11:30:53 [ERROR] Gateway connection check failed:
+2025-08-04 11:30:56 [ERROR] Gateway connection check failed:
+2025-08-04 11:31:00 [ERROR] Gateway connection check failed:
+2025-08-04 11:31:01 [ERROR] Gateway connection check failed:
+2025-08-04 11:31:04 [ERROR] Gateway connection check failed:
+2025-08-04 11:31:04 [ERROR] Gateway connection check failed:
+2025-08-04 11:31:04 [ERROR] Failed to check auth status:
+2025-08-04 11:31:04 [ERROR] Failed to check auth status:
+2025-08-04 11:31:08 [ERROR] Gateway connection check failed:
+2025-08-04 11:31:09 [ERROR] Gateway connection check failed:
+2025-08-04 11:31:11 [ERROR] Gateway connection check failed:
+2025-08-04 12:48:25 [INFO] Starting IBKR Gateway Manager...
+2025-08-04 12:48:25 [INFO] ========================================
+2025-08-04 12:48:25 [INFO] Starting IBKR Gateway in PAPER MODE
+2025-08-04 12:48:25 [INFO] ========================================
+2025-08-04 12:48:25 [INFO] Initializing IBKR Gateway...
+2025-08-04 12:48:25 [INFO] Killing any existing gateway processes...
+2025-08-04 12:48:25 [INFO] Killed any existing gateway processes
+2025-08-04 12:48:25 [INFO] IBKR Gateway Manager running on http://localhost:3000
+2025-08-04 12:48:25 [INFO] Control Panel UI available at root path /
+2025-08-04 12:48:27 [INFO] Starting gateway process...
+2025-08-04 12:48:28 [INFO] Java installation verified
+2025-08-04 12:48:28 [INFO] Killed any existing gateway processes
+2025-08-04 12:48:30 [INFO] Starting gateway from /Users/romankr/Dev/MayBursa/src/apps/ibkr-gateway/clientportal.gw
+2025-08-04 12:48:30 [INFO] Using config: /Users/romankr/Dev/MayBursa/src/apps/ibkr-gateway/clientportal.gw/root/conf.yaml
+2025-08-04 12:48:30 [INFO] Gateway started with PID: 22142
+2025-08-04 12:48:30 [INFO] Waiting for gateway connection...
+2025-08-04 12:48:30 [INFO] Waiting for gateway connection...
+2025-08-04 12:48:30 [INFO] Gateway: running  
+ runtime path : root:dist/ibgroup.web.core.iblink.router.clientportal.gw.jar:build/lib/runtime/*
+ config file  : root/conf.yaml
+2025-08-04 12:48:30 [ERROR] Gateway connection check failed:
+2025-08-04 12:48:30 [ERROR] Gateway connection check failed:
+2025-08-04 12:48:30 [ERROR] Failed to check auth status:
+2025-08-04 12:48:30 [ERROR] Failed to check auth status:
+2025-08-04 12:48:30 [INFO] Gateway: -> mount demo on /demo
+2025-08-04 12:48:30 [INFO] Gateway: Java Version: 1.8.0_451
+****************************************************
+version: a27ed42161ad96c53e715ca5c5e3e3fa4cff5262 Mon, 24 Apr 2023 15:41:53 -0400
+****************************************************
+This is the Client Portal Gateway
+2025-08-04 12:48:30 [INFO] Gateway: for any issues, please contact api@ibkr.com
+and include a copy of your logs
+****************************************************
+https://www.interactivebrokers.com/api/doc.html
+****************************************************
+Open https://localhost:5001 to login
+App demo is available after you login under: https://localhost:5001/demo#/
+2025-08-04 12:48:32 [INFO] Gateway connection established
+2025-08-04 12:48:36 [INFO] Gateway connection established
+2025-08-04 12:48:40 [INFO] Gateway connection established
+2025-08-04 12:48:40 [ERROR] Failed to check auth status: {"0":"R","1":"e","2":"q","3":"u","4":"e","5":"s","6":"t","7":" ","8":"f","9":"a","10":"i","11":"l","12":"e","13":"d","14":" ","15":"w","16":"i","17":"t","18":"h","19":" ","20":"s","21":"t","22":"a","23":"t","24":"u","25":"s","26":" ","27":"c","28":"o","29":"d","30":"e","31":" ","32":"4","33":"0","34":"1"}
+2025-08-04 12:48:41 [ERROR] Failed to check auth status: {"0":"R","1":"e","2":"q","3":"u","4":"e","5":"s","6":"t","7":" ","8":"f","9":"a","10":"i","11":"l","12":"e","13":"d","14":" ","15":"w","16":"i","17":"t","18":"h","19":" ","20":"s","21":"t","22":"a","23":"t","24":"u","25":"s","26":" ","27":"c","28":"o","29":"d","30":"e","31":" ","32":"4","33":"0","34":"1"}
+2025-08-04 12:48:44 [INFO] Gateway connection established
+2025-08-04 12:48:48 [INFO] Gateway connection established
+2025-08-04 12:48:50 [ERROR] Failed to check auth status: {"0":"R","1":"e","2":"q","3":"u","4":"e","5":"s","6":"t","7":" ","8":"f","9":"a","10":"i","11":"l","12":"e","13":"d","14":" ","15":"w","16":"i","17":"t","18":"h","19":" ","20":"s","21":"t","22":"a","23":"t","24":"u","25":"s","26":" ","27":"c","28":"o","29":"d","30":"e","31":" ","32":"4","33":"0","34":"1"}
+2025-08-04 12:48:51 [ERROR] Failed to check auth status: {"0":"R","1":"e","2":"q","3":"u","4":"e","5":"s","6":"t","7":" ","8":"f","9":"a","10":"i","11":"l","12":"e","13":"d","14":" ","15":"w","16":"i","17":"t","18":"h","19":" ","20":"s","21":"t","22":"a","23":"t","24":"u","25":"s","26":" ","27":"c","28":"o","29":"d","30":"e","31":" ","32":"4","33":"0","34":"1"}
+2025-08-04 12:48:52 [INFO] Gateway connection established
+2025-08-04 12:48:56 [INFO] Gateway connection established
+2025-08-04 12:49:00 [INFO] Gateway connection established
+2025-08-04 12:49:00 [ERROR] Failed to check auth status: {"0":"R","1":"e","2":"q","3":"u","4":"e","5":"s","6":"t","7":" ","8":"f","9":"a","10":"i","11":"l","12":"e","13":"d","14":" ","15":"w","16":"i","17":"t","18":"h","19":" ","20":"s","21":"t","22":"a","23":"t","24":"u","25":"s","26":" ","27":"c","28":"o","29":"d","30":"e","31":" ","32":"4","33":"0","34":"1"}
+2025-08-04 12:49:01 [ERROR] Failed to check auth status: {"0":"R","1":"e","2":"q","3":"u","4":"e","5":"s","6":"t","7":" ","8":"f","9":"a","10":"i","11":"l","12":"e","13":"d","14":" ","15":"w","16":"i","17":"t","18":"h","19":" ","20":"s","21":"t","22":"a","23":"t","24":"u","25":"s","26":" ","27":"c","28":"o","29":"d","30":"e","31":" ","32":"4","33":"0","34":"1"}
+2025-08-04 12:49:01 [ERROR] Failed to check auth status: {"0":"R","1":"e","2":"q","3":"u","4":"e","5":"s","6":"t","7":" ","8":"f","9":"a","10":"i","11":"l","12":"e","13":"d","14":" ","15":"w","16":"i","17":"t","18":"h","19":" ","20":"s","21":"t","22":"a","23":"t","24":"u","25":"s","26":" ","27":"c","28":"o","29":"d","30":"e","31":" ","32":"4","33":"0","34":"1"}
+2025-08-04 12:49:01 [ERROR] Failed to check auth status: {"0":"R","1":"e","2":"q","3":"u","4":"e","5":"s","6":"t","7":" ","8":"f","9":"a","10":"i","11":"l","12":"e","13":"d","14":" ","15":"w","16":"i","17":"t","18":"h","19":" ","20":"s","21":"t","22":"a","23":"t","24":"u","25":"s","26":" ","27":"c","28":"o","29":"d","30":"e","31":" ","32":"4","33":"0","34":"1"}
+2025-08-04 12:49:05 [INFO] Gateway connection established
+2025-08-04 12:49:08 [INFO] Gateway connection established
+2025-08-04 12:49:11 [ERROR] Failed to check auth status: {"0":"R","1":"e","2":"q","3":"u","4":"e","5":"s","6":"t","7":" ","8":"f","9":"a","10":"i","11":"l","12":"e","13":"d","14":" ","15":"w","16":"i","17":"t","18":"h","19":" ","20":"s","21":"t","22":"a","23":"t","24":"u","25":"s","26":" ","27":"c","28":"o","29":"d","30":"e","31":" ","32":"4","33":"0","34":"1"}
+2025-08-04 12:49:11 [ERROR] Failed to check auth status: {"0":"R","1":"e","2":"q","3":"u","4":"e","5":"s","6":"t","7":" ","8":"f","9":"a","10":"i","11":"l","12":"e","13":"d","14":" ","15":"w","16":"i","17":"t","18":"h","19":" ","20":"s","21":"t","22":"a","23":"t","24":"u","25":"s","26":" ","27":"c","28":"o","29":"d","30":"e","31":" ","32":"4","33":"0","34":"1"}
+2025-08-04 12:49:12 [INFO] Gateway connection established
+2025-08-04 12:49:16 [INFO] Gateway connection established
+2025-08-04 12:49:20 [INFO] Gateway connection established
+2025-08-04 12:49:21 [ERROR] Failed to check auth status: {"0":"R","1":"e","2":"q","3":"u","4":"e","5":"s","6":"t","7":" ","8":"f","9":"a","10":"i","11":"l","12":"e","13":"d","14":" ","15":"w","16":"i","17":"t","18":"h","19":" ","20":"s","21":"t","22":"a","23":"t","24":"u","25":"s","26":" ","27":"c","28":"o","29":"d","30":"e","31":" ","32":"4","33":"0","34":"1"}
+2025-08-04 12:49:21 [ERROR] Failed to check auth status: {"0":"R","1":"e","2":"q","3":"u","4":"e","5":"s","6":"t","7":" ","8":"f","9":"a","10":"i","11":"l","12":"e","13":"d","14":" ","15":"w","16":"i","17":"t","18":"h","19":" ","20":"s","21":"t","22":"a","23":"t","24":"u","25":"s","26":" ","27":"c","28":"o","29":"d","30":"e","31":" ","32":"4","33":"0","34":"1"}
+2025-08-04 12:49:24 [INFO] Gateway connection established
+2025-08-04 12:49:28 [INFO] Gateway connection established
+2025-08-04 12:49:31 [ERROR] Failed to check auth status: {"0":"R","1":"e","2":"q","3":"u","4":"e","5":"s","6":"t","7":" ","8":"f","9":"a","10":"i","11":"l","12":"e","13":"d","14":" ","15":"w","16":"i","17":"t","18":"h","19":" ","20":"s","21":"t","22":"a","23":"t","24":"u","25":"s","26":" ","27":"c","28":"o","29":"d","30":"e","31":" ","32":"4","33":"0","34":"1"}
+2025-08-04 12:49:31 [ERROR] Timeout waiting for gateway connection
+2025-08-04 12:49:31 [ERROR] Failed to initialize gateway: Failed to establish connection to gateway {"stack":"Error: Failed to establish connection to gateway\n    at initializeGateway (/Users/romankr/Dev/MayBursa/src/apps/ibkr-gateway/src/server.ts:37:13)"}
+2025-08-04 12:49:31 [ERROR] Gateway initialization failed: Failed to establish connection to gateway {"stack":"Error: Failed to establish connection to gateway\n    at initializeGateway (/Users/romankr/Dev/MayBursa/src/apps/ibkr-gateway/src/server.ts:37:13)"}
+2025-08-04 12:49:32 [ERROR] Failed to check auth status: {"0":"R","1":"e","2":"q","3":"u","4":"e","5":"s","6":"t","7":" ","8":"f","9":"a","10":"i","11":"l","12":"e","13":"d","14":" ","15":"w","16":"i","17":"t","18":"h","19":" ","20":"s","21":"t","22":"a","23":"t","24":"u","25":"s","26":" ","27":"c","28":"o","29":"d","30":"e","31":" ","32":"4","33":"0","34":"1"}
+2025-08-04 12:49:41 [ERROR] Failed to check auth status: {"0":"R","1":"e","2":"q","3":"u","4":"e","5":"s","6":"t","7":" ","8":"f","9":"a","10":"i","11":"l","12":"e","13":"d","14":" ","15":"w","16":"i","17":"t","18":"h","19":" ","20":"s","21":"t","22":"a","23":"t","24":"u","25":"s","26":" ","27":"c","28":"o","29":"d","30":"e","31":" ","32":"4","33":"0","34":"1"}
+2025-08-04 12:49:41 [ERROR] Failed to check auth status: {"0":"R","1":"e","2":"q","3":"u","4":"e","5":"s","6":"t","7":" ","8":"f","9":"a","10":"i","11":"l","12":"e","13":"d","14":" ","15":"w","16":"i","17":"t","18":"h","19":" ","20":"s","21":"t","22":"a","23":"t","24":"u","25":"s","26":" ","27":"c","28":"o","29":"d","30":"e","31":" ","32":"4","33":"0","34":"1"}
+2025-08-04 12:49:51 [ERROR] Failed to check auth status: {"0":"R","1":"e","2":"q","3":"u","4":"e","5":"s","6":"t","7":" ","8":"f","9":"a","10":"i","11":"l","12":"e","13":"d","14":" ","15":"w","16":"i","17":"t","18":"h","19":" ","20":"s","21":"t","22":"a","23":"t","24":"u","25":"s","26":" ","27":"c","28":"o","29":"d","30":"e","31":" ","32":"4","33":"0","34":"1"}
+2025-08-04 12:49:52 [ERROR] Failed to check auth status: {"0":"R","1":"e","2":"q","3":"u","4":"e","5":"s","6":"t","7":" ","8":"f","9":"a","10":"i","11":"l","12":"e","13":"d","14":" ","15":"w","16":"i","17":"t","18":"h","19":" ","20":"s","21":"t","22":"a","23":"t","24":"u","25":"s","26":" ","27":"c","28":"o","29":"d","30":"e","31":" ","32":"4","33":"0","34":"1"}
+2025-08-04 12:49:57 [INFO] API: Stop gateway requested
+2025-08-04 12:49:57 [INFO] Stopping gateway process 22142
+2025-08-04 12:49:57 [INFO] Gateway process exited with code null and signal SIGTERM
+2025-08-04 12:50:01 [INFO] Killed any existing gateway processes
+2025-08-04 12:50:03 [INFO] Gateway stopped
+2025-08-04 12:50:04 [ERROR] Gateway connection check failed:
+2025-08-04 12:50:04 [ERROR] Failed to check auth status:
+2025-08-04 12:50:04 [ERROR] Failed to check auth status:
+2025-08-04 12:50:11 [ERROR] Gateway connection check failed:
+2025-08-04 12:50:11 [ERROR] Failed to check auth status:
+2025-08-04 12:50:11 [ERROR] Failed to check auth status:

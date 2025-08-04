@@ -1,0 +1,305 @@
+/* General Styles */
+body {
+    background-color: #f5f5f5;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+}
+
+.container-fluid {
+    padding: 0;
+}
+
+/* Mode Indicator Banner */
+.mode-indicator {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    padding: 10px;
+    text-align: center;
+    font-weight: bold;
+    font-size: 1.1rem;
+    z-index: 1050;
+    box-shadow: 0 2px 4px rgba(0,0,0,.2);
+}
+
+.mode-indicator.paper {
+    background: #28a745;
+    color: white;
+}
+
+.mode-indicator.production {
+    background: #dc3545;
+    color: white;
+    animation: modePulse 2s infinite;
+}
+
+@keyframes modePulse {
+    0% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.8;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+/* Adjust navbar to account for mode indicator */
+.navbar {
+    margin-top: 46px;
+}
+
+/* Status Cards */
+.status-card {
+    transition: all 0.3s ease;
+    min-height: 250px;
+}
+
+.status-card.running {
+    border-color: #28a745;
+    background-color: #f8fff9;
+}
+
+.status-card.stopped {
+    border-color: #dc3545;
+    background-color: #fff8f8;
+}
+
+.status-card.authenticated {
+    border-color: #28a745;
+    background-color: #f8fff9;
+}
+
+.status-card.unauthenticated {
+    border-color: #ffc107;
+    background-color: #fffef8;
+}
+
+/* Status Indicators */
+.status-indicator {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.status-light {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    animation: pulse 2s infinite;
+}
+
+.status-light.status-running {
+    background-color: #28a745;
+    box-shadow: 0 0 10px #28a745;
+}
+
+.status-light.status-stopped {
+    background-color: #dc3545;
+    box-shadow: 0 0 10px #dc3545;
+}
+
+.status-light.status-authenticated {
+    background-color: #28a745;
+    box-shadow: 0 0 10px #28a745;
+}
+
+.status-light.status-unauthenticated {
+    background-color: #ffc107;
+    box-shadow: 0 0 10px #ffc107;
+}
+
+.status-light.status-error {
+    background-color: #6c757d;
+    box-shadow: 0 0 10px #6c757d;
+}
+
+@keyframes pulse {
+    0% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.6;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+.status-text {
+    font-weight: 600;
+    font-size: 1.1rem;
+}
+
+/* PID Display */
+.pid-display {
+    background-color: #f8f9fa;
+    border: 2px solid #dee2e6;
+    border-radius: 8px;
+    padding: 15px;
+    margin-top: 20px;
+    text-align: center;
+}
+
+.pid-label {
+    font-size: 0.9rem;
+    color: #6c757d;
+    margin-bottom: 5px;
+}
+
+.pid-value {
+    font-size: 28px;
+    font-weight: bold;
+    color: #212529;
+    font-family: 'Courier New', monospace;
+}
+
+.status-card.running .pid-value {
+    color: #28a745;
+}
+
+.status-card.stopped .pid-value {
+    color: #dc3545;
+}
+
+/* Auth Details */
+.auth-details {
+    margin-top: 20px;
+}
+
+.auth-details .row > div {
+    text-align: center;
+    padding: 10px;
+}
+
+.auth-details .row > div:first-child {
+    border-right: 1px solid #dee2e6;
+}
+
+/* Monitor Status */
+.monitor-status {
+    border-top: 1px solid #dee2e6;
+    padding-top: 15px;
+}
+
+/* Control Buttons */
+.btn-lg {
+    padding: 12px 30px;
+    font-size: 1.1rem;
+    min-width: 180px;
+}
+
+.btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+/* Activity Log */
+.activity-log {
+    height: 300px;
+    overflow-y: auto;
+    background-color: #f8f9fa;
+    border: 1px solid #dee2e6;
+    border-radius: 4px;
+    padding: 10px;
+    font-family: 'Courier New', monospace;
+    font-size: 0.9rem;
+}
+
+.log-entry {
+    padding: 5px 0;
+    border-bottom: 1px solid #e9ecef;
+}
+
+.log-entry:last-child {
+    border-bottom: none;
+}
+
+.log-time {
+    color: #6c757d;
+    font-weight: 600;
+}
+
+.log-entry.log-success {
+    color: #28a745;
+}
+
+.log-entry.log-error {
+    color: #dc3545;
+}
+
+.log-entry.log-warning {
+    color: #ffc107;
+}
+
+.log-entry.log-info {
+    color: #17a2b8;
+}
+
+/* Loading Overlay */
+.loading-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+}
+
+.loading-overlay .spinner-border {
+    width: 3rem;
+    height: 3rem;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .btn-lg {
+        min-width: auto;
+        width: 100%;
+        margin-bottom: 10px;
+    }
+    
+    .pid-value {
+        font-size: 24px;
+    }
+    
+    .auth-details .row > div:first-child {
+        border-right: none;
+        border-bottom: 1px solid #dee2e6;
+    }
+}
+
+/* Navbar */
+.navbar {
+    box-shadow: 0 2px 4px rgba(0,0,0,.1);
+}
+
+#refresh-time {
+    font-weight: 600;
+}
+
+/* Card Headers */
+.card-header {
+    background-color: #f8f9fa;
+    border-bottom: 2px solid #dee2e6;
+}
+
+.card-header h5 {
+    color: #495057;
+}
+
+/* Hover Effects */
+.btn:hover:not(:disabled) {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(0,0,0,.1);
+    transition: all 0.2s ease;
+}
+
+.status-card:hover {
+    box-shadow: 0 4px 12px rgba(0,0,0,.1);
+}

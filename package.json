@@ -8,6 +8,7 @@
     "dev": "turbo run dev",
     "dev:optionssniper": "turbo run dev --filter=@monorepo/optionssniper*",
     "dev:intuitions": "turbo run dev --filter=@monorepo/intuitions*",
+    "dev:ibkr-gateway": "turbo run dev --filter=@maybursa/ibkr-gateway",
     "lint": "turbo run lint",
     "test": "turbo run test",
     "typecheck": "turbo run typecheck",

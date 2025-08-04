@@ -48,3 +48,5 @@ Thumbs.db
 # TypeScript
 *.tsbuildinfo
 tsconfig.tsbuildinfo
+
+clientportal.gw
