@@ -178,3 +178,15 @@ export const parseNumberSafely = (value: string | number, fallback = 0): number 
   const parsed = parseFloat(value);
   return isNaN(parsed) ? fallback : parsed;
 };
+
+// Logger exports
+export { 
+  createLogger, 
+  defaultLogger,
+  safeStringify,
+  type Logger,
+  type LoggerOptions,
+  type LogLevel,
+  type TransportConfig,
+  type LogFormat
+} from './logger';
