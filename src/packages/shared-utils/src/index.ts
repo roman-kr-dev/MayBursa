@@ -182,6 +182,7 @@ export const parseNumberSafely = (value: string | number, fallback = 0): number 
 // Logger exports
 export { 
   createLogger, 
+  createAppLogger,
   defaultLogger,
   safeStringify,
   type Logger,

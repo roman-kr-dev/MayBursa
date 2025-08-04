@@ -79,8 +79,23 @@ export const consoleFormat = format.combine(
   })
 );
 
+// Custom format to strip ANSI color codes
+const stripAnsi = format((info) => {
+  const stripAnsiRegex = /\x1B\[[0-9;]*m/g;
+  
+  // Strip ANSI codes from all string values
+  Object.keys(info).forEach(key => {
+    if (typeof info[key] === 'string') {
+      info[key] = info[key].replace(stripAnsiRegex, '');
+    }
+  });
+  
+  return info;
+});
+
 export const fileFormat = format.combine(
   format.timestamp(),
   format.errors({ stack: true }),
+  stripAnsi(),
   format.json()
 );
