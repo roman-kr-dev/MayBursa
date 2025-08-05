@@ -35,7 +35,7 @@ function createTransport(config: TransportConfig, defaultFormat?: winston.Logfor
 
 export function createLogger(options: LoggerOptions = {}): Logger {
   const {
-    level = 'info' as LogLevel,
+    level = (process.env.LOG_LEVEL as LogLevel) || 'info' as LogLevel,
     format: formatOptions = {},
     transports: transportConfigs = [{ type: 'console' }],
     defaultMeta = {},
@@ -150,7 +150,7 @@ export function createAppLogger(logDir?: string): Logger {
 
   // Create logger with transports
   const logger = winston.createLogger({
-    level: 'info',
+    level: (process.env.LOG_LEVEL as LogLevel) || 'info',
     transports
   });
   
