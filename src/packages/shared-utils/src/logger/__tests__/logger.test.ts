@@ -1,4 +1,4 @@
-import { createLogger, defaultLogger, safeStringify } from '../index';
+import { createLogger, logger, safeStringify } from '../index';
 import { LogLevel } from '../types';
 import * as fs from 'fs';
 import * as path from 'path';
@@ -60,11 +60,11 @@ describe('Logger', () => {
     });
   });
 
-  describe('defaultLogger', () => {
+  describe('logger', () => {
     it('should be a pre-configured logger instance', () => {
-      expect(defaultLogger).toBeDefined();
-      expect(defaultLogger.info).toBeDefined();
-      expect(defaultLogger.error).toBeDefined();
+      expect(logger).toBeDefined();
+      expect(logger.info).toBeDefined();
+      expect(logger.error).toBeDefined();
     });
   });
 

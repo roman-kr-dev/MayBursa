@@ -1,7 +1,7 @@
 import axios, { AxiosInstance } from 'axios';
 import https from 'https';
 import { config } from '../config/environment';
-import { defaultLogger as logger } from '@monorepo/shared-utils';
+import { logger } from '@monorepo/shared-utils';
 
 interface ConnectionStatus {
   isConnected: boolean;

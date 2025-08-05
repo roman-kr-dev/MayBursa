@@ -2,7 +2,7 @@ import { spawn, ChildProcess, execSync } from 'child_process';
 import path from 'path';
 import fs from 'fs';
 import { config } from '../config/environment';
-import { defaultLogger as logger } from '@monorepo/shared-utils';
+import { logger } from '@monorepo/shared-utils';
 
 export class ClientPortalManager {
   private gatewayProcess: ChildProcess | null = null;

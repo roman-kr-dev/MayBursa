@@ -3,7 +3,7 @@ import { clientPortalManager } from '../services/clientPortalManager';
 import { connectionStatus } from '../services/connectionStatus';
 import { authStatus } from '../services/authStatus';
 import { getTradingMode } from '../config/environment';
-import { defaultLogger as logger } from '@monorepo/shared-utils';
+import { logger } from '@monorepo/shared-utils';
 import { getErrorMessage } from '../utils/errorUtils';
 
 export const statusController = {

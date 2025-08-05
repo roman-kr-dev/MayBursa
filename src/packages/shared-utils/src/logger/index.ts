@@ -85,22 +85,42 @@ export function createLogger(options: LoggerOptions = {}): Logger {
   return logger;
 }
 
-export const defaultLogger = createLogger();
+// Create a singleton logger that respects LOGGER_SAVE_TO_FILE env var
+export const logger = createAppLogger();
 
 export function createAppLogger(logDir?: string): Logger {
   const saveToFile = process.env.LOGGER_SAVE_TO_FILE === 'true';
   
   // Create transports array
-  const transports: winston.transport[] = [
-    // Console transport with colors
-    new winston.transports.Console({
-      format: getDefaultFormats({
-        timestamp: true,
-        colorize: true,
-        prettyPrint: true
-      })
-    })
+  const transports: winston.transport[] = [];
+
+  // Add console transport with its own format
+  // Only colorize if output is a TTY (terminal) and colors are not explicitly disabled
+  const shouldColorize = process.stdout.isTTY !== false && 
+                        process.env.NO_COLOR !== 'true' && 
+                        process.env.FORCE_COLOR !== 'false';
+  
+  const consoleFormatters = [
+    winston.format.timestamp({ format: 'HH:mm:ss.SSS' }),
+    winston.format.errors({ stack: true })
   ];
+  
+  if (shouldColorize) {
+    consoleFormatters.push(winston.format.colorize({ all: true }));
+  }
+  
+  consoleFormatters.push(
+    winston.format.printf(({ timestamp, level, message, ...meta }) => {
+      const metaStr = Object.keys(meta).length ? `\n${JSON.stringify(meta, null, 2)}` : '';
+      return `[${timestamp}] ${level}: ${message}${metaStr}`;
+    })
+  );
+  
+  transports.push(
+    new winston.transports.Console({
+      format: winston.format.combine(...consoleFormatters)
+    })
+  );
 
   // Add file transport if enabled
   if (saveToFile) {

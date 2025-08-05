@@ -278,8 +278,6 @@ src/apps/ibkr-gateway/
 │   │   └── statusController.ts
 │   ├── api/
 │   │   └── routes.ts
-│   └── utils/
-│       └── logger.ts
 ├── public/
 │   ├── index.html
 │   ├── js/

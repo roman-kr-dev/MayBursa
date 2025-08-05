@@ -1,7 +1,7 @@
 import { connectionStatus } from './connectionStatus';
 import { authStatus } from './authStatus';
 import { loginAutomation } from './loginAutomation';
-import { defaultLogger as logger } from '@monorepo/shared-utils';
+import { logger } from '@monorepo/shared-utils';
 
 interface MonitorStatus {
   isMonitoring: boolean;

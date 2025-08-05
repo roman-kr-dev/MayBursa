@@ -2,7 +2,7 @@ import { Request, Response } from 'express';
 import { authStatus } from '../services/authStatus';
 import { authMonitor } from '../services/authMonitor';
 import { getTradingMode } from '../config/environment';
-import { defaultLogger as logger } from '@monorepo/shared-utils';
+import { logger } from '@monorepo/shared-utils';
 import { getErrorMessage } from '../utils/errorUtils';
 
 export const authController = {
