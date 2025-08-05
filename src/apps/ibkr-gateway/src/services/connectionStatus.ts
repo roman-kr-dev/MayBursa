@@ -119,16 +119,8 @@ export class ConnectionStatusService {
       const isConnected = await this.checkConnection();
       
       if (isConnected) {
-        logger.info('Gateway connection established');
-        
-        // Wait a bit more for API to be ready
-        await new Promise(resolve => setTimeout(resolve, 2000));
-        
-        const apiAvailable = await this.checkApiAvailability();
-        if (apiAvailable) {
-          logger.info('Gateway API is available');
-          return true;
-        }
+        logger.info(`Gateway connection established at https://localhost:${config.IBKR_GATEWAY_PORT}`);
+        return true;
       }
       
       // Exponential backoff with jitter
