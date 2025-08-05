@@ -88,9 +88,6 @@ export function createLogger(options: LoggerOptions = {}): Logger {
 // Create a singleton logger that respects LOGGER_SAVE_TO_FILE env var
 export const logger = createAppLogger();
 
-// Export logger as defaultLogger for backward compatibility
-export const defaultLogger = logger;
-
 export function createAppLogger(logDir?: string): Logger {
   const saveToFile = process.env.LOGGER_SAVE_TO_FILE === 'true';
   
