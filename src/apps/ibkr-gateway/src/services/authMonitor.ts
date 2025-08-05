@@ -2,6 +2,7 @@ import { connectionStatus } from './connectionStatus';
 import { authStatus } from './authStatus';
 import { loginAutomation } from './loginAutomation';
 import { logger } from '@monorepo/shared-utils';
+import { config } from '../config/environment';
 
 interface MonitorStatus {
   isMonitoring: boolean;
@@ -73,7 +74,13 @@ export class AuthenticationMonitorService {
         return;
       }
 
-      // Not authenticated - check if we should retry
+      // Not authenticated - check if auto-login is disabled
+      if (!config.IBKR_AUTO_LOGIN) {
+        logger.debug('Session not valid, but auto-login is disabled - manual login required');
+        return;
+      }
+
+      // Check if we should retry
       if (this.hasGivenUp) {
         logger.debug('Authentication monitor has given up after max retries');
         return;

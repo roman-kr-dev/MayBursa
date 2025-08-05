@@ -1,6 +1,6 @@
 import express, { Express, Request, Response, NextFunction } from 'express';
 import path from 'path';
-import { getTradingMode } from './config/environment';
+import { getTradingMode, config } from './config/environment';
 import { logger } from '@monorepo/shared-utils';
 import { clientPortalManager } from './services/clientPortalManager';
 import { connectionStatus } from './services/connectionStatus';
@@ -37,15 +37,20 @@ async function initializeGateway(): Promise<void> {
       throw new Error('Failed to establish connection to gateway');
     }
 
-    // Trigger authentication
-    logger.info('Triggering authentication...');
-    const authenticated = await loginAutomation.authenticate();
+    // Check if auto-login is enabled
+    if (config.IBKR_AUTO_LOGIN) {
+      // Trigger authentication
+      logger.info('Triggering authentication...');
+      const authenticated = await loginAutomation.authenticate();
 
-    if (!authenticated) {
-      logger.error('Initial authentication failed - manual intervention may be required');
+      if (!authenticated) {
+        logger.error('Initial authentication failed - manual intervention may be required');
+      }
+    } else {
+      logger.info('Auto-login disabled (IBKR_AUTO_LOGIN=false) - manual login required');
     }
 
-    // Start authentication monitoring
+    // Start authentication monitoring (always runs to detect manual logins)
     logger.info('Starting authentication monitor...');
     await authMonitor.startMonitoring();
 
