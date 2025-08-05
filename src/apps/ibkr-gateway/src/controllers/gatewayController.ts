@@ -3,7 +3,7 @@ import { clientPortalManager } from '../services/clientPortalManager';
 import { connectionStatus } from '../services/connectionStatus';
 import { loginAutomation } from '../services/loginAutomation';
 import { authMonitor } from '../services/authMonitor';
-import { defaultLogger as logger } from '@monorepo/shared-utils';
+import { logger } from '@monorepo/shared-utils';
 
 export const gatewayController = {
   async startGateway(_req: Request, res: Response): Promise<void> {

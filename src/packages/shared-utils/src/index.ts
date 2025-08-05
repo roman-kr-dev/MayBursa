@@ -184,6 +184,7 @@ export {
   createLogger, 
   createAppLogger,
   defaultLogger,
+  logger,
   safeStringify,
   type Logger,
   type LoggerOptions,

@@ -1,6 +1,6 @@
 # Logger Module
 
-A flexible, type-safe logging utility built on Winston v3 with safe circular reference handling.
+A flexible, type-safe logging utility built on Winston v3 with safe circular reference handling and automatic file logging support.
 
 ## Features
 
@@ -10,13 +10,16 @@ A flexible, type-safe logging utility built on Winston v3 with safe circular ref
 - TypeScript support with full type definitions
 - Customizable formatting options
 - Production-ready with JSON logging
+- Automatic file logging when `LOGGER_SAVE_TO_FILE=true`
+- TTY detection for intelligent colorization
+- Support for `NO_COLOR` and `FORCE_COLOR` environment variables
 
 ## Installation
 
 The logger is included in the `@monorepo/shared-utils` package.
 
 ```typescript
-import { createLogger, defaultLogger } from '@monorepo/shared-utils';
+import { createLogger, logger } from '@monorepo/shared-utils';
 ```
 
 ## Basic Usage
@@ -24,11 +27,11 @@ import { createLogger, defaultLogger } from '@monorepo/shared-utils';
 ### Using the Default Logger
 
 ```typescript
-import { defaultLogger } from '@monorepo/shared-utils';
+import { logger } from '@monorepo/shared-utils';
 
-defaultLogger.info('Application started');
-defaultLogger.error('An error occurred', { error: err });
-defaultLogger.debug('Debug information', { data: someObject });
+logger.info('Application started');
+logger.error('An error occurred', { error: err });
+logger.debug('Debug information', { data: someObject });
 ```
 
 ### Creating a Custom Logger
@@ -161,6 +164,23 @@ const logger = createLogger({
     ? { json: true } 
     : { prettyPrint: true, colorize: true }
 });
+```
+
+### Using the Singleton Logger with File Output
+
+The default exported `logger` automatically respects environment variables:
+
+```typescript
+import { logger } from '@monorepo/shared-utils';
+
+// Set LOGGER_SAVE_TO_FILE=true to enable file logging
+// Logs will be saved to ./logs/app.log relative to your app's working directory
+logger.info('This will log to console and file if LOGGER_SAVE_TO_FILE=true');
+
+// The logger also respects:
+// - NO_COLOR=true to disable colors
+// - FORCE_COLOR=false to disable colors
+// - Automatically disables colors when output is piped
 ```
 
 ### Custom Metadata

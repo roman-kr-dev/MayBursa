@@ -1,7 +1,7 @@
 import axios, { AxiosInstance } from 'axios';
 import https from 'https';
 import { config, getTradingMode, TradingMode } from '../config/environment';
-import { defaultLogger as logger } from '@monorepo/shared-utils';
+import { logger } from '@monorepo/shared-utils';
 import { getErrorMessage } from '../utils/errorUtils';
 
 interface AuthStatusResponse {

@@ -1,6 +1,6 @@
 import { config } from './config/environment';
 import { createServer } from './server';
-import { defaultLogger as logger } from '@monorepo/shared-utils';
+import { logger } from '@monorepo/shared-utils';
 
 async function main() {
   try {

@@ -1,7 +1,7 @@
 import express, { Express, Request, Response, NextFunction } from 'express';
 import path from 'path';
 import { getTradingMode } from './config/environment';
-import { defaultLogger as logger } from '@monorepo/shared-utils';
+import { logger } from '@monorepo/shared-utils';
 import { clientPortalManager } from './services/clientPortalManager';
 import { connectionStatus } from './services/connectionStatus';
 import { loginAutomation } from './services/loginAutomation';

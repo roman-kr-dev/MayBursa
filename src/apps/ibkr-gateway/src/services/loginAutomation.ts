@@ -2,7 +2,7 @@ import puppeteer, { Browser, Page } from 'puppeteer';
 import path from 'path';
 import fs from 'fs';
 import { config, getTradingMode } from '../config/environment';
-import { defaultLogger as logger } from '@monorepo/shared-utils';
+import { logger } from '@monorepo/shared-utils';
 
 export class LoginAutomationService {
   private browser: Browser | null = null;
