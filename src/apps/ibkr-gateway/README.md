@@ -341,6 +341,7 @@ All configuration is done through environment variables in the root `.env.local`
 - `IBKR_CONTROL_PANEL_PORT` - Control panel port (default: 3000)
 - `IBKR_CLIENTPORTAL_PATH` - Path to gateway (default: ./clientportal.gw)
 - `IBKR_TRADING_MODE` - Trading mode: 'paper' or 'production' (default: paper)
+- `IBKR_AUTO_LOGIN` - Enable automatic login: 'true' or 'false' (default: true)
 - `NODE_TLS_REJECT_UNAUTHORIZED` - Set to 0 for development (self-signed certs)
 
 ### Gateway Configuration
@@ -473,6 +474,12 @@ pnpm test:integration
    # In another terminal
    tcpdump -i lo0 port 5001
    ```
+
+4. Disable automatic login for manual testing:
+   ```bash
+   IBKR_AUTO_LOGIN=false pnpm dev:ibkr-gateway
+   ```
+   This allows you to test manual login flows and authentication monitoring without automatic interference.
 
 ## Limitations
 
