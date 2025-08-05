@@ -64,7 +64,7 @@ Edit `.env.local` in the root directory:
 ```bash
 # IBKR Configuration
 IBKR_GATEWAY_PORT=5001
-IBKR_CONTROL_PANEL_PORT=3000
+IBKR_GATEWAY_SERVER_POST=3000
 IBKR_CLIENTPORTAL_PATH=./clientportal.gw
 IBKR_USERNAME=your_username
 IBKR_PASSWORD=your_password
@@ -338,7 +338,7 @@ All configuration is done through environment variables in the root `.env.local`
 
 #### Optional Variables
 - `IBKR_GATEWAY_PORT` - Gateway port (default: 5001)
-- `IBKR_CONTROL_PANEL_PORT` - Control panel port (default: 3000)
+- `IBKR_GATEWAY_SERVER_POST` - Gateway app server port (default: 3000)
 - `IBKR_CLIENTPORTAL_PATH` - Path to gateway (default: ./clientportal.gw)
 - `IBKR_TRADING_MODE` - Trading mode: 'paper' or 'production' (default: paper)
 - `IBKR_AUTO_LOGIN` - Enable automatic login: 'true' or 'false' (default: true)

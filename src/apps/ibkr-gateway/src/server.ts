@@ -18,16 +18,9 @@ async function initializeGateway(): Promise<void> {
     if (tradingMode === 'production') {
       logger.warn('⚠️  WARNING: Running in PRODUCTION mode with REAL MONEY');
     }
-    logger.info('========================================');
 
-    logger.info('Initializing IBKR Gateway...');
-
-    // Start the gateway
-    logger.info('Starting gateway process...');
     await clientPortalManager.startGateway();
 
-    // Wait for gateway to be ready
-    logger.info('Waiting for gateway connection...');
     const connected = await connectionStatus.waitForConnection(60000);
 
     if (!connected) {
@@ -43,13 +36,12 @@ async function initializeGateway(): Promise<void> {
       if (!authenticated) {
         logger.error('Initial authentication failed - manual intervention may be required');
       }
+
+      // Start authentication monitoring
+      await authMonitor.startMonitoring();
     } else {
       logger.info('Auto-login disabled (IBKR_AUTO_LOGIN=false) - manual login required');
     }
-
-    // Start authentication monitoring (always runs to detect manual logins)
-    logger.info('Starting authentication monitor...');
-    await authMonitor.startMonitoring();
 
     logger.info('Gateway initialization complete');
   } catch (error) {
@@ -125,9 +117,7 @@ export async function createServer(): Promise<Express> {
 
 export async function killExistingServer(): Promise<void> {
   try {
-    const controlPanelPort = config.IBKR_CONTROL_PANEL_PORT;
-    logger.info(`Killing any existing control panel processes on port ${controlPanelPort}...`);
-
+    const controlPanelPort = config.IBKR_GATEWAY_SERVER_POST;
     if (process.platform === 'darwin' || process.platform === 'linux') {
       try {
         // Find and kill processes using the control panel port

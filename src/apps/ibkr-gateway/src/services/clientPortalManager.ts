@@ -11,7 +11,6 @@ export class ClientPortalManager {
   async checkJavaInstallation(): Promise<boolean> {
     try {
       execSync('java -version', { stdio: 'ignore' });
-      logger.info('Java installation verified');
       return true;
     } catch (error) {
       logger.error('Java is not installed or not in PATH');
@@ -43,7 +42,7 @@ export class ClientPortalManager {
       }
 
       logger.info('Killed any existing gateway processes');
-      
+
       // Wait a bit for processes to fully terminate
       await new Promise(resolve => setTimeout(resolve, 2000));
     } catch (error) {
@@ -75,8 +74,7 @@ export class ClientPortalManager {
       throw new Error(`Config file not found at ${actualConfigPath}`);
     }
 
-    logger.info(`Starting gateway from ${gatewayPath}`);
-    logger.info(`Using config: ${actualConfigPath}`);
+    logger.info(`Starting gateway from ${gatewayPath} Using config: ${actualConfigPath}`);
 
     // Make sure the script is executable
     if (process.platform !== 'win32') {
@@ -135,13 +133,13 @@ export class ClientPortalManager {
   async stopGateway(): Promise<void> {
     if (this.gatewayProcess && this.gatewayProcess.pid) {
       logger.info(`Stopping gateway process ${this.gatewayProcess.pid}`);
-      
+
       try {
         process.kill(this.gatewayProcess.pid, 'SIGTERM');
-        
+
         // Give it time to shutdown gracefully
         await new Promise(resolve => setTimeout(resolve, 3000));
-        
+
         // Force kill if still running
         if (this.isRunning()) {
           process.kill(this.gatewayProcess.pid, 'SIGKILL');
@@ -153,7 +151,7 @@ export class ClientPortalManager {
 
     // Clean up any remaining processes
     await this.killExistingGateway();
-    
+
     this.gatewayProcess = null;
     logger.info('Gateway stopped');
   }

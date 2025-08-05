@@ -8,7 +8,7 @@ export type TradingMode = 'paper' | 'production';
 
 interface Config {
   IBKR_GATEWAY_PORT: number;
-  IBKR_CONTROL_PANEL_PORT: number;
+  IBKR_GATEWAY_SERVER_POST: number;
   IBKR_CLIENTPORTAL_PATH: string;
   IBKR_USERNAME: string;
   IBKR_PASSWORD: string;
@@ -20,7 +20,7 @@ interface Config {
 function validateEnv(): Config {
   const requiredVars = ['IBKR_USERNAME', 'IBKR_PASSWORD'];
   const missing = requiredVars.filter(varName => !process.env[varName]);
-  
+
   if (missing.length > 0) {
     throw new Error(`Missing required environment variables: ${missing.join(', ')}`);
   }
@@ -38,7 +38,7 @@ function validateEnv(): Config {
 
   return {
     IBKR_GATEWAY_PORT: parseInt(process.env.IBKR_GATEWAY_PORT || '5001', 10),
-    IBKR_CONTROL_PANEL_PORT: parseInt(process.env.IBKR_CONTROL_PANEL_PORT || '3000', 10),
+    IBKR_GATEWAY_SERVER_POST: parseInt(process.env.IBKR_GATEWAY_SERVER_POST || '3000', 10),
     IBKR_CLIENTPORTAL_PATH: process.env.IBKR_CLIENTPORTAL_PATH || './clientportal.gw',
     IBKR_USERNAME: process.env.IBKR_USERNAME!,
     IBKR_PASSWORD: process.env.IBKR_PASSWORD!,

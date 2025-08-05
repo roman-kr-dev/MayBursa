@@ -6,12 +6,10 @@ async function main() {
   try {
     logger.info('Starting IBKR Gateway Manager...');
 
-    // Kill any existing processes before starting
-    logger.info('Cleaning up any existing processes...');
     await killExistingServer();
 
     const server = await createServer();
-    const port = config.IBKR_CONTROL_PANEL_PORT;
+    const port = config.IBKR_GATEWAY_SERVER_POST;
 
     server.listen(port, () => {
       logger.info(`IBKR Gateway Manager running on http://localhost:${port}`);
