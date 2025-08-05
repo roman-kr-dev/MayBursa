@@ -173,11 +173,17 @@ The default exported `logger` automatically respects environment variables:
 ```typescript
 import { logger } from '@monorepo/shared-utils';
 
+// Set LOG_LEVEL to control log verbosity (default: 'info')
+// Available levels: 'error', 'warn', 'info', 'http', 'verbose', 'debug', 'silly'
+process.env.LOG_LEVEL = 'debug';
+
 // Set LOGGER_SAVE_TO_FILE=true to enable file logging
 // Logs will be saved to ./logs/app.log relative to your app's working directory
 logger.info('This will log to console and file if LOGGER_SAVE_TO_FILE=true');
+logger.debug('This debug message will only appear when LOG_LEVEL=debug');
 
 // The logger also respects:
+// - LOG_LEVEL to set the logging level
 // - NO_COLOR=true to disable colors
 // - FORCE_COLOR=false to disable colors
 // - Automatically disables colors when output is piped
