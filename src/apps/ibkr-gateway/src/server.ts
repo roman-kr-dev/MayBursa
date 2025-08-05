@@ -1,5 +1,6 @@
 import express, { Express, Request, Response, NextFunction } from 'express';
 import path from 'path';
+import { execSync } from 'child_process';
 import { getTradingMode, config } from './config/environment';
 import { logger } from '@monorepo/shared-utils';
 import { clientPortalManager } from './services/clientPortalManager';
@@ -20,10 +21,6 @@ async function initializeGateway(): Promise<void> {
     logger.info('========================================');
 
     logger.info('Initializing IBKR Gateway...');
-
-    // Kill any existing gateway processes
-    logger.info('Killing any existing gateway processes...');
-    await clientPortalManager.killExistingGateway();
 
     // Start the gateway
     logger.info('Starting gateway process...');
@@ -124,4 +121,65 @@ export async function createServer(): Promise<Express> {
   });
 
   return app;
+}
+
+export async function killExistingServer(): Promise<void> {
+  try {
+    const controlPanelPort = config.IBKR_CONTROL_PANEL_PORT;
+    logger.info(`Killing any existing control panel processes on port ${controlPanelPort}...`);
+
+    if (process.platform === 'darwin' || process.platform === 'linux') {
+      try {
+        // Find and kill processes using the control panel port
+        const pids = execSync(`lsof -ti :${controlPanelPort} 2>/dev/null || true`, { encoding: 'utf8' })
+          .trim()
+          .split('\n')
+          .filter(Boolean);
+
+        for (const pid of pids) {
+          try {
+            execSync(`kill -9 ${pid}`, { stdio: 'ignore' });
+            logger.info(`Killed process ${pid} on port ${controlPanelPort}`);
+          } catch (error) {
+            // Process might have already exited
+          }
+        }
+      } catch (error) {
+        // No processes found on the port
+      }
+    } else if (process.platform === 'win32') {
+      try {
+        // Find processes using the port on Windows
+        const output = execSync(`netstat -ano | findstr :${controlPanelPort}`, { encoding: 'utf8' });
+        const lines = output.trim().split('\n');
+
+        const pids = new Set<string>();
+        for (const line of lines) {
+          const parts = line.trim().split(/\s+/);
+          const pid = parts[parts.length - 1];
+          if (pid && pid !== '0') {
+            pids.add(pid);
+          }
+        }
+
+        for (const pid of pids) {
+          try {
+            execSync(`taskkill /F /PID ${pid}`, { stdio: 'ignore' });
+            logger.info(`Killed process ${pid} on port ${controlPanelPort}`);
+          } catch (error) {
+            // Process might have already exited
+          }
+        }
+      } catch (error) {
+        // No processes found on the port
+      }
+    }
+
+    logger.info('Killed any existing control panel processes');
+
+    // Wait a bit for port to be released
+    await new Promise(resolve => setTimeout(resolve, 1000));
+  } catch (error) {
+    logger.error('Error killing existing control panel:', error);
+  }
 }
