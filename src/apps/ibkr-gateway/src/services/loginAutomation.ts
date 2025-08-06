@@ -47,8 +47,6 @@ export class LoginAutomationService {
 
       await this.launchBrowser();
       await this.navigateToLogin();
-      await this.acceptCertificate();
-
       await this.fillCredentials();
 
       const authenticated = await this.verifyAuthentication();
@@ -166,48 +164,6 @@ export class LoginAutomationService {
     await this.captureScreenshot('after-navigation');
   }
 
-  private async acceptCertificate(): Promise<void> {
-    if (!this.page) throw new Error('Browser not initialized');
-
-    logger.debug('Checking for certificate warning...');
-
-    // Check if we're on a certificate warning page
-    try {
-      // Chrome/Chromium certificate warning
-      const advancedButton = await this.page.$('#details-button');
-      if (advancedButton) {
-        logger.warn('🔒 Certificate warning detected!');
-        logger.debug('Clicking "Advanced" button...');
-        await advancedButton.click();
-        // Wait for the proceed link to appear
-        await this.page.waitForSelector('#proceed-link', { timeout: 5000 });
-        logger.debug('✅ Clicked "Advanced" button');
-
-        const proceedLink = await this.page.$('#proceed-link');
-        if (proceedLink) {
-          logger.debug('Clicking "Proceed" link...');
-          // Click and wait for navigation concurrently
-          await Promise.all([
-            this.page.waitForNavigation({ waitUntil: 'networkidle2', timeout: 5000 }).catch(() => {
-              // Navigation might not happen, that's okay
-            }),
-            proceedLink.click()
-          ]);
-          logger.debug('✅ Certificate accepted');
-          await this.captureScreenshot('after-certificate-accept');
-        } else {
-          logger.debug('Could not find "Proceed" link');
-        }
-      } else {
-        logger.debug('No certificate warning found (certificate may already be accepted)');
-      }
-    } catch (error) {
-      // Certificate might already be accepted or not needed
-      logger.debug('No certificate warning to bypass');
-      logger.debug(`Certificate handling error: ${error}`);
-    }
-  }
-
   private async selectTradingMode(): Promise<void> {
     if (!this.page) throw new Error('Browser not initialized');
 
@@ -221,7 +177,7 @@ export class LoginAutomationService {
       // The toggle is a checkbox with id="toggle1" and class="xyz-paper-switch"
       // When checked = Paper mode, When unchecked = Live mode
       const toggleCheckbox = await this.page.$('#toggle1, .xyz-paper-switch, input[type="checkbox"][name="paperSwitch"]');
-      
+
       if (!toggleCheckbox) {
         logger.warn('⚠️ Could not find paper/live mode toggle, continuing with default mode');
         return;
@@ -230,7 +186,7 @@ export class LoginAutomationService {
       // Check current state
       const isChecked = await toggleCheckbox.evaluate((el) => (el as HTMLInputElement).checked);
       const currentMode = isChecked ? 'paper' : 'production';
-      
+
       logger.debug(`Current mode: ${currentMode.toUpperCase()} (checkbox ${isChecked ? 'checked' : 'unchecked'})`);
 
       // If already in correct mode, no action needed
@@ -241,7 +197,7 @@ export class LoginAutomationService {
 
       // Need to toggle the mode
       logger.debug(`🔄 Switching from ${currentMode.toUpperCase()} to ${tradingMode.toUpperCase()} mode...`);
-      
+
       // Try clicking the label instead of the checkbox directly (for styled toggles)
       try {
         // First try clicking the label
@@ -264,14 +220,14 @@ export class LoginAutomationService {
           }
         });
       }
-      
+
       // Wait for the toggle animation
       await new Promise(resolve => setTimeout(resolve, 500));
-      
+
       // Verify the change
       const newIsChecked = await toggleCheckbox.evaluate((el) => (el as HTMLInputElement).checked);
       const newMode = newIsChecked ? 'paper' : 'production';
-      
+
       if (newMode === tradingMode) {
         logger.info(`✅ Successfully switched to ${tradingMode.toUpperCase()} mode`);
         await this.captureScreenshot(`${tradingMode}-mode-selected`);
@@ -369,220 +325,60 @@ export class LoginAutomationService {
 
     await this.captureScreenshot('credentials-filled');
 
-    // Submit the form
-    const submitSelectors = [
-      'button[type="submit"]',
-      'input[type="submit"]',
-      'button', // Will check text content separately
-    ];
-
-    let submitted = false;
+    // Submit the form using the specific selector
+    const submitSelector = 'form.xyzform-username button[type="submit"]';
     logger.debug('🔍 Looking for submit button...');
 
-    // Try standard submit buttons first
-    for (const selector of submitSelectors.slice(0, 2)) {
-      try {
-        console.debug(`Trying selector: ${selector}`, 'debug');
+    try {
+      // Wait for the submit button to be available
+      await this.page.waitForSelector(submitSelector, {
+        visible: true,
+        timeout: 5000
+      });
 
-        await this.page.click(selector);
-        logger.info(`Clicked submit button with selector: ${selector}`);
-        logger.debug(`✅ Clicked submit button with selector: ${selector}`);
-        submitted = true;
-        break;
-      } catch {
-        // Try next selector
-      }
-    }
-
-    // If not submitted, look for buttons by text
-    if (!submitted) {
-      const buttons = await this.page.$$('button');
-      for (const button of buttons) {
-        const text = await button.evaluate(el => el.textContent?.trim().toLowerCase());
-        if (text && ['log in', 'login', 'submit', 'sign in'].includes(text)) {
-          logger.info(`Clicking button with text: ${text}`);
-          logger.debug(`✅ Clicking button with text: ${text}`);
-          // Click and wait for potential navigation
-          await Promise.all([
-            this.page.waitForNavigation({ waitUntil: 'networkidle2', timeout: 10000 }).catch(() => {
-              logger.debug('No navigation after button click');
-              logger.debug('No navigation after button click');
-            }),
-            button.click()
-          ]);
-          submitted = true;
-          break;
-        }
-      }
-    }
-
-    if (!submitted) {
-      logger.info('No submit button found, trying Enter key');
-      logger.debug('No submit button found, pressing Enter key...');
-      // Try pressing Enter and wait for navigation
-      await Promise.all([
-        this.page.waitForNavigation({ waitUntil: 'networkidle2', timeout: 10000 }).catch(() => {
-          logger.debug('No navigation after Enter key');
-          logger.debug('No navigation after Enter key');
-        }),
-        this.page.keyboard.press('Enter')
-      ]);
-      logger.debug('✅ Pressed Enter key');
+      // Click the submit button
+      await this.page.click(submitSelector);
+      logger.info('Clicked submit button');
+      logger.debug(`✅ Clicked submit button with selector: ${submitSelector}`);
+    } catch (error) {
+      logger.error('Failed to find or click submit button');
+      logger.debug(`Submit button error: ${error}`);
+      await this.captureScreenshot('no-submit-button');
+      throw new Error('Submit button not found');
     }
 
     logger.debug('⏳ Waiting for login response...');
     await this.captureScreenshot('after-login-submit');
-
-    // Handle potential 2FA
-    await this.handle2FA();
   }
 
-  private async handle2FA(): Promise<void> {
-    if (!this.page) throw new Error('Browser not initialized');
-
-    const tradingMode = getTradingMode();
-    logger.debug(`Checking for 2FA in ${tradingMode.toUpperCase()} mode...`);
-
-    if (tradingMode === 'production') {
-      try {
-        // Check for 2FA prompts
-        const twoFASelectors = [
-          'input[name="code"]',
-          'input[name="token"]',
-          'input[name="otp"]',
-          'input[placeholder*="code"]',
-          'input[placeholder*="token"]'
-        ];
-
-        logger.debug('🔍 Looking for 2FA input fields...');
-
-        for (const selector of twoFASelectors) {
-          logger.debug(`Checking selector: ${selector}`);
-          const twoFAField = await this.page.$(selector);
-          if (twoFAField) {
-            logger.warn('2FA detected in PRODUCTION mode - waiting for manual intervention');
-            logger.warn('🔐 2FA DETECTED in PRODUCTION mode!');
-            logger.warn('⏳ Waiting for manual 2FA intervention (120 seconds)...');
-            await this.captureScreenshot(`2fa-required-${tradingMode}`);
-
-            // Wait up to 120 seconds for user to complete 2FA in production mode
-            logger.info('Waiting for user to complete 2FA...');
-            try {
-              await this.page.waitForNavigation({ waitUntil: 'networkidle2', timeout: 120000 });
-              logger.info('2FA completed, navigation detected');
-              logger.debug('✅ 2FA completed, navigation detected');
-            } catch (error) {
-              logger.warn('2FA timeout reached or navigation not detected');
-              logger.warn('2FA timeout reached or navigation not detected');
-            }
-            break;
-          }
-        }
-
-        logger.debug('No 2FA prompt detected');
-      } catch (error) {
-        // No 2FA required
-        logger.debug('No 2FA prompt detected');
-      }
-    } else {
-      // Paper mode: Skip 2FA wait
-      logger.info('Paper mode: Checking for immediate navigation');
-      // Wait briefly for any navigation
-      try {
-        await this.page.waitForNavigation({ waitUntil: 'networkidle2', timeout: 3000 });
-      } catch {
-        // No navigation detected, continue
-      }
-    }
-  }
 
   private async verifyAuthentication(): Promise<boolean> {
     if (!this.page) throw new Error('Browser not initialized');
 
     try {
-      // Wait for any redirects or page changes
-      try {
-        await this.page.waitForNavigation({ waitUntil: 'domcontentloaded', timeout: 3000 });
-      } catch {
-        // No navigation, check current page state
-      }
+      const tradingMode = getTradingMode();
+      const timeout = tradingMode === 'production' ? 120000 : 30000; // 120s for production, 30s for paper
 
-      // Check for successful authentication indicators
-      const successIndicators = [
-        '.logged-in',
-        '#dashboard',
-        'a[href*="logout"]',
-        'button[aria-label*="logout"]',
-        'button[aria-label*="sign out"]'
-      ];
+      logger.info(`Waiting for authentication (${tradingMode} mode, timeout: ${timeout/1000}s)...`);
 
-      // Check CSS selectors first
-      for (const indicator of successIndicators) {
-        try {
-          await this.page.waitForSelector(indicator, { timeout: 5000 });
-          return true;
-        } catch {
-          // Try next indicator
-        }
-      }
+      // Wait for navigation after form submission
+      await this.page.waitForNavigation({ timeout, waitUntil: 'networkidle2' });
 
-      // Check for text content
-      const textIndicators = ['Logout', 'Sign Out', 'Dashboard', 'Welcome'];
-      for (const text of textIndicators) {
-        const element = await this.page.$(`text/${text}`);
-        if (element) {
-          return true;
-        }
-      }
+      // Check for the success message
+      const successElement = await this.page.$('pre::-p-text(Client login succeeds)');
 
-      // Check URL for success patterns
-      const currentUrl = this.page.url();
-      if (currentUrl.includes('dashboard') ||
-        currentUrl.includes('home') ||
-        currentUrl.includes('portal')) {
+      if (successElement) {
+        logger.info('✅ Authentication successful - "Client login succeeds" message found');
         return true;
+      } else {
+        logger.error('Authentication failed - success message not found');
+        await this.captureScreenshot(`auth-failed-${tradingMode}`);
+        return false;
       }
-
-      // Check for error messages
-      const errorSelectors = [
-        '.error',
-        '.alert-danger',
-        '[role="alert"]',
-        '.error-message',
-        '.login-error'
-      ];
-
-      logger.debug('🔍 Checking for error messages...');
-
-      for (const selector of errorSelectors) {
-        const errorElement = await this.page.$(selector);
-        if (errorElement) {
-          const errorText = await errorElement.evaluate(el => el.textContent);
-          logger.error(`Authentication error: ${errorText}`);
-          logger.error(`Authentication error found: ${errorText}`);
-          return false;
-        }
-      }
-
-      // Check for error text
-      const errorTexts = ['Invalid', 'Failed', 'Error', 'Incorrect'];
-      for (const text of errorTexts) {
-        const element = await this.page.$(`text/${text}`);
-        if (element) {
-          const fullText = await element.evaluate(el => el.textContent);
-          logger.error(`Authentication error detected: ${fullText}`);
-          logger.error(`Authentication error detected: ${fullText}`);
-          return false;
-        }
-      }
-
-      // If we can't determine, assume failure
-      logger.warn('Could not determine authentication status');
-      return false;
 
     } catch (error) {
-      logger.error('Error verifying authentication:', error);
-      logger.error(`Error verifying authentication: ${error}`);
+      logger.error(`Authentication timeout or error: ${error}`);
+      await this.captureScreenshot('auth-verification-error');
       return false;
     }
   }
