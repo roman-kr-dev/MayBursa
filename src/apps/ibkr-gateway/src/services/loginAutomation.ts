@@ -218,115 +218,69 @@ export class LoginAutomationService {
       // Wait a bit for the mode toggle to appear
       await new Promise(resolve => setTimeout(resolve, 1000));
 
-      // Check if we're already in the correct mode
-      const currentModeSelectors = [
-        '.selected-mode',
-        '.active-mode',
-        'input[type="radio"]:checked'
-      ];
-
-      for (const selector of currentModeSelectors) {
-        const currentMode = await this.page.$(selector);
-        if (currentMode) {
-          const modeText = await currentMode.evaluate(el => el.textContent || (el as HTMLInputElement).value);
-          logger.debug(`Current mode detected: ${modeText}`);
-
-          if (modeText && modeText.toLowerCase().includes(tradingMode)) {
-            logger.debug(`✅ Already in ${tradingMode.toUpperCase()} mode`);
-            return;
-          }
-        }
+      // The toggle is a checkbox with id="toggle1" and class="xyz-paper-switch"
+      // When checked = Paper mode, When unchecked = Live mode
+      const toggleCheckbox = await this.page.$('#toggle1, .xyz-paper-switch, input[type="checkbox"][name="paperSwitch"]');
+      
+      if (!toggleCheckbox) {
+        logger.warn('⚠️ Could not find paper/live mode toggle, continuing with default mode');
+        return;
       }
 
-      // Try to find and click the appropriate mode selector
-      if (tradingMode === 'paper') {
-        logger.debug('🔄 Switching to PAPER mode...');
+      // Check current state
+      const isChecked = await toggleCheckbox.evaluate((el) => (el as HTMLInputElement).checked);
+      const currentMode = isChecked ? 'paper' : 'production';
+      
+      logger.debug(`Current mode: ${currentMode.toUpperCase()} (checkbox ${isChecked ? 'checked' : 'unchecked'})`);
 
-        // First, try to find the Paper radio button by looking for the label
-        try {
-          // Method 1: Click on the label containing "Paper"
-          const labels = await this.page.$$('label');
-          for (const label of labels) {
-            const text = await label.evaluate(el => el.textContent);
-            if (text && text.trim() === 'Paper') {
-              logger.debug('Found Paper label, clicking it');
-              await label.click();
-              await new Promise(resolve => setTimeout(resolve, 1000));
-              logger.debug('✅ Clicked Paper mode label');
-              await this.captureScreenshot('paper-mode-selected');
-              return;
-            }
-          }
+      // If already in correct mode, no action needed
+      if (currentMode === tradingMode) {
+        logger.debug(`✅ Already in ${tradingMode.toUpperCase()} mode`);
+        return;
+      }
 
-          // Method 2: Try to find and click the radio input directly
-          const paperRadio = await this.page.$('input[type="radio"][value="paper" i]');
-          if (paperRadio) {
-            await paperRadio.click();
-            await new Promise(resolve => setTimeout(resolve, 1000));
-            logger.debug('✅ Clicked Paper mode radio button');
-            await this.captureScreenshot('paper-mode-selected');
-            return;
-          }
-
-          // Method 3: Try evaluate to find and click
-          const clicked = await this.page.evaluate(() => {
-            const labels = document.querySelectorAll('label');
-            for (const label of labels) {
-              if (label.textContent && label.textContent.trim() === 'Paper') {
-                label.click();
-                return true;
-              }
-            }
-            return false;
-          });
-
-          if (clicked) {
-            await new Promise(resolve => setTimeout(resolve, 1000));
-            logger.debug('✅ Clicked Paper mode via evaluate');
-            await this.captureScreenshot('paper-mode-selected');
-            return;
-          }
-        } catch (error) {
-          logger.debug(`Paper mode selection failed: ${error}`);
+      // Need to toggle the mode
+      logger.debug(`🔄 Switching from ${currentMode.toUpperCase()} to ${tradingMode.toUpperCase()} mode...`);
+      
+      // Try clicking the label instead of the checkbox directly (for styled toggles)
+      try {
+        // First try clicking the label
+        const label = await this.page.$('label[for="toggle1"]');
+        if (label) {
+          await label.click();
+          logger.debug('Clicked the toggle label');
+        } else {
+          // Fallback to clicking the checkbox directly
+          await toggleCheckbox.click();
+          logger.debug('Clicked the checkbox directly');
         }
-
-        // If we can't find a paper mode selector, log warning but continue
-        logger.warn('⚠️ Could not find Paper mode selector, continuing with default mode');
-
-      } else if (tradingMode === 'production') {
-        logger.debug('🔄 Switching to LIVE mode...');
-
-        // Try different selectors for Live mode
-        const liveSelectors = [
-          'input[type="radio"][value="live"]',
-          'label:contains("Live")',
-          'button:contains("Live")',
-          '[data-mode="live"]',
-          'text="Live"'
-        ];
-
-        for (const selector of liveSelectors) {
-          try {
-            const liveElement = await this.page.$(selector);
-            if (liveElement) {
-              logger.debug(`Found Live mode selector: ${selector}`);
-              await liveElement.click();
-              await new Promise(resolve => setTimeout(resolve, 1000));
-              logger.debug('✅ Clicked Live mode selector');
-              await this.captureScreenshot('live-mode-selected');
-              return;
-            }
-          } catch (error) {
-            logger.debug(`Failed to click selector ${selector}: ${error}`);
+      } catch (clickError) {
+        // If clicking fails, try using JavaScript
+        logger.debug('Direct click failed, trying JavaScript click...');
+        await this.page.evaluate(() => {
+          const checkbox = document.querySelector('#toggle1') as HTMLInputElement;
+          if (checkbox) {
+            checkbox.click();
           }
-        }
-
-        // If we can't find a live mode selector, log warning but continue
-        logger.warn('⚠️ Could not find Live mode selector, continuing with default mode');
+        });
+      }
+      
+      // Wait for the toggle animation
+      await new Promise(resolve => setTimeout(resolve, 500));
+      
+      // Verify the change
+      const newIsChecked = await toggleCheckbox.evaluate((el) => (el as HTMLInputElement).checked);
+      const newMode = newIsChecked ? 'paper' : 'production';
+      
+      if (newMode === tradingMode) {
+        logger.info(`✅ Successfully switched to ${tradingMode.toUpperCase()} mode`);
+        await this.captureScreenshot(`${tradingMode}-mode-selected`);
+      } else {
+        logger.error(`❌ Failed to switch to ${tradingMode.toUpperCase()} mode. Current mode: ${newMode.toUpperCase()}`);
       }
 
     } catch (error) {
-      logger.debug(`Trading mode selection error: ${error}`);
+      logger.error(`Trading mode selection error: ${error}`);
       // Continue with login even if mode selection fails
     }
   }
