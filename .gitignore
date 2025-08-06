@@ -55,3 +55,6 @@ logs/
 screenshots/
 
 clientportal.gw
+
+# IBKR Gateway
+src/apps/ibkr-gateway/gateway.pid
