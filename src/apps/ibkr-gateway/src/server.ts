@@ -6,7 +6,7 @@ import { logger } from '@monorepo/shared-utils';
 import { clientPortalManager } from './services/clientPortalManager';
 import { connectionStatus } from './services/connectionStatus';
 import { loginAutomation } from './services/loginAutomation';
-import { authMonitor } from './services/authMonitor';
+import { gatewayMonitor } from './services/gatewayMonitor';
 import { setupRoutes } from './api/routes';
 
 async function initializeGateway(): Promise<void> {
@@ -38,7 +38,7 @@ async function initializeGateway(): Promise<void> {
       }
 
       // Start authentication monitoring
-      await authMonitor.startMonitoring();
+      await gatewayMonitor.startMonitoring();
     } else {
       logger.info('Auto-login disabled (IBKR_AUTO_LOGIN=false) - manual login required');
     }

@@ -12,7 +12,7 @@ export function setupRoutes(app: Express): void {
   // Status endpoints
   router.get('/status', statusController.getGatewayStatus);
   router.get('/auth/status', authController.getAuthStatus);
-  router.get('/auth/monitor', authController.getMonitorStatus);
+  router.get('/gateway/monitor', authController.getMonitorStatus);
   router.get('/config/mode', statusController.getTradingMode);
   
   // Gateway control endpoints
