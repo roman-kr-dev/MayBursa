@@ -52,5 +52,6 @@ tsconfig.tsbuildinfo
 # Logs
 *.log
 logs/
+screenshots/
 
 clientportal.gw
