@@ -6,7 +6,7 @@ console.log('IBKR Gateway Login Test');
 console.log('='.repeat(60));
 
 const service = new LoginAutomationService({
-  keepOpen: true
+  headless: false
 });
 
 service.authenticate().catch((error) => {

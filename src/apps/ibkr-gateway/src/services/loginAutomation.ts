@@ -5,17 +5,17 @@ import { config, getTradingMode } from '../config/environment';
 import { logger } from '@monorepo/shared-utils';
 
 interface LoginAutomationOptions {
-  keepOpen?: boolean;
+  headless?: boolean;
 }
 
 export class LoginAutomationService {
   private browser: Browser | null = null;
   private page: Page | null = null;
   private screenshotDir = path.join(__dirname, '../../screenshots');
-  private keepOpen: boolean = false;
+  private headless: boolean = true;
 
   constructor(options: LoginAutomationOptions) {
-    this.keepOpen = options.keepOpen || false;
+    this.headless = options.headless !== undefined ? options.headless : true;
 
     logger.debug('🔧 Initializing LoginAutomationService...');
     logger.debug(`📁 Screenshot directory: ${this.screenshotDir}`);
@@ -62,7 +62,7 @@ export class LoginAutomationService {
         await this.captureScreenshot(`auth-failed-${tradingMode}`);
       }
 
-      if (this.keepOpen) {
+      if (!this.headless) {
         logger.debug('Browser will remain open. Press Ctrl+C to close and exit');
         this.setupGracefulShutdown();
       } else {
@@ -76,7 +76,7 @@ export class LoginAutomationService {
       const tradingMode = getTradingMode();
       await this.captureScreenshot(`auth-error-${tradingMode}`);
 
-      if (!this.keepOpen) {
+      if (this.headless) {
         await this.closeBrowser();
       }
       return false;
@@ -84,7 +84,7 @@ export class LoginAutomationService {
   }
 
   private async launchBrowser(): Promise<void> {
-    const headlessMode = this.keepOpen ? false : true;
+    const headlessMode = this.headless;
     logger.info(`Launching browser in ${headlessMode ? 'HEADLESS' : 'VISIBLE'} mode`);
 
     logger.debug('Launching browser...');
