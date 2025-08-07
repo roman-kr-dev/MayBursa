@@ -1,0 +1,245 @@
+section: Trading Market Data
+description: 'The IB REST API reference documentation - Section: Trading Market Data'
+baseUrl: https://localhost:5001
+note: All paths include /v1/api prefix (except /gw/* and /oauth2/* endpoints)
+endpoints:
+  - path: /v1/api/hmds/history
+    method: GET
+    summary: Request Historical Data For An Instrument In The Form Of OHLC Bars.
+    parameters:
+      - name: conid
+        in: query
+        required: true
+        type: string
+      - name: barType
+        in: query
+        required: false
+        type: string
+      - name: startTime
+        in: query
+        required: false
+        type: string
+      - name: period
+        in: query
+        required: true
+        type: string
+      - name: direction
+        in: query
+        required: false
+        type: string
+      - name: bar
+        in: query
+        required: true
+        type: string
+      - name: outsideRth
+        in: query
+        required: false
+        type: boolean
+    responses:
+      '200':
+        description: Historical data query successfully returned data.
+        example:
+          startTime: 20231211-04:00:00
+          startTimeVal: 1702285200000
+          endTime: 20231211-17:51:20
+          endTimeVal: 1702335080000
+          data:
+            - t: 1702285200000
+              o: 195.01
+              c: 194.8
+              h: 195.01
+              l: 194.8
+              v: 1723
+          points: 1
+          mktDataDelay: 0
+        schema: hmdsHistoryResponse
+        structure:
+          startTime: string
+          startTimeVal: integer
+          endTime: string
+          endTimeVal: integer
+          data:
+            - singleHistoricalBar
+          points: integer
+          mktDataDelay: integer
+  - path: /v1/api/iserver/marketdata/history
+    method: GET
+    summary: Request Historical Data For An Instrument In The Form Of OHLC Bars.
+    parameters:
+      - name: conid
+        in: query
+        required: true
+        type: string
+      - name: exchange
+        in: query
+        required: false
+        type: string
+      - name: period
+        in: query
+        required: true
+        type: string
+      - name: bar
+        in: query
+        required: true
+        type: string
+      - name: startTime
+        in: query
+        required: false
+        type: string
+      - name: outsideRth
+        in: query
+        required: false
+        type: boolean
+    responses:
+      '200':
+        description: Historical data query successfully returned data.
+        example:
+          serverid: '20477'
+          symbol: AAPL
+          text: APPLE INC
+          priceFactor: 100
+          startTime: 20230818-08:00:00
+          high: 17510/472117.45/0
+          low: 17170/472117.45/0
+          timePeriod: 1d
+          barLength: 86400
+          mdAvailability: RpB
+          outsideRth: false
+          tradingDayDuration: 1440
+          volumeFactor: 1
+          priceDisplayRule: 1
+          priceDisplayValue: '2'
+          chartPanStartTime: 20230821-13:30:00
+          direction: -1
+          negativeCapable: false
+          messageVersion: 2
+          travelTime: 48
+          data:
+            - t: 1692345600000
+              o: 173.4
+              c: 174.7
+              h: 175.1
+              l: 171.7
+              v: 472117.45
+          points: 1
+          mktDataDelay: 0
+        schema: iserverHistoryResponse
+        structure:
+          serverId: string
+          symbol: string
+          text: string
+          priceFactor: integer
+          startTime: string
+          high: string
+          low: string
+          timePeriod: string
+          barLength: integer
+          mdAvailability: string
+          outsideRth: boolean
+          tradingDayDuration: integer
+          volumeFactor: integer
+          priceDisplayRule: integer
+          priceDisplayValue: string
+          chartPanStartTime: string
+          direction: integer
+          negativeCapable: boolean
+          messageVersion: integer
+          travelTime: integer
+          data:
+            - singleHistoricalBar
+          points: integer
+          mktDataDelay: integer
+  - path: /v1/api/iserver/marketdata/snapshot
+    method: GET
+    summary: Live Market Data Snapshot
+    description: >-
+      Get Market Data for the given conid(s). A pre-flight request must be made prior to ever receiving data. For some
+      fields, it may take more than a few moments to receive information. See response fields
+    parameters:
+      - name: conids
+        in: query
+        required: true
+        type: string
+      - name: fields
+        in: query
+        required: false
+        type: string
+    responses:
+      '200':
+        description: Successfully enabled or disabled your email notifications.
+        schema: fyiVT
+        structure:
+          V: integer
+          T: integer
+  - path: /v1/api/iserver/marketdata/unsubscribe
+    method: POST
+    summary: Instruct IServer To Close Its Backend Stream For The Instrument.
+    description: Instruct IServer to close its backend stream for the instrument when real-time snapshots are no longer needed.
+    requestBody:
+      required: true
+      contentType: application/json
+    responses:
+      '200':
+        description: Acknowledges a successful request
+        example:
+          success: true
+        structure:
+          success: boolean
+  - path: /v1/api/iserver/marketdata/unsubscribeall
+    method: GET
+    summary: Instruct IServer To Close All Of Its Open Backend Data Streams For All Instruments.
+    responses:
+      '200':
+        description: Indicates a successful request to unsubscribe all streams.
+        example:
+          unsubscribed: true
+        structure:
+          unsubscribed: boolean
+  - path: /v1/api/md/regsnapshot
+    method: GET
+    summary: Request A Regulatory Snapshot For An Instrument.
+    parameters:
+      - name: conid
+        in: query
+        required: true
+        type: string
+    responses:
+      '200':
+        description: Market Data reg. snapshot
+        example:
+          '31': '174.59'
+          '84': '174.58'
+          '85': 3
+          '86': '174.59'
+          '88': 1
+          '7057': Q
+          '7058': D
+          '7059': 2
+          '7068': Q
+          conid: 265598
+          conidEx: '265598'
+          sizeMinTick: 1
+          BboExchange: 9c
+          HasDelayed: false
+          BestBidExch: 512
+          BestAskExch: 512
+          LastExch: 8
+        schema: regsnapshotData
+        structure:
+          '31': string
+          '84': string
+          '85': integer
+          '86': string
+          '88': integer
+          '7057': string
+          '7058': string
+          '7059': string
+          '7068': string
+          conid: integer
+          conidEx: string
+          sizeMinTick: number
+          BboExchange: string
+          HasDelayed: boolean
+          BestBidExch: integer
+          BestAskExch: integer
+          LastExch: integer

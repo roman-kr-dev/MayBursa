@@ -14,6 +14,7 @@ interface Config {
   IBKR_PASSWORD: string;
   IBKR_TRADING_MODE: TradingMode;
   IBKR_AUTO_LOGIN: boolean;
+  IBKR_AUTO_RESTART: boolean;
   NODE_TLS_REJECT_UNAUTHORIZED: string;
 }
 
@@ -44,6 +45,7 @@ function validateEnv(): Config {
     IBKR_PASSWORD: process.env.IBKR_PASSWORD!,
     IBKR_TRADING_MODE: tradingMode,
     IBKR_AUTO_LOGIN: process.env.IBKR_AUTO_LOGIN?.toLowerCase() === 'false' ? false : true,
+    IBKR_AUTO_RESTART: process.env.IBKR_AUTO_RESTART?.toLowerCase() === 'false' ? false : true,
     NODE_TLS_REJECT_UNAUTHORIZED: process.env.NODE_TLS_REJECT_UNAUTHORIZED || '0'
   };
 }

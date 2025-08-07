@@ -1,0 +1,226 @@
+generated: '2025-08-07T14:51:26.728Z'
+sections:
+  - name: Account Management Accounts
+    file: account-management-accounts.yaml
+    endpoints: 11
+    paths:
+      - GET /gw/api/v1/accounts
+      - POST /gw/api/v1/accounts
+      - PATCH /gw/api/v1/accounts
+      - GET /gw/api/v1/accounts/{accountId}/details
+      - GET /gw/api/v1/accounts/{accountId}/kyc
+      - GET /gw/api/v1/accounts/{accountId}/login-messages
+      - GET /gw/api/v1/accounts/{accountId}/status
+      - GET /gw/api/v1/accounts/{accountId}/tasks
+      - POST /gw/api/v1/accounts/documents
+      - GET /gw/api/v1/accounts/login-messages
+      - GET /gw/api/v1/accounts/status
+  - name: Account Management Banking
+    file: account-management-banking.yaml
+    endpoints: 12
+    paths:
+      - POST /gw/api/v1/bank-instructions
+      - POST /gw/api/v1/bank-instructions/query
+      - GET /gw/api/v1/client-instructions/{clientInstructionId}
+      - POST /gw/api/v1/external-asset-transfers
+      - POST /gw/api/v1/external-cash-transfers
+      - POST /gw/api/v1/external-cash-transfers/query
+      - GET /gw/api/v1/instruction-sets/{instructionSetId}
+      - GET /gw/api/v1/instructions/{instructionId}
+      - POST /gw/api/v1/instructions/cancel
+      - POST /gw/api/v1/instructions/query
+      - POST /gw/api/v1/internal-asset-transfers
+      - POST /gw/api/v1/internal-cash-transfers
+  - name: Account Management Reports
+    file: account-management-reports.yaml
+    endpoints: 4
+    paths:
+      - POST /gw/api/v1/statements
+      - GET /gw/api/v1/statements/available
+      - POST /gw/api/v1/tax-documents
+      - GET /gw/api/v1/tax-documents/available
+  - name: Account Management Utilities
+    file: account-management-utilities.yaml
+    endpoints: 7
+    paths:
+      - GET /gw/api/v1/enumerations/{enumerationType}
+      - GET /gw/api/v1/enumerations/complex-asset-transfer
+      - GET /gw/api/v1/forms
+      - GET /gw/api/v1/participating-banks
+      - GET /gw/api/v1/requests
+      - GET /gw/api/v1/requests/{requestId}/status
+      - GET /gw/api/v1/validations/usernames/{username}
+  - name: Authorization SSO Sessions
+    file: authorization-sso-sessions.yaml
+    endpoints: 2
+    paths:
+      - POST /gw/api/v1/sso-browser-sessions
+      - POST /gw/api/v1/sso-sessions
+  - name: Authorization Token
+    file: authorization-token.yaml
+    endpoints: 1
+    paths:
+      - POST /oauth2/api/v1/token
+  - name: Trading Accounts
+    file: trading-accounts.yaml
+    endpoints: 11
+    paths:
+      - GET /v1/api/acesws/{accountId}/signatures-and-owners
+      - POST /v1/api/iserver/account
+      - GET /v1/api/iserver/account/{accountId}/summary
+      - GET /v1/api/iserver/account/{accountId}/summary/available_funds
+      - GET /v1/api/iserver/account/{accountId}/summary/balances
+      - GET /v1/api/iserver/account/{accountId}/summary/margins
+      - GET /v1/api/iserver/account/{accountId}/summary/market_value
+      - GET /v1/api/iserver/account/pnl/partitioned
+      - GET /v1/api/iserver/account/search/{searchPattern}
+      - GET /v1/api/iserver/accounts
+      - POST /v1/api/iserver/dynaccount
+  - name: Trading Alerts
+    file: trading-alerts.yaml
+    endpoints: 6
+    paths:
+      - POST /v1/api/iserver/account/{accountId}/alert
+      - DELETE /v1/api/iserver/account/{accountId}/alert/{alertId}
+      - POST /v1/api/iserver/account/{accountId}/alert/activate
+      - GET /v1/api/iserver/account/{accountId}/alerts
+      - GET /v1/api/iserver/account/alert/{alertId}
+      - GET /v1/api/iserver/account/mta
+  - name: Trading Contracts
+    file: trading-contracts.yaml
+    endpoints: 16
+    paths:
+      - GET /v1/api/iserver/contract/{conid}/algos
+      - GET /v1/api/iserver/contract/{conid}/info
+      - GET /v1/api/iserver/contract/{conid}/info-and-rules
+      - POST /v1/api/iserver/contract/rules
+      - GET /v1/api/iserver/currency/pairs
+      - GET /v1/api/iserver/exchangerate
+      - GET /v1/api/iserver/secdef/bond-filters
+      - GET /v1/api/iserver/secdef/info
+      - GET /v1/api/iserver/secdef/search
+      - POST /v1/api/iserver/secdef/search
+      - GET /v1/api/iserver/secdef/strikes
+      - GET /v1/api/trsrv/all-conids
+      - GET /v1/api/trsrv/futures
+      - GET /v1/api/trsrv/secdef
+      - GET /v1/api/trsrv/secdef/schedule
+      - GET /v1/api/trsrv/stocks
+  - name: Trading FA Allocation Management
+    file: trading-fa-allocation.yaml
+    endpoints: 8
+    paths:
+      - GET /v1/api/iserver/account/allocation/accounts
+      - GET /v1/api/iserver/account/allocation/group
+      - PUT /v1/api/iserver/account/allocation/group
+      - POST /v1/api/iserver/account/allocation/group
+      - POST /v1/api/iserver/account/allocation/group/delete
+      - POST /v1/api/iserver/account/allocation/group/single
+      - GET /v1/api/iserver/account/allocation/presets
+      - POST /v1/api/iserver/account/allocation/presets
+  - name: Trading FYIs and Notifications
+    file: trading-fyis.yaml
+    endpoints: 11
+    paths:
+      - GET /v1/api/fyi/deliveryoptions
+      - DELETE /v1/api/fyi/deliveryoptions/{deviceId}
+      - POST /v1/api/fyi/deliveryoptions/device
+      - PUT /v1/api/fyi/deliveryoptions/email
+      - GET /v1/api/fyi/disclaimer/{typecode}
+      - PUT /v1/api/fyi/disclaimer/{typecode}
+      - GET /v1/api/fyi/notifications
+      - PUT /v1/api/fyi/notifications/{notificationID}
+      - GET /v1/api/fyi/settings
+      - POST /v1/api/fyi/settings/{typecode}
+      - GET /v1/api/fyi/unreadnumber
+  - name: Trading Market Data
+    file: trading-market-data.yaml
+    endpoints: 6
+    paths:
+      - GET /v1/api/hmds/history
+      - GET /v1/api/iserver/marketdata/history
+      - GET /v1/api/iserver/marketdata/snapshot
+      - POST /v1/api/iserver/marketdata/unsubscribe
+      - GET /v1/api/iserver/marketdata/unsubscribeall
+      - GET /v1/api/md/regsnapshot
+  - name: Trading OAuth 1.0a
+    file: trading-oauth.yaml
+    endpoints: 3
+    paths:
+      - POST /v1/api/oauth/access_token
+      - POST /v1/api/oauth/live_session_token
+      - POST /v1/api/oauth/request_token
+  - name: Trading Orders
+    file: trading-orders.yaml
+    endpoints: 11
+    paths:
+      - POST /v1/api/iserver/account/{accountId}/order/{orderId}
+      - DELETE /v1/api/iserver/account/{accountId}/order/{orderId}
+      - POST /v1/api/iserver/account/{accountId}/orders
+      - POST /v1/api/iserver/account/{accountId}/orders/whatif
+      - GET /v1/api/iserver/account/order/status/{orderId}
+      - GET /v1/api/iserver/account/orders
+      - GET /v1/api/iserver/account/trades
+      - POST /v1/api/iserver/notification
+      - POST /v1/api/iserver/questions/suppress
+      - POST /v1/api/iserver/questions/suppress/reset
+      - POST /v1/api/iserver/reply/{replyId}
+  - name: Trading Portfolio
+    file: trading-portfolio.yaml
+    endpoints: 10
+    paths:
+      - GET /v1/api/portfolio/{accountId}/allocation
+      - GET /v1/api/portfolio/{accountId}/ledger
+      - GET /v1/api/portfolio/{accountId}/meta
+      - GET /v1/api/portfolio/{accountid}/position/{conid}
+      - GET /v1/api/portfolio/{accountId}/positions/{pageId}
+      - POST /v1/api/portfolio/{accountId}/positions/invalidate
+      - GET /v1/api/portfolio/{accountId}/summary
+      - GET /v1/api/portfolio/accounts
+      - GET /v1/api/portfolio/positions/{conid}
+      - GET /v1/api/portfolio/subaccounts
+  - name: Trading Portfolio Analyst
+    file: trading-portfolio-analyst.yaml
+    endpoints: 3
+    paths:
+      - POST /v1/api/pa/allperiods
+      - POST /v1/api/pa/performance
+      - POST /v1/api/pa/transactions
+  - name: Trading Scanner
+    file: trading-scanner.yaml
+    endpoints: 4
+    paths:
+      - GET /v1/api/hmds/scanner/params
+      - POST /v1/api/hmds/scanner/run
+      - GET /v1/api/iserver/scanner/params
+      - POST /v1/api/iserver/scanner/run
+  - name: Trading Session
+    file: trading-session.yaml
+    endpoints: 6
+    paths:
+      - POST /v1/api/iserver/auth/ssodh/init
+      - POST /v1/api/iserver/auth/status
+      - GET /v1/api/iserver/reauthenticate
+      - POST /v1/api/logout
+      - GET /v1/api/sso/validate
+      - POST /v1/api/tickle
+  - name: Trading Watchlists
+    file: trading-watchlists.yaml
+    endpoints: 4
+    paths:
+      - GET /v1/api/iserver/watchlist
+      - POST /v1/api/iserver/watchlist
+      - DELETE /v1/api/iserver/watchlist
+      - GET /v1/api/iserver/watchlists
+  - name: Trading Websocket
+    file: trading-websocket.yaml
+    endpoints: 1
+    paths:
+      - GET /v1/api/ws
+  - name: Utilities Echo
+    file: utilities-echo.yaml
+    endpoints: 2
+    paths:
+      - GET /gw/api/v1/echo/https
+      - POST /gw/api/v1/echo/signed-jwt
+totalEndpoints: 139

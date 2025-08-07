@@ -1,0 +1,36 @@
+section: Utilities Echo
+description: 'The IB REST API reference documentation - Section: Utilities Echo'
+baseUrl: https://localhost:5001
+note: All paths include /v1/api prefix (except /gw/* and /oauth2/* endpoints)
+endpoints:
+  - path: /gw/api/v1/echo/https
+    method: GET
+    summary: Echo A Request With HTTPS Security Policy Back After Validation.
+    responses:
+      '200':
+        description: Returns a JSON object containing the request parameters.
+        schema: EchoResponse
+        structure:
+          requestMethod: string
+          securityPolicy: string
+          queryParameters: {}
+    security: HTTPS
+    scopes:
+      - echo.read
+  - path: /gw/api/v1/echo/signed-jwt
+    method: POST
+    summary: Echo A Request With Signed JWT Security Policy Back After Validation.
+    requestBody:
+      required: false
+      contentType: application/json
+    responses:
+      '200':
+        description: Returns a JSON object containing the request parameters.
+        schema: EchoResponse
+        structure:
+          requestMethod: string
+          securityPolicy: string
+          queryParameters: {}
+    security: SIGNED_JWT
+    scopes:
+      - echo.write

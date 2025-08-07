@@ -28,3 +28,11 @@ This applies every time external library code is altered to ensure compatibility
 - **ALWAYS use** `import { logger } from '@monorepo/shared-utils';`
 - **NEVER use** `console.log()`, `console.error()`, `console.warn()`, or `console.info()`
 - **Logger methods**: `logger.debug()`, `logger.info()`, `logger.warn()`, `logger.error()`
+
+## Interactive Brokers (IBKR) API Development
+
+### MANDATORY: Always Consult IBKR API Reference
+
+Before performing ANY operation related to Interactive Brokers API, you MUST:
+
+1. **Read the API-README.md** located at `src/apps/ibkr-gateway/reference/API-README.md`

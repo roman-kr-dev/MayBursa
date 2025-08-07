@@ -6,7 +6,7 @@ import { logger } from '@monorepo/shared-utils';
 import { clientPortalManager } from './services/clientPortalManager';
 import { connectionStatus } from './services/connectionStatus';
 import { loginAutomation } from './services/loginAutomation';
-import { authMonitor } from './services/authMonitor';
+import { gatewayMonitor } from './services/gatewayMonitor';
 import { setupRoutes } from './api/routes';
 
 async function initializeGateway(): Promise<void> {
@@ -35,10 +35,15 @@ async function initializeGateway(): Promise<void> {
 
       if (!authenticated) {
         logger.error('Initial authentication failed - manual intervention may be required');
+      } else {
+        // Wait for the gateway to update its internal authentication state
+        // This prevents the monitor from immediately checking and finding "not authenticated"
+        logger.info('Waiting for gateway to establish session internally...');
+        await new Promise(resolve => setTimeout(resolve, 10000)); // 10 second delay
       }
 
       // Start authentication monitoring
-      await authMonitor.startMonitoring();
+      await gatewayMonitor.startMonitoring();
     } else {
       logger.info('Auto-login disabled (IBKR_AUTO_LOGIN=false) - manual login required');
     }

@@ -58,7 +58,7 @@ async function fetchLoginStatus() {
 
 async function fetchMonitorStatus() {
     try {
-        const response = await fetch('/api/auth/monitor');
+        const response = await fetch('/api/gateway/monitor');
         const data = await response.json();
         
         updateMonitorStatus(data);
@@ -170,25 +170,34 @@ function updateMonitorStatus(data) {
     
     if (data.success) {
         let status = '';
+        let statusClass = 'text-success';
         
         if (data.isMonitoring) {
-            status = 'Active';
-            
-            if (data.hasGivenUp) {
-                status = `Given up after ${data.maxRetries} attempts`;
-                monitorDetails.className = 'text-danger';
-            } else if (data.retryCount > 0) {
-                status = `Retry ${data.retryCount}/${data.maxRetries}`;
-                monitorDetails.className = 'text-warning';
+            // Process monitoring status
+            if (!data.processRunning && data.restartAttempts > 0) {
+                status = `Process down, restart attempt #${data.restartAttempts}`;
+                statusClass = 'text-warning';
+            } else if (data.totalRestarts > 0) {
+                status = `Active (${data.totalRestarts} restart${data.totalRestarts !== 1 ? 's' : ''})`;
             } else {
-                monitorDetails.className = 'text-success';
+                status = 'Active';
+            }
+            
+            // Authentication monitoring status
+            if (data.authHasGivenUp) {
+                status += ` | Auth: Given up after ${data.authMaxRetries} attempts`;
+                statusClass = 'text-danger';
+            } else if (data.authRetryCount > 0) {
+                status += ` | Auth: Retry ${data.authRetryCount}/${data.authMaxRetries}`;
+                statusClass = 'text-warning';
             }
         } else {
             status = 'Not Active';
-            monitorDetails.className = 'text-muted';
+            statusClass = 'text-muted';
         }
         
         monitorDetails.textContent = status;
+        monitorDetails.className = statusClass;
     } else {
         monitorDetails.textContent = 'Unknown';
         monitorDetails.className = 'text-muted';

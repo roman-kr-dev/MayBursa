@@ -2,7 +2,7 @@ import { Request, Response } from 'express';
 import { clientPortalManager } from '../services/clientPortalManager';
 import { connectionStatus } from '../services/connectionStatus';
 import { loginAutomation } from '../services/loginAutomation';
-import { authMonitor } from '../services/authMonitor';
+import { gatewayMonitor } from '../services/gatewayMonitor';
 import { logger } from '@monorepo/shared-utils';
 
 export const gatewayController = {
@@ -36,8 +36,13 @@ export const gatewayController = {
         try {
           const connected = await connectionStatus.waitForConnection();
           if (connected) {
-            await loginAutomation.authenticate();
-            await authMonitor.startMonitoring();
+            const authenticated = await loginAutomation.authenticate();
+            if (authenticated) {
+              // Wait for the gateway to update its internal authentication state
+              logger.info('Waiting for gateway to establish session internally...');
+              await new Promise(resolve => setTimeout(resolve, 10000)); // 10 second delay
+            }
+            await gatewayMonitor.startMonitoring();
           }
         } catch (error) {
           logger.error('Background initialization failed:', error);
@@ -59,7 +64,7 @@ export const gatewayController = {
       logger.info('API: Stop gateway requested');
 
       // Stop monitoring first
-      await authMonitor.stopMonitoring();
+      await gatewayMonitor.stopMonitoring();
 
       // Stop the gateway
       await clientPortalManager.stopGateway();
@@ -83,7 +88,7 @@ export const gatewayController = {
       logger.info('API: Restart gateway requested');
 
       // Stop monitoring
-      await authMonitor.stopMonitoring();
+      await gatewayMonitor.stopMonitoring();
 
       // Kill existing processes
       await clientPortalManager.killExistingGateway();
@@ -107,8 +112,13 @@ export const gatewayController = {
         try {
           const connected = await connectionStatus.waitForConnection();
           if (connected) {
-            await loginAutomation.authenticate();
-            await authMonitor.startMonitoring();
+            const authenticated = await loginAutomation.authenticate();
+            if (authenticated) {
+              // Wait for the gateway to update its internal authentication state
+              logger.info('Waiting for gateway to establish session internally...');
+              await new Promise(resolve => setTimeout(resolve, 10000)); // 10 second delay
+            }
+            await gatewayMonitor.startMonitoring();
           }
         } catch (error) {
           logger.error('Background initialization failed:', error);

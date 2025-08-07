@@ -1,0 +1,27 @@
+section: Authorization Token
+description: 'The IB REST API reference documentation - Section: Authorization Token'
+baseUrl: https://localhost:5001
+note: All paths include /v1/api prefix (except /gw/* and /oauth2/* endpoints)
+endpoints:
+  - path: /oauth2/api/v1/token
+    method: POST
+    summary: Create Access Token
+    description: Generate OAuth 2.0 access tokens based on request parameters.
+    requestBody:
+      required: true
+      contentType: application/x-www-form-urlencoded
+    responses:
+      '200':
+        description: Returns a token response.
+        example:
+          access_token: >-
+            eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImtpZCI6IjM0MDk5YjQxYThkZTY1ZTJmNTAwMzQ3MmQ0M2Q5ZDBhZjI2MWIzN2IifQ.eyJpc3MiOiIvdG9rZW4iLCJzdWIiOiJwcm9kdGVzdGVyIiwiZXhwIjoxNzA5NzczMjgyLCJpYXQiOjE3MDk2ODY4ODIsInNjb3BlIjoiZWNoby5yZWFkIGVjaG8ud3JpdGUiLCJjc2lkIjoicHJvZHRlc3RlciIsImFjY291bnRJZCI6IlU0NjM3NyJ9.HDfltwI2xOYYnCRgjefujhU2h5lcQCvuvtNuCVSeq26IydAvMiv_QccmcBvsMSHKYjH6nvA1r_5f7R3Jsc46_d1YMArcFfE33mj_qj9GYml-B_8634vLdD104abB-DU2J4a7yW1YwN61hYwPGWueps_UsnKnxf-Iaj6ELxtPBRl4NOEC8vJZ9nfhL81t4L5N_f-skXbpcLcArZaBtxqXvI1z4ClJd9L1-9pJ_3DPUp0s3VHnDCnx2wBkLY_pPEcnP52Ms_gppSHLXn_x5OLL82kbxWSlhbX9fvogj0AtHJDvhWNwTFk8Az57MSsPBAZMf4rsx-LY1ZK9bNSlQNb2W-BuqotDwwPwIZNB9en_6p0KoJFFEQu0dTSJAxGjfMeADQc6ZduHFzyNeOTpnh2oPfRK7JrsLGuGvbQ_M7taKEiDV49gpYzjJqVtfuNDAzLARLbj8WPGcUbckSF4pJH5Ipm1FbYhp0DzEgo5VEjZlQU5ChlQGakF4nf9NEIz5Aed
+          token_type: Bearer
+          scope: echo.read echo.write
+          expires_in: 86399
+        schema: TokenResponse
+        structure:
+          access_token: string
+          token_type: string
+          scope: string
+          expires_in: integer

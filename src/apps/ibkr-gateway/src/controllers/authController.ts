@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 import { authStatus } from '../services/authStatus';
-import { authMonitor } from '../services/authMonitor';
+import { gatewayMonitor } from '../services/gatewayMonitor';
 import { getTradingMode } from '../config/environment';
 import { logger } from '@monorepo/shared-utils';
 import { getErrorMessage } from '../utils/errorUtils';
@@ -35,7 +35,7 @@ export const authController = {
 
   async getMonitorStatus(_req: Request, res: Response): Promise<void> {
     try {
-      const monitorStatus = authMonitor.getMonitorStatus();
+      const monitorStatus = gatewayMonitor.getMonitorStatus();
       
       res.json({
         success: true,
@@ -56,7 +56,7 @@ export const authController = {
       logger.info('API: Manual login requested');
       
       // This will reset retry count and attempt authentication
-      const success = await authMonitor.manualAuthenticate();
+      const success = await gatewayMonitor.manualAuthenticate();
       
       if (success) {
         res.json({

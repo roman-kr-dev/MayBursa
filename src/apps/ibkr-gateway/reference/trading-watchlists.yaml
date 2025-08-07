@@ -1,0 +1,111 @@
+section: Trading Watchlists
+description: 'The IB REST API reference documentation - Section: Trading Watchlists'
+baseUrl: https://localhost:5001
+note: All paths include /v1/api prefix (except /gw/* and /oauth2/* endpoints)
+endpoints:
+  - path: /v1/api/iserver/watchlist
+    method: GET
+    summary: Retrieve Details Of A Single Watchlist Stored In The Username's Settings.
+    parameters:
+      - name: id
+        in: query
+        required: true
+        type: string
+    responses:
+      '200':
+        description: Successful deletion of specified watchlist.
+        example:
+          id: '1234'
+          hash: '1234987651621'
+          name: Test Watchlist
+          readOnly: false
+          instruments:
+            - ST: STK
+              C: '8314'
+              conid: 8314
+              name: INTL BUSINESS MACHINES CORP
+              fullName: IBM
+              assetClass: STK
+              ticker: IBM
+              chineseName: ''
+        schema: singleWatchlist
+        structure:
+          id: string
+          hash: string
+          name: string
+          readOnly: boolean
+          instruments:
+            - singleWatchlistEntry
+  - path: /v1/api/iserver/watchlist
+    method: POST
+    summary: Create A Watchlist To Monitor A Set Of Instruments.
+    requestBody:
+      required: true
+      contentType: application/json
+    responses:
+      '200':
+        description: Watchlist creation successful.
+        structure:
+          id: string
+          hash: string
+          name: string
+          readOnly: boolean
+          instruments:
+            - string
+  - path: /v1/api/iserver/watchlist
+    method: DELETE
+    summary: Delete A Specified Watchlist From The Username's Settings.
+    parameters:
+      - name: id
+        in: query
+        required: true
+        type: string
+    responses:
+      '200':
+        description: Successful deletion of specified watchlist.
+        example:
+          data:
+            deleted: '1234'
+          action: context
+          MID: '2'
+        schema: watchlistDeleteSuccess
+        structure:
+          data:
+            deleted: string
+          action: string
+          MID: string
+  - path: /v1/api/iserver/watchlists
+    method: GET
+    summary: Retrieve All Saved Watchlists Stored On IB Backend For The Username In Use In The Current Web API Session.
+    parameters:
+      - name: SC
+        in: query
+        required: false
+        type: string
+    responses:
+      '200':
+        description: Historical data query successfully returned data.
+        example:
+          data:
+            scanners_only: false
+            show_scanners: false
+            bulk_delete: false
+            user_lists:
+              - is_open: false
+                read_only: false
+                name: Test Watchlist
+                modified: 1702581306241
+                id: '1234'
+                type: watchlist
+          action: content
+          MID: '2'
+        schema: watchlistsResponse
+        structure:
+          data:
+            scanners_only: boolean
+            show_scanners: boolean
+            bulk_delete: boolean
+            user_lists:
+              - ...
+          action: string
+          MID: string

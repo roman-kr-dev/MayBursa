@@ -1,0 +1,148 @@
+section: Trading FA Allocation Management
+description: 'The IB REST API reference documentation - Section: Trading FA Allocation Management'
+baseUrl: https://localhost:5001
+note: All paths include /v1/api prefix (except /gw/* and /oauth2/* endpoints)
+endpoints:
+  - path: /v1/api/iserver/account/allocation/accounts
+    method: GET
+    summary: Allocatable Sub-Accounts
+    description: >-
+      Retrieves a list of all sub-accounts and returns their net liquidity and available equity for advisors to make
+      decisions on what accounts should be allocated and how.
+    responses:
+      '200':
+        description: Indicates data is being returned successfully.
+        example:
+          accounts:
+            - data:
+                - value: '230013224.04'
+                  key: NetLiquidation
+                - value: '229617260.41'
+                  key: AvailableEquity
+              name: U1234567
+            - data:
+                - value: '229453917.57'
+                  key: NetLiquidation
+                - value: '229153196.12'
+                  key: AvailableEquity
+              name: U1234568
+        schema: subAccounts
+        structure:
+          accounts:
+            - data: ...
+              name: string
+  - path: /v1/api/iserver/account/allocation/group
+    method: GET
+    summary: List All Allocation Groups
+    description: >-
+      Retrieves a list of all of the advisor’s allocation groups. This describes the name of the allocation group,
+      number of subaccounts within the group, and the method in use for the group.
+    responses:
+      '200':
+        description: Returns the "data" array, which contains all allocation groups under the advisor account.
+        example:
+          data:
+            - allocation_method: E
+              size: 16
+              name: group_1
+            - allocation_method: 'N'
+              size: 3
+              name: group_2
+        schema: allocationGroups
+        structure:
+          data:
+            - item
+  - path: /v1/api/iserver/account/allocation/group
+    method: PUT
+    summary: Modify Allocation Group
+    requestBody:
+      required: true
+      contentType: application/json
+    responses:
+      '200':
+        description: Returns a confirmation that the modification was successful.
+        structure:
+          success: boolean
+  - path: /v1/api/iserver/account/allocation/group
+    method: POST
+    summary: Add Allocation Group
+    description: >-
+      Add a new allocation group. This group can be used to trade in place of the {accountId} for the
+      /iserver/account/{accountId}/orders endpoint.
+    requestBody:
+      required: true
+      contentType: application/json
+    responses:
+      '200':
+        description: Returns a confirmation that the modification was successful.
+        structure:
+          success: boolean
+  - path: /v1/api/iserver/account/allocation/group/delete
+    method: POST
+    summary: Remove Allocation Group
+    requestBody:
+      required: true
+      contentType: application/json
+    responses:
+      '200':
+        description: Returns a confirmation that the modification was successful.
+        example:
+          success: true
+        structure:
+          success: boolean
+  - path: /v1/api/iserver/account/allocation/group/single
+    method: POST
+    summary: Retrieve Single Allocation Group
+    description: >-
+      Retrieves the configuration of a single account group. This describes the name of the allocation group, the
+      specific accounts contained in the group, and the allocation method in use along with any re
+    requestBody:
+      required: true
+      contentType: application/json
+    responses:
+      '200':
+        description: Returns details of the allocation group.
+        example:
+          name: group1
+          accounts:
+            - name: U1234567
+            - name: U1234568
+          default_method: E
+        schema: allocationGroup
+        structure:
+          name: string
+          accounts:
+            - item
+          default_method: allocationMethod
+  - path: /v1/api/iserver/account/allocation/presets
+    method: GET
+    summary: Retrieve Allocation Presets
+    description: Retrieve the preset behavior for allocation groups for specific events.
+    responses:
+      '200':
+        description: Successfully retrieve preset details
+        example:
+          group_auto_close_positions: false
+          default_method_for_all: AvailableEquity
+          profiles_auto_close_positions: false
+          strict_credit_check: false
+          group_proportional_allocation: false
+        schema: presets
+        structure:
+          group_auto_close_positions: boolean
+          default_method_for_all: string
+          profiles_auto_close_positions: boolean
+          strict_credit_check: boolean
+          group_proportional_allocation: boolean
+  - path: /v1/api/iserver/account/allocation/presets
+    method: POST
+    summary: Set The Allocation Presets
+    description: Set the preset behavior for new allocation groups for specific events.
+    requestBody:
+      required: true
+      contentType: application/json
+    responses:
+      '200':
+        description: Successfully retrieve preset details
+        structure:
+          success: boolean

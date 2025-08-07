@@ -1,0 +1,95 @@
+section: Account Management Reports
+description: 'The IB REST API reference documentation - Section: Account Management Reports'
+baseUrl: https://localhost:5001
+note: All paths include /v1/api prefix (except /gw/* and /oauth2/* endpoints)
+endpoints:
+  - path: /gw/api/v1/statements
+    method: POST
+    summary: Generates Statements In Supported Formats Based On Request Parameters.
+    description: '**Scope**: `statements.read` OR `statements.write` OR `reports.write`**Security Policy**: `Signed JWT`'
+    parameters:
+      - required: false
+        type: string
+    requestBody:
+      required: true
+      contentType: application/json
+    responses:
+      '200':
+        description: Returns a JSON object containing the relevant statement.
+        schema: GetStatementsResponse
+        structure:
+          data:
+            dataType: string
+            encoding: string
+            value: string
+            mimeType: string
+            gzip: boolean
+            accept: string
+    security: SIGNED_JWT
+    scopes:
+      - statements.read
+      - statements.write
+      - reports.write
+  - path: /gw/api/v1/statements/available
+    method: GET
+    summary: Fetch Available Daily, Monthly, And Annual Report Dates For An Account Id
+    parameters:
+      - required: false
+        type: string
+      - required: false
+        type: string
+    responses:
+      '200':
+        description: Returns a JSON object containing the available report dates.
+        schema: GetAvailableStmtDatesResponse
+        structure:
+          data: {}
+    security: HTTPS
+    scopes:
+      - statements.read
+      - reports.read
+  - path: /gw/api/v1/tax-documents
+    method: POST
+    summary: Fetch Tax Forms In Supported Formats Based On Request Parameters.
+    parameters:
+      - required: false
+        type: string
+    requestBody:
+      required: true
+      contentType: application/json
+    responses:
+      '200':
+        description: Returns a JSON object containing the relevant Tax Form.
+        schema: TaxFormResponse
+        structure:
+          data:
+            dataType: string
+            encoding: string
+            value: string
+            mimeType: string
+            gzip: boolean
+            accept: string
+    security: SIGNED_JWT
+    scopes:
+      - statements.write
+      - reports.write
+  - path: /gw/api/v1/tax-documents/available
+    method: GET
+    summary: Fetch List Of Available Tax Reports/forms/documents For A Specified Account And Tax Year
+    parameters:
+      - required: false
+        type: string
+      - required: false
+        type: string
+      - required: false
+        type: string
+    responses:
+      '200':
+        description: Returns a JSON object containing the available report dates.
+        schema: GetAvailableTaxFormsResponse
+        structure:
+          data: {}
+    security: HTTPS
+    scopes:
+      - statements.read
+      - reports.read

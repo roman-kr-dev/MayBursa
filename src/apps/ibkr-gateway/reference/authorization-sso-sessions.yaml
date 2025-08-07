@@ -1,0 +1,45 @@
+section: Authorization SSO Sessions
+description: 'The IB REST API reference documentation - Section: Authorization SSO Sessions'
+baseUrl: https://localhost:5001
+note: All paths include /v1/api prefix (except /gw/* and /oauth2/* endpoints)
+endpoints:
+  - path: /gw/api/v1/sso-browser-sessions
+    method: POST
+    summary: Create SSO Browser Session.
+    description: '**Scope**: `sso-browser-sessions.write`**Security Policy**: `Signed JWT`'
+    parameters:
+      - required: false
+        type: string
+    requestBody:
+      required: false
+      contentType: application/json
+    responses:
+      '200':
+        description: Create a Single Sign On (SSO) to access the IBKR hosted portal (White Branded).
+        schema: CreateBrowserSessionResponse
+        structure:
+          active: boolean
+          url: string
+    security: SIGNED_JWT
+    scopes:
+      - sso-browser-sessions.write
+  - path: /gw/api/v1/sso-sessions
+    method: POST
+    summary: Create A New SSO Session On Behalf Of An End-user.
+    parameters:
+      - required: false
+        type: string
+    requestBody:
+      required: false
+      contentType: application/json
+    responses:
+      '200':
+        description: Returns a JSON object containing a reference to the newly created SSO session.
+        schema: CreateSessionResponse
+        structure:
+          active: boolean
+          access_token: string
+          token_type: string
+    security: SIGNED_JWT
+    scopes:
+      - sso-sessions.write

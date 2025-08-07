@@ -1,0 +1,275 @@
+section: Trading FYIs and Notifications
+description: 'The IB REST API reference documentation - Section: Trading FYIs and Notifications'
+baseUrl: https://localhost:5001
+note: All paths include /v1/api prefix (except /gw/* and /oauth2/* endpoints)
+endpoints:
+  - path: /v1/api/fyi/deliveryoptions
+    method: GET
+    summary: Get Delivery OptionsCopy Location
+    responses:
+      '200':
+        description: Successfully retrieve preset details
+        example:
+          E:
+            - NM: iPhone
+              I: apn://mtws@SDFSDFDSFS123123DSFSDF
+              UI: apn://mtws@SDFSDFDSFS123123DSFSDF
+              A: 1
+          M: 1
+        schema: deliveryOptions
+        structure:
+          M: integer
+          E:
+            - item
+  - path: /v1/api/fyi/deliveryoptions/{deviceId}
+    method: DELETE
+    summary: Delete A Device
+    description: Delete a specific device from our saved list of notification devices.
+    parameters:
+      - name: deviceId
+        in: path
+        required: true
+        type: string
+    responses:
+      '200':
+        description: >-
+          No response message is returned. Instead, you will only receive an empty string with a 200 OK status code
+          indicating a successfully deleted account.
+  - path: /v1/api/fyi/deliveryoptions/device
+    method: POST
+    summary: Enable/Disable Device Option
+    description: Choose whether a particular device is enabled or disabled.
+    requestBody:
+      required: true
+      contentType: application/json
+    responses:
+      '200':
+        description: Successfully retrieve preset details
+        schema: fyiVT
+        structure:
+          V: integer
+          T: integer
+  - path: /v1/api/fyi/deliveryoptions/email
+    method: PUT
+    summary: Enable/Disable Email Option
+    description: Enable or disable your account’s primary email to receive notifications.
+    parameters:
+      - name: enabled
+        in: query
+        required: true
+        type: string
+    responses:
+      '200':
+        description: Successfully enabled or disabled your email notifications.
+        example:
+          V: 1
+          T: 10
+        schema: fyiVT
+        structure:
+          V: integer
+          T: integer
+  - path: /v1/api/fyi/disclaimer/{typecode}
+    method: GET
+    summary: Get Disclaimer For A Certain Kind Of Fyi
+    description: Receive additional disclaimers based on the specified typecode.
+    parameters:
+      - name: typecode
+        in: path
+        required: true
+        type: string
+    responses:
+      '200':
+        description: Successfully disclaimer details
+        example:
+          DT: >-
+            This communication is provided for information purposes only and is not a recommendation or a solicitation
+            to buy, sell or hold any investment product. Selling securities short involves significant risk and you may
+            lose more than you invest.
+          FC: BA
+        schema: disclaimerInfo
+        structure:
+          FC: string
+          DT: string
+  - path: /v1/api/fyi/disclaimer/{typecode}
+    method: PUT
+    summary: Mark Disclaimer Read
+    description: Mark a specific disclaimer message as read.
+    parameters:
+      - name: typecode
+        in: path
+        required: true
+        type: string
+    responses:
+      '200':
+        description: Successfully marked as read
+        example:
+          V: 1
+          T: 10
+        schema: fyiVT
+        structure:
+          V: integer
+          T: integer
+  - path: /v1/api/fyi/notifications
+    method: GET
+    summary: Get A List Of Notifications
+    parameters:
+      - name: max
+        in: query
+        required: true
+        type: string
+      - name: include
+        in: query
+        required: false
+        type: string
+      - name: exclude
+        in: query
+        required: false
+        type: string
+      - name: id
+        in: query
+        required: false
+        type: string
+    responses:
+      '200':
+        description: Successfully enabled or disabled your email notifications.
+        example:
+          - R: 0
+            D: '1710847062.0'
+            MS: 'FYI: Changes in Analyst Ratings'
+            MD: >-
+              <html>Some investors use analysts ratings to stay informed about their investments. Analysts have changed
+              their ratings for one or more companies in which you hold positions.    <br />The following summary
+              displays the affected companies, the current number of analysts by rating category and, in parentheses,
+              the recent change in the number of analysts rating the company within each rating category.  <br /> -
+              JWN@NYSE: Buy: 1(0), Outperform: 1(0), Hold: 12(-1), Underperform: 5(0), Sell: 0(0). Held in: D****000 <br
+              /> - RF@NYSE: Buy: 4(+1), Outperform: 5(0), Hold: 17(-1), Underperform: 1(0), Sell: 0(0). Held in:
+              D****000 <br /> <br />   Note: Current ratings are from Reuters and may not reflect all rating changes
+              from other sources such as Street Insider and Briefing.</html>
+            ID: '2024031947509444'
+            HT: 0
+            FC: PF
+          - R: 1
+            D: '1710761985.0'
+            MS: 'FYI: Changes in Analyst Ratings'
+            MD: >-
+              <html>Some investors use analysts ratings to stay informed about their investments. Analysts have changed
+              their ratings for one or more companies in which you hold positions.    <br />The following summary
+              displays the affected companies, the current number of analysts by rating category and, in parentheses,
+              the recent change in the number of analysts rating the company within each rating category.  <br /> -
+              F@NYSE: Buy: 4(0), Outperform: 4(0), Hold: 15(+1), Underperform: 3(-1), Sell: 1(0). Held in: D****000 <br
+              /> - RF@NYSE: Buy: 4(+1), Outperform: 5(0), Hold: 17(-1), Underperform: 1(0), Sell: 0(0). Held in:
+              D****000 <br /> - TSLA@NASDAQ: Buy: 5(0), Outperform: 12(0), Hold: 21(0), Underperform: 7(+1), Sell: 4(0).
+              Held in: D****000 <br /> - UAA@NYSE: Buy: 6(0), Outperform: 2(-1), Hold: 17(+1), Underperform: 2(0), Sell:
+              0(0). Held in: D****000 <br /> <br />   Note: Current ratings are from Reuters and may not reflect all
+              rating changes from other sources such as Street Insider and Briefing.</html>
+            ID: '2024031843829868'
+            HT: 0
+            FC: PF
+          - R: 1
+            D: '1710501829.0'
+            MS: 'FYI: Changes in Analyst Ratings'
+            MD: >-
+              <html>Some investors use analysts ratings to stay informed about their investments. Analysts have changed
+              their ratings for one or more companies in which you hold positions.    <br />The following summary
+              displays the affected companies, the current number of analysts by rating category and, in parentheses,
+              the recent change in the number of analysts rating the company within each rating category.  <br /> -
+              F@NYSE: Buy: 4(0), Outperform: 4(0), Hold: 14(+1), Underperform: 4(0), Sell: 1(0). Held in: D****000 <br
+              /> - UAA@NYSE: Buy: 6(0), Outperform: 3(-1), Hold: 16(-1), Underperform: 2(+1), Sell: 0(0). Held in:
+              D****000 <br /> <br />   Note: Current ratings are from Reuters and may not reflect all rating changes
+              from other sources such as Street Insider and Briefing.</html>
+            ID: '2024031537589663'
+            HT: 0
+            FC: PF
+        schema: notifications
+        structure:
+          - D: string
+            ID: string
+            FC: string
+            MD: string
+            MS: string
+            R: string
+  - path: /v1/api/fyi/notifications/{notificationID}
+    method: PUT
+    summary: Mark Notification Read
+    description: Mark a particular notification message as read or unread.
+    parameters:
+      - name: notificationId
+        in: path
+        required: true
+        type: string
+    responses:
+      '200':
+        description: Successfully enabled or disabled your email notifications.
+        example:
+          V: 1
+          T: 5
+          P:
+            R: 1
+            ID: '2024031947509444'
+        schema: notificationReadAcknowledge
+        structure:
+          V: integer
+          T: integer
+          P:
+            R: integer
+            ID: string
+  - path: /v1/api/fyi/settings
+    method: GET
+    summary: Get Notification Settings
+    description: Return the current choices of subscriptions for notifications.
+    responses:
+      '200':
+        description: Indicates data is being returned successfully.
+        example:
+          - FC: PF
+            H: 0
+            A: 1
+            FD: Notify me of recent activity affecting my portfolio holdings.
+            FN: Portfolio FYIs
+          - FC: PT
+            H: 0
+            A: 1
+            FD: >-
+              Notify me of potential account configuration changes needed and useful features based on my position
+              transfers.
+            FN: Position Transfer
+        schema: fyiSettings
+        structure:
+          - A: integer
+            FC: string
+            H: integer
+            FD: string
+            FN: string
+  - path: /v1/api/fyi/settings/{typecode}
+    method: POST
+    summary: Modify FYI Notifications
+    description: Enable or disable group of notifications by the specific typecode.
+    parameters:
+      - name: typecode
+        in: path
+        required: true
+        type: string
+    requestBody:
+      required: true
+      contentType: application/json
+    responses:
+      '200':
+        description: Successfully retrieve preset details
+        example:
+          V: 1
+          T: 10
+        schema: fyiVT
+        structure:
+          V: integer
+          T: integer
+  - path: /v1/api/fyi/unreadnumber
+    method: GET
+    summary: Unread Bulletins
+    description: Returns the total number of unread notifications
+    responses:
+      '200':
+        description: Indicates data is being returned successfully.
+        example:
+          BN: 4
+        structure:
+          BN: integer

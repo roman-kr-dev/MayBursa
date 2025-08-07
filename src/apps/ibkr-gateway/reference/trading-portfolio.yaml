@@ -1,0 +1,1609 @@
+section: Trading Portfolio
+description: 'The IB REST API reference documentation - Section: Trading Portfolio'
+baseUrl: https://localhost:5001
+note: All paths include /v1/api prefix (except /gw/* and /oauth2/* endpoints)
+endpoints:
+  - path: /v1/api/portfolio/{accountId}/allocation
+    method: GET
+    summary: Get An Account's Allocations By Asset Class, Sector Group, And Sector.
+    parameters:
+      - name: accountId
+        in: path
+        required: true
+        type: string
+      - name: model
+        in: query
+        required: false
+        type: string
+    responses:
+      '200':
+        description: response with allocations
+        example:
+          assetClass:
+            long:
+              CRYPTO: 255.17
+              OPT: 44352.82
+              STK: 1564447.6240790943
+              BOND: 380106.54
+              CASH: 72425.68706744915
+            short:
+              OPT: -80.53
+              STK: -103716.11109948158
+              CASH: -508096.16629793524
+          sector:
+            long:
+              Others: 704313.8907064605
+              Industrial: 380106.54
+              Technology: 309264.47000000003
+              Consumer, Cyclical: 18213.43337263364
+              Communications: 164576.99
+              Financial: 412637.11
+              Consumer, Non-cyclical: 49.72
+            short:
+              Technology: -87162
+              Consumer, Cyclical: -11763
+              Communications: -189.53
+              Financial: -4682.111099481583
+          group:
+            long:
+              Computers: 279285.37
+              Others: 704313.8907064605
+              Biotechnology: 49.72
+              Aerospace/Defense: 380106.54
+              Semiconductors: 371.9
+              Auto Manufacturers: 18213.43337263364
+              Banks: 366666.31
+              Diversified Finan Serv: 45970.8
+              Software: 29607.2
+              Internet: 164576.99
+            short:
+              Semiconductors: -87162
+              Auto Manufacturers: -11763
+              Insurance: -4682.111099481583
+              Internet: -189.53
+        schema: portfolioAllocations
+        structure:
+          assetClass:
+            long: {}
+            short: {}
+          group:
+            long: {}
+            short: {}
+          sector:
+            long: {}
+            short: {}
+  - path: /v1/api/portfolio/{accountId}/ledger
+    method: GET
+    summary: Get Ledger Data For The Given Account.
+    description: Get the given account's ledger data detailing its balances by currency.
+    parameters:
+      - name: accountId
+        in: path
+        required: true
+        type: string
+    responses:
+      '200':
+        description: ledger
+        example:
+          CAD:
+            commoditymarketvalue: 0
+            futuremarketvalue: 0
+            settledcash: 3899.42
+            exchangerate: 0.73095405
+            sessionid: 1
+            cashbalance: 3899.42
+            corporatebondsmarketvalue: 0
+            warrantsmarketvalue: 0
+            netliquidationvalue: 3899.42
+            interest: 0
+            unrealizedpnl: 0
+            stockmarketvalue: 0
+            moneyfunds: 0
+            currency: CAD
+            realizedpnl: 0
+            funds: 0
+            acctcode: DU123456
+            issueroptionsmarketvalue: 0
+            key: LedgerList
+            timestamp: 1712784785
+            severity: 0
+            stockoptionmarketvalue: 0
+            futuresonlypnl: 0
+            tbondsmarketvalue: 0
+            futureoptionmarketvalue: 0
+            cashbalancefxsegment: 0
+            secondkey: CAD
+            tbillsmarketvalue: 0
+            dividends: 0
+            cryptocurrencyvalue: 0
+          USD:
+            commoditymarketvalue: 0
+            futuremarketvalue: -5650
+            settledcash: -494573.5
+            exchangerate: 1
+            sessionid: 1
+            cashbalance: -494573.5
+            corporatebondsmarketvalue: 387538.2
+            warrantsmarketvalue: 0
+            netliquidationvalue: 1388598.1
+            interest: -742.84
+            unrealizedpnl: 342011.97
+            stockmarketvalue: 1451848.9
+            moneyfunds: 0
+            currency: USD
+            realizedpnl: 0
+            funds: 0
+            acctcode: DU123456
+            issueroptionsmarketvalue: 0
+            key: LedgerList
+            timestamp: 1712784785
+            severity: 0
+            stockoptionmarketvalue: 44272.29
+            futuresonlypnl: -5650
+            tbondsmarketvalue: 0
+            futureoptionmarketvalue: 0
+            cashbalancefxsegment: 0
+            secondkey: USD
+            tbillsmarketvalue: 0
+            endofbundle: 1
+            dividends: 0
+            cryptocurrencyvalue: 255.1348
+          BASE:
+            commoditymarketvalue: 0
+            futuremarketvalue: -5650
+            settledcash: -435667.94
+            exchangerate: 1
+            sessionid: 1
+            cashbalance: -435667.94
+            corporatebondsmarketvalue: 387538.2
+            warrantsmarketvalue: 0
+            netliquidationvalue: 1456360.9
+            interest: -742.84
+            unrealizedpnl: 342383.1
+            stockmarketvalue: 1460706
+            moneyfunds: 0
+            currency: BASE
+            realizedpnl: 0
+            funds: 0
+            acctcode: DU123456
+            issueroptionsmarketvalue: 0
+            key: LedgerList
+            timestamp: 1712784785
+            severity: 0
+            stockoptionmarketvalue: 44272.29
+            futuresonlypnl: -5650
+            tbondsmarketvalue: 0
+            futureoptionmarketvalue: 0
+            cashbalancefxsegment: 0
+            secondkey: BASE
+            tbillsmarketvalue: 0
+            dividends: 0
+            cryptocurrencyvalue: 255.1348
+        schema: ledger
+        structure: {}
+  - path: /v1/api/portfolio/{accountId}/meta
+    method: GET
+    summary: Get An Account's Attributes.
+    description: Get a single account's attributes and capabilities.
+    parameters:
+      - name: accountId
+        in: path
+        required: true
+        type: string
+    responses:
+      '200':
+        description: An account's attributes
+        example:
+          id: DU123456
+          PrepaidCrypto-Z: false
+          PrepaidCrypto-P: false
+          brokerageAccess: false
+          accountId: DU123456
+          accountVan: DU123456
+          accountTitle: John Smith, LLC
+          displayName: John Smith, LLC
+          accountAlias: Retirement
+          accountStatus: 1590724800000
+          currency: USD
+          type: DEMO
+          tradingType: STKNOPT
+          businessType: IB_SALES
+          ibEntity: IBLLC-US
+          faclient: false
+          clearingStatus: O
+          covestor: false
+          noClientTrading: false
+          trackVirtualFXPortfolio: true
+          acctCustType: LLC
+          parent:
+            mmc: []
+            accountId: ''
+            isMParent: false
+            isMChild: false
+            isMultiplex: false
+          desc: DU123456
+        schema: accountAttributes
+        structure:
+          accountAlias: string
+          accountStatus: integer
+          accountTitle: string
+          accountVan: string
+          acctCustType: string
+          brokerageAccess: boolean
+          businessType: string
+          clearingStatus: string
+          covestor: boolean
+          currency: string
+          desc: string
+          displayName: string
+          faClient: boolean
+          ibEntity: string
+          id: string
+          noClientTrading: boolean
+          parent:
+            mmc:
+              - item
+            accountId: string
+            isMChild: boolean
+            isMParent: boolean
+            isMultiplex: boolean
+          PrepaidCrypto-P: boolean
+          PrepaidCrypto-Z: boolean
+          trackVirtualFXPortfolio: boolean
+          tradingType: string
+          type: string
+  - path: /v1/api/portfolio/{accountid}/position/{conid}
+    method: GET
+    summary: Get Position For A Given Instrument In A Single Account.
+    description: >-
+      Get position for a given instrument in a single account. WaitSecDef attribute is always defaulted to false. It is
+      possible to get position without security definition.
+    parameters:
+      - name: accountId
+        in: path
+        required: true
+        type: string
+      - name: conid
+        in: path
+        required: true
+        type: string
+    responses:
+      '200':
+        description: Position details by conid
+        example:
+          - acctId: DU123456
+            conid: 580947749
+            contractDesc: META JUN2024 330 P [META 240621P00330000 100]
+            position: -1
+            mktPrice: 0.77968365
+            mktValue: -77.97
+            currency: USD
+            avgCost: 4229.1637
+            avgPrice: 42.291637
+            realizedPnl: 0
+            unrealizedPnl: 4151.2
+            exchs: null
+            expiry: '20240621'
+            putOrCall: P
+            multiplier: 100
+            strike: '330'
+            exerciseStyle: null
+            conExchMap: []
+            assetClass: OPT
+            undConid: 107113386
+            model: ''
+            incrementRules:
+              - lowerEdge: 0
+                increment: 0.01
+            displayRule:
+              magnification: 0
+              displayRuleStep:
+                - decimalDigits: 2
+                  lowerEdge: 0
+                  wholeDigits: 4
+            crossCurrency: false
+            time: 27
+            chineseName: Meta&#x5E73;&#x53F0;&#x80A1;&#x4EFD;&#x6709;&#x9650;&#x516C;&#x53F8;
+            allExchanges: >-
+              AMEX,CBOE,PHLX,PSE,ISE,BOX,BATS,NASDAQOM,CBOE2,NASDAQBX,MIAX,GEMINI,EDGX,MERCURY,PEARL,EMERALD,MEMX,WALLBETH,IBUSOPT
+            listingExchange: AMEX
+            countryCode: US
+            name: META PLATFORMS INC-CLASS A
+            lastTradingDay: '20240621'
+            group: Internet
+            sector: Communications
+            sectorGroup: Internet Content-Entmnt
+            ticker: META
+            type: ''
+            undComp: META PLATFORMS INC-CLASS A
+            undSym: META
+            hasOptions: false
+            fullName: META Jun21'24 330 Put
+            isUS: true
+            isEventContract: false
+            pageSize: 100
+        schema: individualPositionArray
+        structure:
+          - individualPosition
+  - path: /v1/api/portfolio/{accountId}/positions/{pageId}
+    method: GET
+    summary: Get All Positions In An Account.
+    parameters:
+      - name: accountId
+        in: path
+        required: true
+        type: string
+      - name: pageId
+        in: path
+        required: false
+        type: string
+      - name: model
+        in: path
+        required: false
+        type: string
+      - name: sort
+        in: path
+        required: false
+        type: string
+      - name: direction
+        in: path
+        required: false
+        type: string
+      - name: waitForSecDef
+        in: path
+        required: false
+        type: boolean
+    responses:
+      '200':
+        description: positions
+        example:
+          - acctId: DU123456
+            conid: 479624278
+            contractDesc: BTC CRYPTO
+            position: 0.00365831
+            mktPrice: 69814.3984375
+            mktValue: 255.4
+            currency: USD
+            avgCost: 27608.34921045
+            avgPrice: 27608.34921045
+            realizedPnl: 0
+            unrealizedPnl: 154.4
+            exchs: null
+            expiry: null
+            putOrCall: null
+            multiplier: 0
+            strike: '0'
+            exerciseStyle: null
+            conExchMap: []
+            assetClass: CRYPTO
+            undConid: 0
+            model: ''
+            incrementRules:
+              - lowerEdge: 0
+                increment: 0.25
+            displayRule:
+              magnification: 0
+              displayRuleStep:
+                - decimalDigits: 2
+                  lowerEdge: 0
+                  wholeDigits: 4
+            time: 6
+            chineseName: '&#x7F8E;&#x5143;'
+            allExchanges: PAXOS
+            listingExchange: PAXOS
+            countryCode: US
+            name: Bitcoin cryptocurrency
+            lastTradingDay: null
+            group: null
+            sector: null
+            sectorGroup: null
+            ticker: BTC
+            type: ''
+            hasOptions: false
+            fullName: BTC
+            isEventContract: false
+            pageSize: 100
+          - acctId: DU123456
+            conid: 584891614
+            contractDesc: SPY    JAN2025 440 C [SPY   250117C00440000 100]
+            position: 1
+            mktPrice: 95.70706175
+            mktValue: 9570.71
+            currency: USD
+            avgCost: 5801.0401
+            avgPrice: 58.010401
+            realizedPnl: 0
+            unrealizedPnl: 3769.67
+            exchs: null
+            expiry: '20250117'
+            putOrCall: C
+            multiplier: 100
+            strike: '440'
+            exerciseStyle: null
+            conExchMap: []
+            assetClass: OPT
+            undConid: 756733
+            model: ''
+            incrementRules:
+              - lowerEdge: 0
+                increment: 0.01
+            displayRule:
+              magnification: 0
+              displayRuleStep:
+                - decimalDigits: 2
+                  lowerEdge: 0
+                  wholeDigits: 4
+            crossCurrency: false
+            time: 26
+            chineseName: SPDR&#x6807;&#x666E;500 ETF&#x4FE1;&#x6258;
+            allExchanges: >-
+              AMEX,CBOE,PHLX,PSE,ISE,BOX,BATS,NASDAQOM,CBOE2,NASDAQBX,MIAX,GEMINI,EDGX,MERCURY,PEARL,EMERALD,MEMX,WALLBETH,IBUSOPT
+            listingExchange: AMEX
+            countryCode: US
+            name: SPDR S&P 500 ETF TRUST
+            lastTradingDay: '20250117'
+            group: null
+            sector: null
+            sectorGroup: null
+            ticker: SPY
+            type: ''
+            undComp: SPDR S&P 500 ETF TRUST
+            undSym: SPY
+            hasOptions: false
+            fullName: SPY Jan17'25 440 Call
+            isUS: true
+            isEventContract: false
+            pageSize: 100
+          - acctId: DU123456
+            conid: 8314
+            contractDesc: IBM
+            position: 1412
+            mktPrice: 185.17599485
+            mktValue: 261468.5
+            currency: USD
+            avgCost: 144.46141
+            avgPrice: 144.46141
+            realizedPnl: 0
+            unrealizedPnl: 57488.99
+            exchs: null
+            expiry: null
+            putOrCall: null
+            multiplier: 0
+            strike: '0'
+            exerciseStyle: null
+            conExchMap: []
+            assetClass: STK
+            undConid: 0
+            model: ''
+            incrementRules:
+              - lowerEdge: 0
+                increment: 0.01
+            displayRule:
+              magnification: 0
+              displayRuleStep:
+                - decimalDigits: 2
+                  lowerEdge: 0
+                  wholeDigits: 4
+            time: 38
+            chineseName: '&#x56FD;&#x9645;&#x5546;&#x4E1A;&#x673A;&#x5668;'
+            allExchanges: >-
+              AMEX,NYSE,CBOE,PHLX,CHX,ARCA,ISLAND,ISE,IDEAL,NASDAQQ,REALNYSE,DRCTEDGE,BEX,BATS,NITEECN,EDGEA,CSFBALGO,PSX,BYX,ITG,PDQ,IBKRATS,NYSEFLOOR,CITADEL,NYSEDARK,MIAX,IBDARK,CITADELDP,NASDDARK,IEX,WEDBUSH,SUMMER,WINSLOW,FINRA,LIQITG,UBSDARK,BTIG,VIRTU,JEFF,OPCO,COWEN,DBK,JPMC,EDGX,JANE,NEEDHAM,FRACSHARE,RBCALGO,VIRTUDP,BAYCREST,FOXRIVER,MND,NITEEXST,PEARL,GSDARK,NITERTL,NYSENAT,IEXMID,HRT,FLOWTRADE,HRTDP,JANELP,PEAK6,CTDLZERO,HRTMID,JANEZERO,HRTEXST,IMCLP,LTSE,SOCGENDP,MEMX,INTELCROS,VIRTUBYIN,JUMPTRADE,NITEZERO,TPLUS1,XTXEXST,XTXDP,XTXMID,COWENLP,BARCDP,JUMPLP,OLDMCLP,RBCCMALP,WALLBETH,IBEOS,JONES,GSLP,BLUEOCEAN,USIBSILP,OVERNIGHT,JANEMID,IBATSEOS,HRTZERO,VIRTUALGO,G1XLP,VIRTUMID,GLOBALXLP,CTDLMID,TPLUS0
+            listingExchange: NYSE
+            countryCode: US
+            name: INTL BUSINESS MACHINES CORP
+            lastTradingDay: null
+            group: Computers
+            sector: Technology
+            sectorGroup: Computer Services
+            ticker: IBM
+            type: COMMON
+            hasOptions: true
+            fullName: IBM
+            isUS: true
+            isEventContract: false
+            pageSize: 100
+        structure:
+          - individualPosition
+  - path: /v1/api/portfolio/{accountId}/positions/invalidate
+    method: POST
+    summary: Instructs IB To Discard Cached Portfolio Positions For A Given Account.
+    description: >-
+      Instructs IB to discard cached portfolio positions for a given account, so that the next request for positions
+      delivers freshly obtained data.
+    parameters:
+      - name: accountId
+        in: path
+        required: true
+        type: string
+    responses:
+      '200':
+        description: status of invalidation
+        example:
+          message: success
+        structure:
+          message: string
+  - path: /v1/api/portfolio/{accountId}/summary
+    method: GET
+    summary: Portfolio Account Summary
+    parameters:
+      - name: accountId
+        in: path
+        required: true
+        type: string
+    responses:
+      '200':
+        description: response with summary definitions
+        example:
+          accountcode:
+            amount: 0
+            currency: null
+            isNull: false
+            severity: 0
+            timestamp: 1712156105000
+            value: DU123456
+          accountready:
+            amount: 0
+            currency: null
+            isNull: false
+            severity: 0
+            timestamp: 1712156105000
+            value: 'true'
+          accounttype:
+            amount: 0
+            currency: null
+            isNull: false
+            severity: 0
+            timestamp: 1712156105000
+            value: LLC
+          accruedcash:
+            amount: 880036.375
+            currency: USD
+            isNull: false
+            severity: 0
+            timestamp: 1712156105000
+            value: null
+          accruedcash-c:
+            amount: 0
+            currency: USD
+            isNull: false
+            severity: 0
+            timestamp: 1712156105000
+            value: null
+          accruedcash-s:
+            amount: 880036.375
+            currency: USD
+            isNull: false
+            severity: 0
+            timestamp: 1712156105000
+            value: null
+          accrueddividend:
+            amount: 0
+            currency: USD
+            isNull: false
+            severity: 0
+            timestamp: 1712156105000
+            value: null
+          accrueddividend-c:
+            amount: 0
+            currency: USD
+            isNull: false
+            severity: 0
+            timestamp: 1712156105000
+            value: null
+          accrueddividend-s:
+            amount: 0
+            currency: USD
+            isNull: false
+            severity: 0
+            timestamp: 1712156105000
+            value: null
+          availablefunds:
+            amount: 205266944
+            currency: USD
+            isNull: false
+            severity: 0
+            timestamp: 1712156105000
+            value: null
+          availablefunds-c:
+            amount: 468839.75
+            currency: USD
+            isNull: false
+            severity: 0
+            timestamp: 1712156105000
+            value: null
+          availablefunds-s:
+            amount: 204798112
+            currency: USD
+            isNull: false
+            severity: 0
+            timestamp: 1712156105000
+            value: null
+          availabletotrade:
+            amount: 204680368
+            currency: USD
+            isNull: false
+            severity: 0
+            timestamp: 1712156105000
+            value: null
+          availabletotrade-c:
+            amount: 500449.375
+            currency: USD
+            isNull: false
+            severity: 0
+            timestamp: 1712156105000
+            value: null
+          availabletotrade-s:
+            amount: 204179920
+            currency: USD
+            isNull: false
+            severity: 0
+            timestamp: 1712156105000
+            value: null
+          availabletowithdraw:
+            amount: 204676912
+            currency: USD
+            isNull: false
+            severity: 0
+            timestamp: 1712156105000
+            value: null
+          availabletowithdraw-c:
+            amount: 496993.75
+            currency: USD
+            isNull: false
+            severity: 0
+            timestamp: 1712156105000
+            value: null
+          availabletowithdraw-s:
+            amount: 204179920
+            currency: USD
+            isNull: false
+            severity: 0
+            timestamp: 1712156105000
+            value: null
+          billable:
+            amount: 0
+            currency: USD
+            isNull: false
+            severity: 0
+            timestamp: 1712156105000
+            value: null
+          billable-c:
+            amount: 0
+            currency: USD
+            isNull: false
+            severity: 0
+            timestamp: 1712156105000
+            value: null
+          billable-s:
+            amount: 0
+            currency: USD
+            isNull: false
+            severity: 0
+            timestamp: 1712156105000
+            value: null
+          buyingpower:
+            amount: 821079744
+            currency: USD
+            isNull: false
+            severity: 0
+            timestamp: 1712156105000
+            value: null
+          columnprio-c:
+            amount: 0
+            currency: null
+            isNull: false
+            severity: 0
+            timestamp: 1712156105000
+            value: '2'
+          columnprio-s:
+            amount: 0
+            currency: null
+            isNull: false
+            severity: 0
+            timestamp: 1712156105000
+            value: '1'
+          cushion:
+            amount: 0
+            currency: null
+            isNull: false
+            severity: 0
+            timestamp: 1712156105000
+            value: '0.994598'
+          daytradesremaining:
+            amount: 0
+            currency: null
+            isNull: false
+            severity: 0
+            timestamp: 1712156105000
+            value: '-1'
+          daytradesremainingt+1:
+            amount: 0
+            currency: null
+            isNull: false
+            severity: 0
+            timestamp: 1712156105000
+            value: '-1'
+          daytradesremainingt+2:
+            amount: 0
+            currency: null
+            isNull: false
+            severity: 0
+            timestamp: 1712156105000
+            value: '-1'
+          daytradesremainingt+3:
+            amount: 0
+            currency: null
+            isNull: false
+            severity: 0
+            timestamp: 1712156105000
+            value: '-1'
+          daytradesremainingt+4:
+            amount: 0
+            currency: null
+            isNull: false
+            severity: 0
+            timestamp: 1712156105000
+            value: '-1'
+          daytradingstatus-s:
+            amount: 0
+            currency: null
+            isNull: false
+            severity: 0
+            timestamp: 1712156105000
+            value: ': : false: 205505601.94: :false'
+          depositoncredithold:
+            amount: 0
+            currency: null
+            isNull: false
+            severity: 0
+            timestamp: 1712156105000
+            value: 'null'
+          equitywithloanvalue:
+            amount: 205505520
+            currency: USD
+            isNull: false
+            severity: 0
+            timestamp: 1712156105000
+            value: null
+          equitywithloanvalue-c:
+            amount: 471830.0625
+            currency: USD
+            isNull: false
+            severity: 0
+            timestamp: 1712156105000
+            value: null
+          equitywithloanvalue-s:
+            amount: 205033696
+            currency: USD
+            isNull: false
+            severity: 0
+            timestamp: 1712156105000
+            value: null
+          excessliquidity:
+            amount: 205300432
+            currency: USD
+            isNull: false
+            severity: 0
+            timestamp: 1712156105000
+            value: null
+          excessliquidity-c:
+            amount: 471830.0625
+            currency: USD
+            isNull: false
+            severity: 0
+            timestamp: 1712156105000
+            value: null
+          excessliquidity-s:
+            amount: 204828608
+            currency: USD
+            isNull: false
+            severity: 0
+            timestamp: 1712156105000
+            value: null
+          fullavailablefunds:
+            amount: 205252848
+            currency: USD
+            isNull: false
+            severity: 0
+            timestamp: 1712156105000
+            value: null
+          fullavailablefunds-c:
+            amount: 454742.59375
+            currency: USD
+            isNull: false
+            severity: 0
+            timestamp: 1712156105000
+            value: null
+          fullavailablefunds-s:
+            amount: 204798112
+            currency: USD
+            isNull: false
+            severity: 0
+            timestamp: 1712156105000
+            value: null
+          fullexcessliquidity:
+            amount: 205287616
+            currency: USD
+            isNull: false
+            severity: 0
+            timestamp: 1712156105000
+            value: null
+          fullexcessliquidity-c:
+            amount: 459014.46875
+            currency: USD
+            isNull: false
+            severity: 0
+            timestamp: 1712156105000
+            value: null
+          fullexcessliquidity-s:
+            amount: 204828608
+            currency: USD
+            isNull: false
+            severity: 0
+            timestamp: 1712156105000
+            value: null
+          fullinitmarginreq:
+            amount: 282575.34375
+            currency: USD
+            isNull: false
+            severity: 0
+            timestamp: 1712156105000
+            value: null
+          fullinitmarginreq-c:
+            amount: 46990.5
+            currency: USD
+            isNull: false
+            severity: 0
+            timestamp: 1712156105000
+            value: null
+          fullinitmarginreq-s:
+            amount: 235584.84375
+            currency: USD
+            isNull: false
+            severity: 0
+            timestamp: 1712156105000
+            value: null
+          fullmaintmarginreq:
+            amount: 247882.796875
+            currency: USD
+            isNull: false
+            severity: 0
+            timestamp: 1712156105000
+            value: null
+          fullmaintmarginreq-c:
+            amount: 42718.640625
+            currency: USD
+            isNull: false
+            severity: 0
+            timestamp: 1712156105000
+            value: null
+          fullmaintmarginreq-s:
+            amount: 205164.171875
+            currency: USD
+            isNull: false
+            severity: 0
+            timestamp: 1712156105000
+            value: null
+          grosspositionvalue:
+            amount: 659611.375
+            currency: USD
+            isNull: false
+            severity: 0
+            timestamp: 1712156105000
+            value: null
+          grosspositionvalue-s:
+            amount: 659611.375
+            currency: USD
+            isNull: false
+            severity: 0
+            timestamp: 1712156105000
+            value: null
+          guarantee:
+            amount: 0
+            currency: USD
+            isNull: false
+            severity: 0
+            timestamp: 1712156105000
+            value: null
+          guarantee-c:
+            amount: 0
+            currency: USD
+            isNull: false
+            severity: 0
+            timestamp: 1712156105000
+            value: null
+          guarantee-s:
+            amount: 0
+            currency: USD
+            isNull: false
+            severity: 0
+            timestamp: 1712156105000
+            value: null
+          highestseverity:
+            amount: 0
+            currency: null
+            isNull: false
+            severity: 0
+            timestamp: 1712156105000
+            value: 'null'
+          indianstockhaircut:
+            amount: 0
+            currency: USD
+            isNull: false
+            severity: 0
+            timestamp: 1712156105000
+            value: null
+          indianstockhaircut-c:
+            amount: 0
+            currency: USD
+            isNull: false
+            severity: 0
+            timestamp: 1712156105000
+            value: null
+          indianstockhaircut-s:
+            amount: 0
+            currency: USD
+            isNull: false
+            severity: 0
+            timestamp: 1712156105000
+            value: null
+          initmarginreq:
+            amount: 268478.1875
+            currency: USD
+            isNull: false
+            severity: 0
+            timestamp: 1712156105000
+            value: null
+          initmarginreq-c:
+            amount: 32893.3515625
+            currency: USD
+            isNull: false
+            severity: 0
+            timestamp: 1712156105000
+            value: null
+          initmarginreq-s:
+            amount: 235584.84375
+            currency: USD
+            isNull: false
+            severity: 0
+            timestamp: 1712156105000
+            value: null
+          leverage-s:
+            amount: 0
+            currency: null
+            isNull: false
+            severity: 0
+            timestamp: 1712156105000
+            value: '0.0'
+          lookaheadavailablefunds:
+            amount: 205266944
+            currency: USD
+            isNull: false
+            severity: 0
+            timestamp: 1712156105000
+            value: null
+          lookaheadavailablefunds-c:
+            amount: 468839.75
+            currency: USD
+            isNull: false
+            severity: 0
+            timestamp: 1712156105000
+            value: null
+          lookaheadavailablefunds-s:
+            amount: 204798112
+            currency: USD
+            isNull: false
+            severity: 0
+            timestamp: 1712156105000
+            value: null
+          lookaheadexcessliquidity:
+            amount: 205300432
+            currency: USD
+            isNull: false
+            severity: 0
+            timestamp: 1712156105000
+            value: null
+          lookaheadexcessliquidity-c:
+            amount: 471830.0625
+            currency: USD
+            isNull: false
+            severity: 0
+            timestamp: 1712156105000
+            value: null
+          lookaheadexcessliquidity-s:
+            amount: 204828608
+            currency: USD
+            isNull: false
+            severity: 0
+            timestamp: 1712156105000
+            value: null
+          lookaheadinitmarginreq:
+            amount: 268478.1875
+            currency: USD
+            isNull: false
+            severity: 0
+            timestamp: 1712156105000
+            value: null
+          lookaheadinitmarginreq-c:
+            amount: 32893.3515625
+            currency: USD
+            isNull: false
+            severity: 0
+            timestamp: 1712156105000
+            value: null
+          lookaheadinitmarginreq-s:
+            amount: 235584.84375
+            currency: USD
+            isNull: false
+            severity: 0
+            timestamp: 1712156105000
+            value: null
+          lookaheadmaintmarginreq:
+            amount: 235067.203125
+            currency: USD
+            isNull: false
+            severity: 0
+            timestamp: 1712156105000
+            value: null
+          lookaheadmaintmarginreq-c:
+            amount: 29903.05078125
+            currency: USD
+            isNull: false
+            severity: 0
+            timestamp: 1712156105000
+            value: null
+          lookaheadmaintmarginreq-s:
+            amount: 205164.171875
+            currency: USD
+            isNull: false
+            severity: 0
+            timestamp: 1712156105000
+            value: null
+          lookaheadnextchange:
+            amount: 0
+            currency: null
+            isNull: false
+            severity: 0
+            timestamp: 1712156105000
+            value: '1712157300'
+          maintmarginreq:
+            amount: 235067.203125
+            currency: USD
+            isNull: false
+            severity: 0
+            timestamp: 1712156105000
+            value: null
+          maintmarginreq-c:
+            amount: 29903.05078125
+            currency: USD
+            isNull: false
+            severity: 0
+            timestamp: 1712156105000
+            value: null
+          maintmarginreq-s:
+            amount: 205164.171875
+            currency: USD
+            isNull: false
+            severity: 0
+            timestamp: 1712156105000
+            value: null
+          netliquidation:
+            amount: 206415536
+            currency: USD
+            isNull: false
+            severity: 0
+            timestamp: 1712156105000
+            value: null
+          netliquidation-c:
+            amount: 501733.09375
+            currency: USD
+            isNull: false
+            severity: 0
+            timestamp: 1712156105000
+            value: null
+          netliquidation-s:
+            amount: 205913808
+            currency: USD
+            isNull: false
+            severity: 0
+            timestamp: 1712156105000
+            value: null
+          netliquidationuncertainty:
+            amount: 70.94000244140625
+            currency: USD
+            isNull: false
+            severity: 0
+            timestamp: 1712156105000
+            value: null
+          nlvandmargininreview:
+            amount: 0
+            currency: null
+            isNull: false
+            severity: 0
+            timestamp: 1712156105000
+            value: 'false'
+          pasharesvalue:
+            amount: 0
+            currency: USD
+            isNull: false
+            severity: 0
+            timestamp: 1712156105000
+            value: null
+          pasharesvalue-c:
+            amount: 0
+            currency: USD
+            isNull: false
+            severity: 0
+            timestamp: 1712156105000
+            value: null
+          pasharesvalue-s:
+            amount: 0
+            currency: USD
+            isNull: false
+            severity: 0
+            timestamp: 1712156105000
+            value: null
+          physicalcertificatevalue:
+            amount: 0
+            currency: USD
+            isNull: false
+            severity: 0
+            timestamp: 1712156105000
+            value: null
+          physicalcertificatevalue-c:
+            amount: 0
+            currency: USD
+            isNull: false
+            severity: 0
+            timestamp: 1712156105000
+            value: null
+          physicalcertificatevalue-s:
+            amount: 0
+            currency: USD
+            isNull: false
+            severity: 0
+            timestamp: 1712156105000
+            value: null
+          postexpirationexcess:
+            amount: 0
+            currency: USD
+            isNull: false
+            severity: 0
+            timestamp: 1712156105000
+            value: null
+          postexpirationexcess-c:
+            amount: 0
+            currency: USD
+            isNull: false
+            severity: 0
+            timestamp: 1712156105000
+            value: null
+          postexpirationexcess-s:
+            amount: 0
+            currency: USD
+            isNull: false
+            severity: 0
+            timestamp: 1712156105000
+            value: null
+          postexpirationmargin:
+            amount: 0
+            currency: USD
+            isNull: false
+            severity: 0
+            timestamp: 1712156105000
+            value: null
+          postexpirationmargin-c:
+            amount: 0
+            currency: USD
+            isNull: false
+            severity: 0
+            timestamp: 1712156105000
+            value: null
+          postexpirationmargin-s:
+            amount: 0
+            currency: USD
+            isNull: false
+            severity: 0
+            timestamp: 1712156105000
+            value: null
+          previousdayequitywithloanvalue:
+            amount: 205044656
+            currency: USD
+            isNull: false
+            severity: 0
+            timestamp: 1712156105000
+            value: null
+          previousdayequitywithloanvalue-s:
+            amount: 205044656
+            currency: USD
+            isNull: false
+            severity: 0
+            timestamp: 1712156105000
+            value: null
+          regtequity:
+            amount: 205913808
+            currency: USD
+            isNull: false
+            severity: 0
+            timestamp: 1712156105000
+            value: null
+          regtequity-s:
+            amount: 205913808
+            currency: USD
+            isNull: false
+            severity: 0
+            timestamp: 1712156105000
+            value: null
+          regtmargin:
+            amount: 329761.1875
+            currency: USD
+            isNull: false
+            severity: 0
+            timestamp: 1712156105000
+            value: null
+          regtmargin-s:
+            amount: 329761.1875
+            currency: USD
+            isNull: false
+            severity: 0
+            timestamp: 1712156105000
+            value: null
+          segmenttitle-c:
+            amount: 0
+            currency: null
+            isNull: false
+            severity: 0
+            timestamp: 1712156105000
+            value: US Commodities
+          segmenttitle-s:
+            amount: 0
+            currency: null
+            isNull: false
+            severity: 0
+            timestamp: 1712156105000
+            value: US Securities
+          sma:
+            amount: 205584048
+            currency: USD
+            isNull: false
+            severity: 0
+            timestamp: 1712156105000
+            value: null
+          sma-s:
+            amount: 205584048
+            currency: USD
+            isNull: false
+            severity: 0
+            timestamp: 1712156105000
+            value: null
+          totalcashvalue:
+            amount: 205646432
+            currency: USD
+            isNull: false
+            severity: 0
+            timestamp: 1712156105000
+            value: null
+          totalcashvalue-c:
+            amount: 501733.09375
+            currency: USD
+            isNull: false
+            severity: 0
+            timestamp: 1712156105000
+            value: null
+          totalcashvalue-s:
+            amount: 205144704
+            currency: USD
+            isNull: false
+            severity: 0
+            timestamp: 1712156105000
+            value: null
+          totaldebitcardpendingcharges:
+            amount: 0
+            currency: USD
+            isNull: false
+            severity: 0
+            timestamp: 1712156105000
+            value: null
+          totaldebitcardpendingcharges-c:
+            amount: 0
+            currency: USD
+            isNull: false
+            severity: 0
+            timestamp: 1712156105000
+            value: null
+          totaldebitcardpendingcharges-s:
+            amount: 0
+            currency: USD
+            isNull: false
+            severity: 0
+            timestamp: 1712156105000
+            value: null
+          tradingtype-s:
+            amount: 0
+            currency: null
+            isNull: false
+            severity: 0
+            timestamp: 1712156105000
+            value: STKNOPT
+          whatifpmenabled:
+            amount: 0
+            currency: null
+            isNull: false
+            severity: 0
+            timestamp: 1712156105000
+            value: 'true'
+        schema: portfolioSummary
+        structure:
+          accountcode: string
+          accountready: string
+          accounttype: string
+          accruedcash: string
+          accruedcash-c: string
+          accruedcash-s: string
+          accrueddividend: string
+          accrueddividend-c: string
+          accrueddividend-s: string
+          availablefunds: string
+          availablefunds-c: string
+          availablefunds-s: string
+          availabletotrade: string
+          availabletotrade-c: string
+          availabletotrade-s: string
+          availabletowithdraw: string
+          availabletowithdraw-c: string
+          availabletowithdraw-s: string
+          billable: string
+          billable-c: string
+          billable-s: string
+          buyingpower: string
+          columnprio-c: string
+          columnprio-s: string
+          cushion: string
+          daytradesremaining: string
+          daytradesremainingt+1: string
+          daytradesremainingt+2: string
+          daytradesremainingt+3: string
+          daytradesremainingt+4: string
+          daytradingstatus-s: string
+          depositoncredithold: string
+          equitywithloanvalue: string
+          equitywithloanvalue-c: string
+          equitywithloanvalue-s: string
+          excessliquidity: string
+          excessliquidity-c: string
+          excessliquidity-s: string
+          fullavailablefunds: string
+          fullavailablefunds-c: string
+          fullavailablefunds-s: string
+          fullexcessliquidity: string
+          fullexcessliquidity-c: string
+          fullexcessliquidity-s: string
+          fullinitmarginreq: string
+          fullinitmarginreq-c: string
+          fullinitmarginreq-s: string
+          fullmaintmarginreq: string
+          fullmaintmarginreq-c: string
+          fullmaintmarginreq-s: string
+          grosspositionvalue: string
+          grosspositionvalue-s: string
+          guarantee: string
+          guarantee-c: string
+          guarantee-s: string
+          highestseverity: string
+          indianstockhaircut: string
+          indianstockhaircut-c: string
+          indianstockhaircut-s: string
+          initmarginreq: string
+          initmarginreq-c: string
+          initmarginreq-s: string
+          leverage-s: string
+          lookaheadavailablefunds: string
+          lookaheadavailablefunds-c: string
+          lookaheadavailablefunds-s: string
+          lookaheadexcessliquidity: string
+          lookaheadexcessliquidity-c: string
+          lookaheadexcessliquidity-s: string
+          lookaheadinitmarginreq: string
+          lookaheadinitmarginreq-c: string
+          lookaheadinitmarginreq-s: string
+          lookaheadmaintmarginreq: string
+          lookaheadmaintmarginreq-c: string
+          lookaheadmaintmarginreq-s: string
+          lookaheadnextchange: string
+          maintmarginreq: string
+          maintmarginreq-c: string
+          maintmarginreq-s: string
+          netliquidation: string
+          netliquidation-c: string
+          netliquidation-s: string
+          netliquidationuncertainty: string
+          nlvandmargininreview: string
+          pasharesvalue: string
+          pasharesvalue-c: string
+          pasharesvalue-s: string
+          physicalcertificatevalue: string
+          physicalcertificatevalue-c: string
+          physicalcertificatevalue-s: string
+          postexpirationexcess: string
+          postexpirationexcess-c: string
+          postexpirationexcess-s: string
+          postexpirationmargin: string
+          postexpirationmargin-c: string
+          postexpirationmargin-s: string
+          previousdayequitywithloanvalue: string
+          previousdayequitywithloanvalue-s: string
+          regtequity: string
+          regtequity-s: string
+          regtmargin: string
+          regtmargin-s: string
+          segmenttitle-c: string
+          segmenttitle-s: string
+          sma: string
+          sma-s: string
+          totalcashvalue: string
+          totalcashvalue-c: string
+          totalcashvalue-s: string
+          totaldebitcardpendingcharges: string
+          totaldebitcardpendingcharges-c: string
+          totaldebitcardpendingcharges-s: string
+          tradingtype-s: string
+          whatifpmenabled: string
+  - path: /v1/api/portfolio/accounts
+    method: GET
+    summary: Accounts
+    responses:
+      '200':
+        description: returned array with user account
+        example:
+          - id: DU123456
+            PrepaidCrypto-Z: false
+            PrepaidCrypto-P: false
+            brokerageAccess: true
+            accountId: DU123456
+            accountVan: DU123456
+            accountTitle: John Smith, LLC
+            displayName: John Smith, LLC
+            accountAlias: null
+            accountStatus: 1590724800000
+            currency: USD
+            type: DEMO
+            tradingType: STKNOPT
+            businessType: IB_SALES
+            ibEntity: IBLLC-US
+            faclient: false
+            clearingStatus: O
+            covestor: false
+            noClientTrading: false
+            trackVirtualFXPortfolio: true
+            acctCustType: LLC
+            parent:
+              mmc: []
+              accountId: ''
+              isMParent: false
+              isMChild: false
+              isMultiplex: false
+            desc: DU123456
+        structure:
+          - accountAttributes
+  - path: /v1/api/portfolio/positions/{conid}
+    method: GET
+    summary: Get Positions In Accounts For A Given Instrument
+    description: Get positions in accounts for a given instrument (no secDef await control)
+    parameters:
+      - name: conid
+        in: path
+        required: true
+        type: string
+    responses:
+      '200':
+        description: Object containing positions in the requested conid broken out by account.
+        example:
+          DU123456:
+            - acctId: DU123456
+              conid: 8314
+              contractDesc: IBM
+              position: 1412
+              mktPrice: 166.7599945
+              mktValue: 235465.11
+              currency: USD
+              avgCost: 144.46141
+              avgPrice: 144.46141
+              realizedPnl: 0
+              unrealizedPnl: 31485.6
+              exchs: null
+              expiry: null
+              putOrCall: null
+              multiplier: 0
+              strike: '0'
+              exerciseStyle: null
+              conExchMap: []
+              assetClass: STK
+              undConid: 0
+              model: ''
+              incrementRules:
+                - lowerEdge: 0
+                  increment: 0.01
+              displayRule:
+                magnification: 0
+                displayRuleStep:
+                  - decimalDigits: 2
+                    lowerEdge: 0
+                    wholeDigits: 4
+              time: 64
+              chineseName: '&#x56FD;&#x9645;&#x5546;&#x4E1A;&#x673A;&#x5668;'
+              allExchanges: >-
+                AMEX,NYSE,CBOE,PHLX,CHX,ARCA,ISLAND,ISE,IDEAL,NASDAQQ,REALNYSE,DRCTEDGE,BEX,BATS,NITEECN,EDGEA,CSFBALGO,PSX,BYX,ITG,PDQ,IBKRATS,NYSEFLOOR,CITADEL,NYSEDARK,MIAX,IBDARK,CITADELDP,NASDDARK,IEX,WEDBUSH,SUMMER,WINSLOW,FINRA,LIQITG,UBSDARK,BTIG,VIRTU,JEFF,OPCO,COWEN,DBK,JPMC,EDGX,JANE,NEEDHAM,FRACSHARE,RBCALGO,VIRTUDP,BAYCREST,FOXRIVER,MND,NITEEXST,PEARL,GSDARK,NITERTL,NYSENAT,IEXMID,HRT,FLOWTRADE,HRTDP,JANELP,PEAK6,CTDLZERO,HRTMID,JANEZERO,HRTEXST,IMCLP,LTSE,SOCGENDP,MEMX,INTELCROS,VIRTUBYIN,JUMPTRADE,NITEZERO,TPLUS1,XTXEXST,XTXDP,XTXMID,COWENLP,BARCDP,JUMPLP,OLDMCLP,RBCCMALP,WALLBETH,IBEOS,JONES,GSLP,BLUEOCEAN,USIBSILP,OVERNIGHT,JANEMID,IBATSEOS,HRTZERO,VIRTUALGO,G1XLP,VIRTUMID,GLOBALXLP,CTDLMID,TPLUS0
+              listingExchange: NYSE
+              countryCode: US
+              name: INTL BUSINESS MACHINES CORP
+              lastTradingDay: null
+              group: Computers
+              sector: Technology
+              sectorGroup: Computer Services
+              ticker: IBM
+              type: COMMON
+              hasOptions: true
+              fullName: IBM
+              isUS: true
+              isEventContract: false
+              pageSize: 100
+          DU123457:
+            - acctId: DU123457
+              conid: 8314
+              contractDesc: IBM
+              position: 1412
+              mktPrice: 166.7599945
+              mktValue: 235465.11
+              currency: USD
+              avgCost: 144.46141
+              avgPrice: 144.46141
+              realizedPnl: 0
+              unrealizedPnl: 31485.6
+              exchs: null
+              expiry: null
+              putOrCall: null
+              multiplier: null
+              strike: 0
+              exerciseStyle: null
+              conExchMap: []
+              assetClass: STK
+              undConid: 0
+              model: ''
+        structure: {}
+  - path: /v1/api/portfolio/subaccounts
+    method: GET
+    summary: Get Attributes Of Subaccounts In Account Structure
+    responses:
+      '200':
+        description: Array of objects representing accounts in the structure.
+        example:
+          - id: DU1234511
+            PrepaidCrypto-Z: false
+            PrepaidCrypto-P: false
+            brokerageAccess: false
+            accountId: DU1234511
+            accountVan: DU1234511
+            accountTitle: John Smith, LLC
+            displayName: John Smith, LLC
+            accountAlias: null
+            accountStatus: 1590724800000
+            currency: USD
+            type: DEMO
+            tradingType: STKNOPT
+            businessType: IB_SALES
+            ibEntity: IBLLC-US
+            faclient: false
+            clearingStatus: O
+            covestor: false
+            noClientTrading: false
+            trackVirtualFXPortfolio: true
+            acctCustType: LLC
+            parent:
+              mmc: []
+              accountId: ''
+              isMParent: false
+              isMChild: false
+              isMultiplex: false
+            desc: DU1234511
+        structure:
+          - accountAttributes

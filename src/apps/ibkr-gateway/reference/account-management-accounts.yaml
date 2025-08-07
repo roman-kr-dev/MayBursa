@@ -1,0 +1,289 @@
+section: Account Management Accounts
+description: 'The IB REST API reference documentation - Section: Account Management Accounts'
+baseUrl: https://localhost:5001
+note: All paths include /v1/api prefix (except /gw/* and /oauth2/* endpoints)
+endpoints:
+  - path: /gw/api/v1/accounts
+    method: GET
+    summary: Retrieve Processed Application
+    description: >-
+      Retrieve the application request and IBKR response data based on IBKR accountId or externalId. Only available for
+      accounts that originate via API**Scope**: `accounts.read`**Security Policy**: `HTTPS`
+    parameters:
+      - name: accountId
+        in: query
+        required: false
+        type: string
+      - name: externalId
+        in: query
+        required: false
+        type: string
+    responses:
+      '200':
+        description: >-
+          Retrieve the application request and IBKR response data based on IBKR accountId or externalId. Only available
+          for accounts that originate via API
+    security: HTTPS
+    scopes:
+      - accounts.read
+  - path: /gw/api/v1/accounts
+    method: POST
+    summary: Create Account
+    description: >-
+      Submit account application. This will create brokerage account for the end user.**Scope**:
+      `accounts.write`**Security Policy**: `Signed JWT`
+    requestBody:
+      required: true
+      contentType: application/jwt
+    responses:
+      '200':
+        description: Submit account application. This will create brokerage account for the end user.
+        schema: StatusResponse
+        structure:
+          requestId: integer
+          dateSubmitted: string
+          fileData: FileData
+      '202':
+        description: Submit account application. This will initiate creation of brokerage account for the end user.
+        schema: RequestInfoResponse
+        structure:
+          requestId: integer
+          executedAt: string
+    security: SIGNED_JWT
+    scopes:
+      - accounts.write
+  - path: /gw/api/v1/accounts
+    method: PATCH
+    summary: Update Account
+    description: 'Update information for an existing accountId**Scope**: `accounts.write`**Security Policy**: `Signed JWT`'
+    requestBody:
+      required: true
+      contentType: application/jwt
+    responses:
+      '200':
+        description: Update information for an existing accountId
+        schema: StatusResponse
+        structure:
+          requestId: integer
+          dateSubmitted: string
+          fileData: FileData
+      '202':
+        description: Initiate update information for an existing accountId.
+        schema: RequestInfoResponse
+        structure:
+          requestId: integer
+          executedAt: string
+    security: SIGNED_JWT
+    scopes:
+      - accounts.write
+  - path: /gw/api/v1/accounts/{accountId}/details
+    method: GET
+    summary: Get Account Information
+    description: '**Scope**: `accounts.read`**Security Policy**: `HTTPS`'
+    parameters:
+      - name: accountId
+        in: path
+        required: true
+        type: string
+    responses:
+      '200':
+        description: >-
+          View information associated with account including contact data, financial information and trading
+          configuration.
+        schema: AccountDetailsResponse
+        structure:
+          error: ErrorResponse
+          hasError: boolean
+          errorDescription: string
+          account: AccountData
+          associatedPersons:
+            - AssociatedPerson
+          associatedEntities:
+            - AssociatedEntity
+          withHoldingStatement: {}
+          marketData:
+            - {}
+          financialInformation: {}
+          sourcesOfWealth:
+            - {}
+          tradeBundles:
+            - string
+          individualIRABeneficiaries:
+            - IndividualIRABene
+          entityIRABeneficiaries:
+            - EntityIRABene
+          decedents:
+            - {}
+          restrictions:
+            - RestrictionInfo
+    security: HTTPS
+    scopes:
+      - accounts.read
+  - path: /gw/api/v1/accounts/{accountId}/kyc
+    method: GET
+    summary: Retrieve Au10Tix URL
+    description: >-
+      Generate URL address to complete real-time KYC verification using Au10Tix**Scope**: `accounts.read`**Security
+      Policy**: `HTTPS`
+    parameters:
+      - name: accountId
+        in: path
+        required: true
+        type: string
+    responses:
+      '200':
+        description: Generate URL address to complete real-time KYC verification using Au10Tix
+        schema: Au10TixDetailResponse
+        structure:
+          startDate: string
+          expiryDate: string
+          error: ErrorResponse
+          hasError: boolean
+          errorDescription: string
+          url: string
+          externalId: string
+          entityId: integer
+          state: string
+    security: HTTPS
+    scopes:
+      - accounts.read
+  - path: /gw/api/v1/accounts/{accountId}/login-messages
+    method: GET
+    summary: Get Login Message By Account
+    description: 'Query login messages assigned by accountId**Scope**: `accounts.read`**Security Policy**: `HTTPS`'
+    parameters:
+      - name: accountId
+        in: path
+        required: true
+        type: string
+      - name: type
+        in: query
+        required: false
+        type: string
+    responses:
+      '200':
+        description: Query login messages assigned by accountId
+        schema: LoginMessageResponse
+        structure:
+          accountId: string
+          clearingStatus: string
+          clearingStatusDescription: string
+          loginMessages:
+            - LoginMessage
+          loginMessagePresent: boolean
+    security: HTTPS
+    scopes:
+      - accounts.read
+  - path: /gw/api/v1/accounts/{accountId}/status
+    method: GET
+    summary: Get Status By Account
+    description: 'Query status of account by accountId**Scope**: `accounts.read`**Security Policy**: `HTTPS`'
+    parameters:
+      - name: accountId
+        in: path
+        required: true
+        type: string
+    responses:
+      '200':
+        description: Query status of account by accountId.
+        schema: AccountStatusResponse
+        structure:
+          dateOpened: string
+          dateStarted: string
+          dateClosed: string
+          accountId: string
+          status: string
+          description: string
+          masterAccountId: string
+          state: string
+    security: HTTPS
+    scopes:
+      - accounts.read
+  - path: /gw/api/v1/accounts/{accountId}/tasks
+    method: GET
+    summary: Get Registration Tasks
+    description: >-
+      Query registration tasks assigned to account and pending tasks that are required for account approval**Scope**:
+      `accounts.read`**Security Policy**: `HTTPS`
+    parameters:
+      - name: accountId
+        in: path
+        required: true
+        type: string
+      - name: type
+        in: query
+        required: false
+        type: string
+    responses:
+      '200':
+        description: Query registration tasks assigned to account and pending tasks that are required for account approval
+    security: HTTPS
+    scopes:
+      - accounts.read
+  - path: /gw/api/v1/accounts/documents
+    method: POST
+    summary: Submit General Agreements And Disclosures
+    description: >-
+      Provides mechanism to submit Agreements and Disclosures to IBKR once a day instead of with each application. We
+      store these documents on the servers and will use them for new application requests subm
+    requestBody:
+      required: true
+      contentType: application/jwt
+    responses:
+      '200':
+        description: Submit standard agreements and disclosures
+        schema: StatusResponse
+        structure:
+          requestId: integer
+          dateSubmitted: string
+          fileData: FileData
+    security: SIGNED_JWT
+    scopes:
+      - accounts.write
+  - path: /gw/api/v1/accounts/login-messages
+    method: GET
+    summary: Get Login Messages
+    description: >-
+      Query all accounts associated with ‘Client ID’ that have incomplete login message**Scope**:
+      `accounts.read`**Security Policy**: `HTTPS`
+    parameters:
+      - name: loginMessageRequest
+        in: query
+        required: true
+        type: string
+    responses:
+      '200':
+        description: Query all accounts associated with ‘Client ID’ that have incomplete login message
+        schema: LoginMessageResponse
+        structure:
+          accountId: string
+          clearingStatus: string
+          clearingStatusDescription: string
+          loginMessages:
+            - LoginMessage
+          loginMessagePresent: boolean
+    security: HTTPS
+    scopes:
+      - accounts.read
+  - path: /gw/api/v1/accounts/status
+    method: GET
+    summary: Get Status Of Accounts
+    description: 'Query status of all accounts associated with ‘Client ID''**Scope**: `accounts.read`**Security Policy**: `HTTPS`'
+    parameters:
+      - name: accountStatusRequest
+        in: query
+        required: true
+        type: string
+    responses:
+      '200':
+        description: Query status of all accounts associated with ‘Client ID'
+        schema: AccountStatusBulkResponse
+        structure:
+          accounts:
+            - AccountStatusResponse
+          offset: integer
+          limit: integer
+          total: integer
+    security: HTTPS
+    scopes:
+      - accounts.read
