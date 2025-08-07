@@ -19,7 +19,7 @@ export const authController = {
         competing: status.competing,
         isValid: sessionInfo.isValid,
         tradingMode: tradingMode,
-        serverVersion: status.serverInfo?.version,
+        serverVersion: status.serverInfo?.serverVersion,
         fail: status.fail,
         message: status.message
       });

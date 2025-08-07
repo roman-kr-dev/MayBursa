@@ -1,6 +1,7 @@
-import axios, { AxiosInstance } from 'axios';
+import axios from 'axios';
 import https from 'https';
 import { config } from '../config/environment';
+import { apiClient, IBKRAPIError } from './apiClient';
 import { logger } from '@monorepo/shared-utils';
 
 interface ConnectionStatus {
@@ -12,32 +13,21 @@ interface ConnectionStatus {
 }
 
 export class ConnectionStatusService {
-  private axiosInstance: AxiosInstance;
   private lastStatus: ConnectionStatus | null = null;
-  private retryCount = 0;
-  private maxRetries = 3;
-  private retryDelay = 1000; // Start with 1 second
-
-  constructor() {
-    // Create axios instance with self-signed certificate handling
-    this.axiosInstance = axios.create({
-      baseURL: `https://localhost:${config.IBKR_GATEWAY_PORT}`,
-      timeout: 5000,
-      httpsAgent: new https.Agent({
-        rejectUnauthorized: false
-      }),
-      headers: {
-        'Accept': 'application/json'
-      }
-    });
-  }
+  private gatewayAxios = axios.create({
+    baseURL: `https://localhost:${config.IBKR_GATEWAY_PORT}`,
+    timeout: 5000,
+    httpsAgent: new https.Agent({
+      rejectUnauthorized: false
+    })
+  });
 
   async checkConnection(): Promise<boolean> {
     const startTime = Date.now();
 
     try {
-      // Try to reach the gateway root endpoint
-      const response = await this.axiosInstance.get('/');
+      // Try to reach the gateway root endpoint (not an API endpoint)
+      const response = await this.gatewayAxios.get('/');
       const latency = Date.now() - startTime;
 
       const isConnected = response.status === 200 || response.status === 302;
@@ -48,10 +38,6 @@ export class ConnectionStatusService {
         latency,
         lastChecked: new Date()
       };
-
-      // Reset retry count on success
-      this.retryCount = 0;
-      this.retryDelay = 1000;
 
       logger.debug(`Gateway connection check: ${isConnected ? 'success' : 'failed'} (${latency}ms)`);
       return isConnected;
@@ -73,24 +59,31 @@ export class ConnectionStatusService {
   }
 
   async checkApiAvailability(): Promise<boolean> {
+    const startTime = Date.now();
+    
     try {
-      // Check if the API endpoints are available
-      const response = await this.axiosInstance.get('/v1/api/iserver/auth/status');
-
-      const isAvailable = response.status === 200;
+      // Use apiClient to check auth status - this validates API is available
+      await apiClient.checkAuthStatus();
+      
+      const latency = Date.now() - startTime;
 
       if (this.lastStatus) {
-        this.lastStatus.isApiAvailable = isAvailable;
+        this.lastStatus.isApiAvailable = true;
+        this.lastStatus.latency = latency;
       }
 
-      return isAvailable;
+      return true;
     } catch (error) {
       if (this.lastStatus) {
         this.lastStatus.isApiAvailable = false;
       }
 
       // API might not be available yet, which is expected during startup
-      logger.debug('API availability check failed:', error instanceof Error ? error.message : 'Unknown error');
+      if (error instanceof IBKRAPIError) {
+        logger.debug('API availability check failed:', error.message);
+      } else {
+        logger.debug('API availability check failed:', error);
+      }
       return false;
     }
   }
@@ -112,6 +105,7 @@ export class ConnectionStatusService {
 
   async waitForConnection(timeout: number = 60000): Promise<boolean> {
     const startTime = Date.now();
+    const checkInterval = 2000; // Check every 2 seconds
 
     logger.info('Waiting for gateway connection...');
 
@@ -123,18 +117,8 @@ export class ConnectionStatusService {
         return true;
       }
 
-      // Exponential backoff with jitter
-      const jitter = Math.random() * 500;
-      const delay = Math.min(this.retryDelay * Math.pow(2, this.retryCount), 10000) + jitter;
-
-      logger.debug(`Retrying connection in ${Math.round(delay)}ms (attempt ${this.retryCount + 1}/${this.maxRetries})`);
-
-      await new Promise(resolve => setTimeout(resolve, delay));
-      this.retryCount++;
-
-      if (this.retryCount >= this.maxRetries) {
-        this.retryCount = 0; // Reset for next cycle
-      }
+      // Simple fixed interval checking since apiClient handles retries
+      await new Promise(resolve => setTimeout(resolve, checkInterval));
     }
 
     logger.error('Timeout waiting for gateway connection');
@@ -143,6 +127,7 @@ export class ConnectionStatusService {
 
   async waitForApiAvailability(timeout: number = 30000): Promise<boolean> {
     const startTime = Date.now();
+    const checkInterval = 2000; // Check every 2 seconds
 
     logger.info('Waiting for gateway API to be available...');
 
@@ -154,7 +139,8 @@ export class ConnectionStatusService {
         return true;
       }
 
-      await new Promise(resolve => setTimeout(resolve, 1000));
+      // Simple fixed interval checking since apiClient handles retries
+      await new Promise(resolve => setTimeout(resolve, checkInterval));
     }
 
     logger.error('Timeout waiting for API availability');

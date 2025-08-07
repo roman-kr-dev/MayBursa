@@ -1,19 +1,6 @@
-import axios, { AxiosInstance } from 'axios';
-import https from 'https';
-import { config, getTradingMode, TradingMode } from '../config/environment';
+import { apiClient, AuthStatusResponse, IBKRAPIError } from './apiClient';
+import { getTradingMode, TradingMode } from '../config/environment';
 import { logger } from '@monorepo/shared-utils';
-import { getErrorMessage } from '../utils/errorUtils';
-
-interface AuthStatusResponse {
-  authenticated: boolean;
-  connected: boolean;
-  competing: boolean;
-  fail?: string;
-  message?: string;
-  serverInfo?: {
-    version: string;
-  };
-}
 
 interface SessionInfo {
   isValid: boolean;
@@ -34,37 +21,11 @@ interface FullStatus {
 }
 
 export class AuthenticationStatusService {
-  private axiosInstance: AxiosInstance;
   private lastSessionInfo: SessionInfo | null = null;
-
-  constructor() {
-    // Create axios instance with self-signed certificate handling
-    this.axiosInstance = axios.create({
-      baseURL: `https://localhost:${config.IBKR_GATEWAY_PORT}/v1/api`,
-      timeout: 10000,
-      httpsAgent: new https.Agent({
-        rejectUnauthorized: false
-      }),
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      }
-    });
-  }
 
   async checkAuthStatus(): Promise<AuthStatusResponse> {
     try {
-      // The /iserver/auth/status endpoint is the standard way to check authentication
-      const response = await this.axiosInstance.get('/iserver/auth/status');
-      
-      const status: AuthStatusResponse = {
-        authenticated: response.data.authenticated || false,
-        connected: response.data.connected || false,
-        competing: response.data.competing || false,
-        fail: response.data.fail,
-        message: response.data.message,
-        serverInfo: response.data.serverInfo
-      };
+      const status = await apiClient.checkAuthStatus();
 
       // Update last session info
       this.lastSessionInfo = {
@@ -72,7 +33,7 @@ export class AuthenticationStatusService {
         authenticated: status.authenticated,
         connected: status.connected,
         competing: status.competing,
-        serverVersion: status.serverInfo?.version,
+        serverVersion: status.serverInfo?.serverVersion,
         lastChecked: new Date()
       };
 
@@ -84,7 +45,7 @@ export class AuthenticationStatusService {
 
       return status;
     } catch (error) {
-      logger.error('Failed to check auth status:', getErrorMessage(error));
+      logger.error('Failed to check auth status:', error);
       
       // If we can't reach the API, consider it not authenticated
       this.lastSessionInfo = {
@@ -94,6 +55,16 @@ export class AuthenticationStatusService {
         competing: false,
         lastChecked: new Date()
       };
+
+      // Return a default status if error occurs
+      if (error instanceof IBKRAPIError) {
+        return {
+          authenticated: false,
+          connected: false,
+          competing: false,
+          fail: error.message
+        };
+      }
 
       return {
         authenticated: false,
@@ -134,11 +105,10 @@ export class AuthenticationStatusService {
     try {
       logger.info('Attempting to reauthenticate...');
       
-      // Try to reauthenticate using the API
-      const response = await this.axiosInstance.post('/iserver/reauthenticate');
+      const response = await apiClient.reauthenticate();
       
-      if (response.data.message) {
-        logger.info('Reauthentication response:', response.data.message);
+      if (response.message) {
+        logger.info('Reauthentication response:', response.message);
       }
 
       // Wait a bit for the reauthentication to take effect
@@ -147,25 +117,27 @@ export class AuthenticationStatusService {
       // Check if we're authenticated now
       return await this.isSessionValid();
     } catch (error) {
-      logger.error('Reauthentication failed:', getErrorMessage(error));
+      logger.error('Reauthentication failed:', error);
       return false;
     }
   }
 
   async keepAlive(): Promise<void> {
     try {
-      // Send a tickle request to keep the session alive
-      await this.axiosInstance.post('/tickle');
+      await apiClient.tickle();
       logger.debug('Keep-alive sent');
     } catch (error) {
-      logger.error('Keep-alive failed:', getErrorMessage(error));
+      logger.error('Keep-alive failed:', error);
     }
   }
 
   async logout(): Promise<void> {
     try {
-      await this.axiosInstance.post('/logout');
-      logger.info('Logged out successfully');
+      const response = await apiClient.logout();
+      
+      if (response.status) {
+        logger.info('Logged out successfully');
+      }
       
       this.lastSessionInfo = {
         isValid: false,
@@ -175,7 +147,7 @@ export class AuthenticationStatusService {
         lastChecked: new Date()
       };
     } catch (error) {
-      logger.error('Logout failed:', getErrorMessage(error));
+      logger.error('Logout failed:', error);
     }
   }
 
