@@ -36,7 +36,12 @@ export const gatewayController = {
         try {
           const connected = await connectionStatus.waitForConnection();
           if (connected) {
-            await loginAutomation.authenticate();
+            const authenticated = await loginAutomation.authenticate();
+            if (authenticated) {
+              // Wait for the gateway to update its internal authentication state
+              logger.info('Waiting for gateway to establish session internally...');
+              await new Promise(resolve => setTimeout(resolve, 10000)); // 10 second delay
+            }
             await gatewayMonitor.startMonitoring();
           }
         } catch (error) {
@@ -107,7 +112,12 @@ export const gatewayController = {
         try {
           const connected = await connectionStatus.waitForConnection();
           if (connected) {
-            await loginAutomation.authenticate();
+            const authenticated = await loginAutomation.authenticate();
+            if (authenticated) {
+              // Wait for the gateway to update its internal authentication state
+              logger.info('Waiting for gateway to establish session internally...');
+              await new Promise(resolve => setTimeout(resolve, 10000)); // 10 second delay
+            }
             await gatewayMonitor.startMonitoring();
           }
         } catch (error) {

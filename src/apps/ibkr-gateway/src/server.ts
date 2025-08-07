@@ -35,6 +35,11 @@ async function initializeGateway(): Promise<void> {
 
       if (!authenticated) {
         logger.error('Initial authentication failed - manual intervention may be required');
+      } else {
+        // Wait for the gateway to update its internal authentication state
+        // This prevents the monitor from immediately checking and finding "not authenticated"
+        logger.info('Waiting for gateway to establish session internally...');
+        await new Promise(resolve => setTimeout(resolve, 10000)); // 10 second delay
       }
 
       // Start authentication monitoring

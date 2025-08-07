@@ -139,7 +139,12 @@ export class GatewayMonitorService {
           logger.info('Triggering authentication after restart...');
           setTimeout(async () => {
             try {
-              await loginAutomation.authenticate();
+              const authenticated = await loginAutomation.authenticate();
+              if (authenticated) {
+                // Wait for the gateway to update its internal authentication state
+                logger.info('Waiting for gateway to establish session internally after restart...');
+                await new Promise(resolve => setTimeout(resolve, 10000)); // 10 second delay
+              }
             } catch (error) {
               logger.error('Failed to authenticate after restart:', error);
             }
