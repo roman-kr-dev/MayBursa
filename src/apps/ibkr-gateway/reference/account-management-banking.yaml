@@ -1,0 +1,395 @@
+section: Account Management Banking
+description: 'The IB REST API reference documentation - Section: Account Management Banking'
+baseUrl: https://localhost:5001
+note: All paths include /v1/api prefix (except /gw/* and /oauth2/* endpoints)
+endpoints:
+  - path: /gw/api/v1/bank-instructions
+    method: POST
+    summary: Manage Bank Instructions
+    description: >-
+      Create or delete bank instructions by accountId. Only ACH and EDDA are supported for 'Create'.**Scope**:
+      `bank-instructions.write`**Security Policy**: `Signed JWT`
+    parameters:
+      - required: false
+        type: string
+    requestBody:
+      required: true
+      contentType: application/json
+    responses:
+      '202':
+        description: Accepts request to create a new instruction asynchronously
+        example:
+          instructionResult:
+            clientInstructionId: 80009
+            instructionType: ACH_INSTRUCTION
+            instructionStatus: PENDING
+            instructionId: 43092478
+          instructionSetId: 2487
+          status: 202
+        schema: AsynchronousInstructionResponse
+        structure: InstructionResponse
+    security: SIGNED_JWT
+    scopes:
+      - bank-instructions.write
+  - path: /gw/api/v1/bank-instructions/query
+    method: POST
+    summary: View Bank Instructions
+    description: >-
+      View active bank instructions for an accountId.**Scope**: `bank-instructions.read`**Security Policy**: `Signed
+      JWT`
+    parameters:
+      - required: false
+        type: string
+    requestBody:
+      required: true
+      contentType: application/json
+    responses:
+      '201':
+        description: Instruction successfully created and processed synchronously
+        example:
+          instructionResult:
+            accountId: U46377
+            bankInstructionMethod: WIRE
+            bankInstructionDetails:
+              - instructionName: testCitadele
+                type: FOREIGN_BANK
+                currency: USD
+                instructionStatus: REJECTED
+                bankRoutingNumber: '000127591'
+                bankAccountNumber: '*****7042'
+              - instructionName: testChase1
+                type: LOCAL_BANK
+                currency: USD
+                instructionStatus: PROCESSED
+                bankRoutingNumber: '021100361'
+                bankAccountNumber: '*****9869'
+              - instructionName: testee
+                type: FOREIGN_BANK
+                currency: USD
+                instructionStatus: PROCESSED
+                bankRoutingNumber: '021112361'
+                bankAccountNumber: '*****9889'
+              - instructionName: test multiple
+                type: FOREIGN_BANK
+                currency: CHF
+                instructionStatus: PROCESSED
+                bankRoutingNumber: '021100361'
+                bankAccountNumber: '*****2531'
+              - instructionName: farawayBroker
+                type: FOREIGN_BROKER
+                currency: CHF
+                instructionStatus: REJECTED
+                bankRoutingNumber: '021100361'
+                bankAccountNumber: '*****1234'
+            ibReferenceId: 0
+            clientInstructionId: 12001819
+            instructionType: QUERY_BANK_INSTRUCTION
+            instructionStatus: PROCESSED
+            instructionId: 43094187
+          instructionSetId: 3771
+          status: 201
+    security: SIGNED_JWT
+    scopes:
+      - bank-instructions.read
+  - path: /gw/api/v1/client-instructions/{clientInstructionId}
+    method: GET
+    summary: Get Status For ClientInstructionId
+    description: 'Retrieve status of request by clientInstructionId.**Scope**: `instructions.read`**Security Policy**: `HTTPS`'
+    parameters:
+      - required: false
+        type: string
+      - required: false
+        type: string
+    responses:
+      '200':
+        description: Returns the status of an instruction.
+        example:
+          status: 200
+          instructionResult:
+            clientInstructionId: 7008156
+            instructionType: INTERNAL_CASH_TRANSFER
+            instructionStatus: PENDING
+            instructionId: 43092595
+          instructionSetId: 2650
+    security: HTTPS
+    scopes:
+      - instructions.read
+  - path: /gw/api/v1/external-asset-transfers
+    method: POST
+    summary: Transfer Positions Externally (ACATS, ATON, FOP, DWAC, Complex Asset Transfer)
+    description: >-
+      Initiate request to submit external position transfer. Methods- ACATS, ATON, Basic FOP, FOP, DWAC. More
+      information on transfer methods can be found here - https://www.interactivebrokers.com/campus/tr
+    parameters:
+      - required: false
+        type: string
+    requestBody:
+      required: true
+      contentType: application/json
+    responses:
+      '202':
+        description: Accepts request to create a new instruction asynchronously
+        example:
+          instructionResult:
+            clientInstructionId: 1013031
+            instructionType: FOP
+            instructionStatus: PENDING
+            instructionId: 43091814
+          instructionSetId: 1703
+          status: 202
+        schema: AsynchronousInstructionResponse
+        structure: InstructionResponse
+    security: SIGNED_JWT
+    scopes:
+      - transfers.write
+  - path: /gw/api/v1/external-cash-transfers
+    method: POST
+    summary: Transfer Cash Externally
+    description: >-
+      Initiate request to deposit or withdrawal between IBKR account and bank account. More information on transfer
+      methods can be found here - https://www.interactivebrokers.com/campus/trading-lessons/cash
+    parameters:
+      - required: false
+        type: string
+    requestBody:
+      required: true
+      contentType: application/json
+    responses:
+      '202':
+        description: Accepts request to create a new instruction asynchronously
+        example:
+          instructionResult:
+            clientInstructionId: 7008143
+            instructionType: DEPOSIT
+            instructionStatus: PENDING
+            instructionId: 43092468
+          instructionSetId: 2480
+          status: 202
+        schema: AsynchronousInstructionResponse
+        structure: InstructionResponse
+    security: SIGNED_JWT
+    scopes:
+      - transfers.write
+  - path: /gw/api/v1/external-cash-transfers/query
+    method: POST
+    summary: View Cash Balances
+    description: >-
+      View available cash for withdrawal with and without margin loan by accountId**Scope**: `transfers.read`**Security
+      Policy**: `Signed JWT`
+    parameters:
+      - required: false
+        type: string
+    requestBody:
+      required: true
+      contentType: application/json
+    responses:
+      '201':
+        description: Instruction successfully created and processed synchronously
+        example:
+          status: 201
+          instructionSetId: 17791
+          instructionResult:
+            accountId: U46377
+            currency: EUR
+            withdrawableAmount: 0
+            withdrawableAmountNoBorrow: 0
+            allowedTransferAmountToMaster: 0
+            allowedTransferAmountToMasterNoBorrow: 0
+            ibReferenceId: 0
+            clientInstructionId: 7013230
+            instructionType: QUERY_WITHDRAWABLE_FUNDS
+            instructionStatus: PROCESSED
+            instructionId: 43133309
+      '202':
+        description: Accepts request to create a new instruction asynchronously
+        example:
+          status: 202
+          instructionSetId: 18640
+          instructionResult:
+            accountId: U1032333
+            year: '2022'
+            ibReferenceId: 0
+            clientInstructionId: 7013306
+            instructionType: QUERY_IRA_CONTRIBUTIONS
+            instructionStatus: PENDING
+            instructionId: 43134474
+            description: >-
+              Query is being processed. Please poll for status 1 minutes later using FB status endpoint. No new queries
+              will be allowed before this one is processed 
+    security: SIGNED_JWT
+    scopes:
+      - transfers.read
+  - path: /gw/api/v1/instruction-sets/{instructionSetId}
+    method: GET
+    summary: Get Status For InstructionSetId
+    description: >-
+      Retrieve status of all requests associated with instructionSetId.**Scope**: `instructions.read`**Security
+      Policy**: `HTTPS`
+    parameters:
+      - required: false
+        type: string
+      - required: false
+        type: string
+    responses:
+      '200':
+        description: Returns the status multiple instructions.
+        schema: BulkMultiStatusResponse
+        structure:
+          status: integer
+          instructionSetId: number
+          instructionResults:
+            - item
+    security: HTTPS
+    scopes:
+      - instructions.read
+  - path: /gw/api/v1/instructions/{instructionId}
+    method: GET
+    summary: Get Status For InstructionId
+    description: 'Retrieve status of request by instructionId**Scope**: `instructions.read`**Security Policy**: `HTTPS`'
+    parameters:
+      - required: false
+        type: string
+      - required: false
+        type: string
+    responses:
+      '200':
+        description: Returns the status of an instruction.
+        example:
+          status: 200
+          instructionResult:
+            clientInstructionId: 7008156
+            instructionType: INTERNAL_CASH_TRANSFER
+            instructionStatus: PENDING
+            instructionId: 43092595
+          instructionSetId: 2650
+    security: HTTPS
+    scopes:
+      - instructions.read
+  - path: /gw/api/v1/instructions/cancel
+    method: POST
+    summary: Cancel Request
+    description: 'Cancel request by instructionId.**Scope**: `instructions.read`**Security Policy**: `Signed JWT`'
+    parameters:
+      - required: false
+        type: string
+    requestBody:
+      required: true
+      contentType: application/json
+    responses:
+      '201':
+        description: Instruction successfully created and processed synchronously
+        example:
+          instructionResult:
+            clientInstructionId: 12001810
+            instructionType: CANCEL_INSTRUCTION
+            instructionStatus: PROCESSED
+            instructionId: 43094179
+          instructionSetId: 3763
+          status: 201
+        schema: SynchronousInstructionResponse
+        structure: InstructionResponse
+    security: SIGNED_JWT
+    scopes:
+      - instructions.read
+  - path: /gw/api/v1/instructions/query
+    method: POST
+    summary: Get Transaction History
+    description: >-
+      Query list of recent transactions (up to 30 days) based on accountId.**Scope**: `instructions.read`**Security
+      Policy**: `Signed JWT`
+    parameters:
+      - required: false
+        type: string
+    requestBody:
+      required: true
+      contentType: application/json
+    responses:
+      '202':
+        description: Accepts request to create a new instruction asynchronously
+        example:
+          instructionResult:
+            ibReferenceId: 0
+            clientInstructionId: 7009001
+            instructionType: QUERY_RECENT_INSTRUCTIONS
+            instructionStatus: PENDING
+            instructionId: 43094002
+            code: PENDING
+            description: >-
+              Query is being processed. Please poll for status 1 minutes later using FB status endpoint. No new queries
+              will be allowed before this one is processed
+          instructionSetId: 3702
+          status: 202
+        schema: AsynchronousInstructionResponse
+        structure: InstructionResponse
+    security: SIGNED_JWT
+    scopes:
+      - instructions.read
+  - path: /gw/api/v1/internal-asset-transfers
+    method: POST
+    summary: Transfer Positions Internally
+    description: >-
+      Transfer positions internally between two accounts with Interactive Brokers**Scope**: `transfers.write`**Security
+      Policy**: `Signed JWT`
+    parameters:
+      - required: false
+        type: string
+    requestBody:
+      required: true
+      contentType: application/json
+    responses:
+      '202':
+        description: Accepts request to create a new instruction asynchronously
+        example:
+          instructionResult:
+            clientInstructionId: 7008152
+            instructionType: INTERNAL_POSITION_TRANSFER
+            instructionStatus: PENDING
+            instructionId: 43092590
+          instructionSetId: 2614
+          status: 202
+        schema: AsynchronousInstructionResponse
+        structure: InstructionResponse
+    security: SIGNED_JWT
+    scopes:
+      - transfers.write
+  - path: /gw/api/v1/internal-cash-transfers
+    method: POST
+    summary: Transfer Cash Internally
+    description: >-
+      Transfer cash internally between two accounts with Interactive Brokers.**Scope**: `transfers.write`**Security
+      Policy**: `Signed JWT`
+    parameters:
+      - required: false
+        type: string
+    requestBody:
+      required: true
+      contentType: application/json
+    responses:
+      '201':
+        description: Creates a new instruction synchronously, e.g., for Internal Cash Transfer w/o dateTimeToOccur
+        example:
+          instructionResult:
+            clientInstructionId: 1013032
+            instructionType: INTERNAL_CASH_TRANSFER
+            instructionStatus: PROCESSED
+            instructionId: 43091814
+            ibReferenceId: 132123
+          instructionSetId: 1703
+          status: 201
+        schema: SynchronousInstructionResponse
+        structure: InstructionResponse
+      '202':
+        description: Accepts request to create a new instruction asynchronously
+        example:
+          instructionResult:
+            clientInstructionId: 1013031
+            instructionType: INTERNAL_CASH_TRANSFER
+            instructionStatus: PENDING
+            instructionId: 43091814
+          instructionSetId: 1703
+          status: 202
+        schema: AsynchronousInstructionResponse
+        structure: InstructionResponse
+    security: SIGNED_JWT
+    scopes:
+      - transfers.write

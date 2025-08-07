@@ -1,0 +1,239 @@
+section: Account Management Utilities
+description: 'The IB REST API reference documentation - Section: Account Management Utilities'
+baseUrl: https://localhost:5001
+note: All paths include /v1/api prefix (except /gw/* and /oauth2/* endpoints)
+endpoints:
+  - path: /gw/api/v1/enumerations/{enumerationType}
+    method: GET
+    summary: Get Enumerations
+    description: >-
+      Used to query list of enumerations for attributes included within extPositionsTransfers, occupation,
+      employerBusiness, financialInformation, affiliationDetails, tradingPermissions, etc.**Scope**: `acc
+    parameters:
+      - name: type
+        in: path
+        required: true
+        type: string
+      - name: currency
+        in: query
+        required: false
+        type: string
+      - name: ibEntity
+        in: query
+        required: false
+        type: string
+      - name: mdStatusNonPro
+        in: query
+        required: false
+        type: string
+      - name: form-number
+        in: query
+        required: false
+        type: string
+      - name: language
+        in: query
+        required: false
+        type: string
+    responses:
+      '200':
+        description: Get enumerations
+        schema: EnumerationResponse
+        structure:
+          enumerationsType: string
+          formNumber: string
+          jsonData: ArrayNode
+    security: HTTPS
+    scopes:
+      - accounts.read
+      - enumerations.read
+  - path: /gw/api/v1/enumerations/complex-asset-transfer
+    method: GET
+    summary: Get A List Of Participating Brokers For The Given Asset Type
+    description: >-
+      Get list of brokers supported for given asset transfer type**Scope**: `enumerations.read`**Security Policy**:
+      `HTTPS`
+    parameters:
+      - required: false
+        type: string
+      - name: instructionType
+        in: query
+        required: true
+        type: string
+    responses:
+      '200':
+        description: Returns list of brokers supported for given asset type
+        example:
+          instructionType: COMPLEX_ASSET_TRANSFER
+          brokers:
+            - DONNER & REUSCHEL
+            - IBROKER GLOBAL MARKETS SOCIEDAD DE VALORES, S.A
+            - EQUATEX 4500
+            - IMAGI  BROKERAGE LIMITED
+            - V-BANK
+            - ADMIRAL MARKETS UK LTD
+            - ALFA BANK
+            - YICKO SECURITIES LIMITED
+            - BLACKWELL GLOBAL SECURITIES LIMITED
+            - EQUINITI
+            - KAISA FINANCIAL GROUP COMPANY LIMITED
+        schema: GetBrokerListResponse
+        structure:
+          instructionType: string
+          brokers:
+            - string
+    security: HTTPS
+    scopes:
+      - enumerations.read
+  - path: /gw/api/v1/forms
+    method: GET
+    summary: Get Forms
+    description: 'Get forms**Scope**: `accounts.read` OR `forms.read`**Security Policy**: `HTTPS`'
+    parameters:
+      - name: formNo
+        in: query
+        required: false
+        type: array
+      - name: getDocs
+        in: query
+        required: false
+        type: string
+      - name: fromDate
+        in: query
+        required: false
+        type: string
+      - name: toDate
+        in: query
+        required: false
+        type: string
+      - name: language
+        in: query
+        required: false
+        type: string
+      - name: projection
+        in: query
+        required: false
+        type: string
+    responses:
+      '200':
+        description: Get forms
+        schema: FormFileResponse
+        structure:
+          error: ErrorResponse
+          hasError: boolean
+          errorDescription: string
+          fileData: FileData
+          formDetails:
+            - FormDetails
+    security: HTTPS
+    scopes:
+      - accounts.read
+      - forms.read
+  - path: /gw/api/v1/participating-banks
+    method: GET
+    summary: Get Participating Banks
+    description: >-
+      Get list of banks which support banking connection with Interactive Brokers.**Scope**:
+      `enumerations.read`**Security Policy**: `HTTPS`
+    parameters:
+      - required: false
+        type: string
+      - name: type
+        in: query
+        required: true
+        type: string
+    responses:
+      '200':
+        description: Returns the list of participating banks.
+        example:
+          type: eDDA
+          participatingBanks:
+            - institutionName: WELAB BANK LIMITED
+              clearingCode: '390'
+              BIC: WEDIHKHHXXX
+            - institutionName: INDUSTRIAL AND COMMERCIAL BANK OF CHINA (ASIA) LIMITED
+              clearingCode: '072'
+              BIC: UBHKHKHHXXX
+            - institutionName: FUSION BANK LIMITED
+              clearingCode: '391'
+              BIC: IFFUHKHHXXX
+            - institutionName: CITIBANK (HONG KONG) LIMITED
+              clearingCode: '250'
+              BIC: CITIHKAXXXX
+        schema: GetParticipatingListResponse
+        structure:
+          type: string
+          participatingBanks:
+            - institutionName: string
+              clearingCode: string
+              BIC: string
+    security: HTTPS
+    scopes:
+      - enumerations.read
+  - path: /gw/api/v1/requests
+    method: GET
+    summary: Get Requests' Details By Timeframe
+    description: 'Fetch Requests'' Details By Timeframe**Scope**: `accounts.read`**Security Policy**: `HTTPS`'
+    parameters:
+      - name: requestDetails
+        in: query
+        required: true
+        type: string
+    responses:
+      '200':
+        description: Fetch Requests' Details By Timeframe
+        schema: RequestDetailsResponse
+        structure:
+          requestDetails:
+            - RequestDetail
+          offset: integer
+          limit: integer
+          total: integer
+    security: HTTPS
+    scopes:
+      - accounts.read
+  - path: /gw/api/v1/requests/{requestId}/status
+    method: GET
+    summary: Get Status Of A Request
+    description: 'Returns status for account management request**Scope**: `accounts.read`**Security Policy**: `HTTPS`'
+    parameters:
+      - name: requestId
+        in: path
+        required: true
+        type: integer
+      - name: type
+        in: query
+        required: true
+        type: string
+    responses:
+      '200':
+        description: Returns status for account management request
+    security: HTTPS
+    scopes:
+      - accounts.read
+  - path: /gw/api/v1/validations/usernames/{username}
+    method: GET
+    summary: Verify User Availability
+    description: >-
+      Verify whether user is valid and available**Scope**: `accounts.read` OR `validations.read`**Security Policy**:
+      `HTTPS`
+    parameters:
+      - name: username
+        in: path
+        required: true
+        type: string
+    responses:
+      '200':
+        description: Verify whether user is valid and available
+        schema: UserNameAvailableResponse
+        structure:
+          error: ErrorResponse
+          hasError: boolean
+          errorDescription: string
+          isValid: boolean
+          isAvailable: boolean
+          suggestedUserName:
+            - string
+    security: HTTPS
+    scopes:
+      - accounts.read
+      - validations.read

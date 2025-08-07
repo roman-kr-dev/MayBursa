@@ -1,0 +1,269 @@
+section: Trading Alerts
+description: 'The IB REST API reference documentation - Section: Trading Alerts'
+baseUrl: https://localhost:5001
+note: All paths include /v1/api prefix (except /gw/* and /oauth2/* endpoints)
+endpoints:
+  - path: /v1/api/iserver/account/{accountId}/alert
+    method: POST
+    summary: Create Or Modify Alert
+    description: Endpoint used to create a new alert, or modify an existing alert.
+    parameters:
+      - name: accountId
+        in: path
+        required: true
+        type: string
+    requestBody:
+      required: true
+      contentType: application/json
+    responses:
+      '200':
+        description: >-
+          An object containing valid accounts and the account properties regarding trading access. This endpoint is also
+          used to confirm account validation.
+        example:
+          request_id: null
+          order_id: 1408549184
+          success: true
+          text: Submitted
+          order_status: null
+          warning_message: null
+        schema: alertCreationResponse
+        structure:
+          request_id: integer
+          order_id: integer
+          success: boolean
+          text: string
+          order_status: string
+          warning_message: string
+  - path: /v1/api/iserver/account/{accountId}/alert/{alertId}
+    method: DELETE
+    summary: Delete An Alert
+    description: Permanently delete an existing alert. Deleting an MTA alert will reset it to the default state.
+    parameters:
+      - name: accountId
+        in: path
+        required: true
+        type: string
+      - name: alertId
+        in: path
+        required: true
+        type: string
+    requestBody:
+      required: true
+      contentType: application/json
+    responses:
+      '200':
+        description: An object containing details on the deleted endpoint.
+        example:
+          request_id: null
+          order_id: 833967258
+          success: true
+          text: Request was submitted
+          failure_list: null
+        schema: alertDeletionResponse
+        structure:
+          request_id: integer
+          order_id: integer
+          success: boolean
+          text: string
+          failure_list: string
+  - path: /v1/api/iserver/account/{accountId}/alert/activate
+    method: POST
+    summary: Activate Or Deactivate An Alert
+    description: >-
+      Activate or Deactivate existing alerts created for this account. This does not delete alerts, but disables
+      notifications until reactivated.
+    parameters:
+      - name: accountId
+        in: path
+        required: true
+        type: string
+    requestBody:
+      required: true
+      contentType: application/json
+    responses:
+      '200':
+        description: An object containing details about the activated/deactivated alert.
+        example:
+          request_id: null
+          order_id: 833967258
+          success: true
+          text: Request was submitted
+          failure_list: null
+        schema: alertActivationResponse
+        structure:
+          request_id: integer
+          order_id: integer
+          success: boolean
+          text: string
+          failure_list: string
+  - path: /v1/api/iserver/account/{accountId}/alerts
+    method: GET
+    summary: Get A List Of Available Alerts
+    description: Retrieve a list of all alerts attached to the provided account.
+    parameters:
+      - name: accountId
+        in: path
+        required: true
+        type: string
+    responses:
+      '200':
+        description: An array of objects detailing contract information.
+        example: []
+        schema: alerts
+        structure:
+          - alert
+  - path: /v1/api/iserver/account/alert/{alertId}
+    method: GET
+    summary: Get Details Of A Specific Alert
+    description: Request details of a specific alert by providing the assigned alertId Id.
+    parameters:
+      - name: alertId
+        in: path
+        required: true
+        type: string
+      - name: type
+        in: query
+        required: true
+        type: string
+    responses:
+      '200':
+        description: An object containing all unique details of the specified alert.
+        example:
+          account: U1234567
+          order_id: 833967258
+          alert_name: IBM
+          tif: GTC
+          expire_time: null
+          alert_active: 1
+          alert_repeatable: 0
+          alert_email: john.smith@example.com
+          alert_send_message: 1
+          alert_message: alert message
+          alert_show_popup: 1
+          alert_play_audio: null
+          order_status: Submitted
+          alert_triggered: false
+          fg_color: '#FFFFFF'
+          bg_color: '#0000CC'
+          order_not_editable: false
+          itws_orders_only: 0
+          alert_mta_currency: null
+          alert_mta_defaults: null
+          tool_id: null
+          time_zone: null
+          alert_default_type: null
+          condition_size: 1
+          condition_outside_rth: 1
+          conditions:
+            - condition_type: 1
+              conidex: 8314@NYSE
+              contract_description_1: IBM
+              condition_operator: '>='
+              condition_trigger_method: '0'
+              condition_value: '500.00'
+              condition_logic_bind: 'n'
+              condition_time_zone: null
+        schema: alertDetails
+        structure:
+          account: string
+          order_id: integer
+          alertName: string
+          tif: string
+          expire_time: string
+          alert_active: integer
+          alert_repeatable: integer
+          alert_email: string
+          alert_send_message: integer
+          alert_message: string
+          alert_show_popup: integer
+          alert_play_audio: integer
+          order_status: string
+          alert_triggered: integer
+          fg_color: string
+          bg_color: string
+          order_not_editable: boolean
+          itws_orders_only: integer
+          alert_mta_currency: string
+          alert_mta_defaults: string
+          tool_id: integer
+          time_zone: string
+          alert_default_type: integer
+          condition_size: integer
+          condition_outside_rth: integer
+          conditions:
+            - alertCondition
+  - path: /v1/api/iserver/account/mta
+    method: GET
+    summary: Get MTA Alert
+    description: >-
+      Retrieve information about your MTA alert. Each login user only has one mobile trading assistant (MTA) alert with
+      it’s own unique tool id that cannot be changed. MTA alerts can not be created or delet
+    responses:
+      '200':
+        description: The alert description for the unique MTA alert on the account.
+        example:
+          account: U1234567
+          order_id: 167426254
+          alert_name: MTA (AutoAlert)
+          tif: GTC
+          expire_time: null
+          alert_active: 1
+          alert_repeatable: 1
+          alert_email: jonh.smith@example.com
+          alert_send_message: 1
+          alert_message: null
+          alert_show_popup: 0
+          alert_play_audio: null
+          order_status: Submitted
+          alert_triggered: false
+          fg_color: '#FFFFFF'
+          bg_color: '#0000CC'
+          order_not_editable: false
+          itws_orders_only: 0
+          alert_mta_currency: USD
+          alert_mta_defaults: >-
+            9:STATE=1,MIN=-260000,MAX=260000,STEP=500,DEF_MIN=-26000,DEF_MAX=26000|8:STATE=0,MIN=-15,MAX=15,STEP=0.5,DEF_MIN=-2,DEF_MAX=2|7:STATE=1,MIN=-5,MAX=5,STEP=0.5,DEF_MIN=-2,DEF_MAX=2|4:STATE=1,MIN=1,MAX=50,STEP=1,DEF_VAL=10|5:STATE=0
+          tool_id: 55834574848
+          time_zone: all timezones can be here
+          alert_default_type: null
+          condition_size: 1
+          condition_outside_rth: 0
+          conditions:
+            - condition_type: 5
+              conidex: '*@*'
+              contract_description_1: Unknown
+              condition_operator: null
+              condition_trigger_method: null
+              condition_value: '*'
+              condition_logic_bind: 'n'
+              condition_time_zone: null
+        schema: alertDetails
+        structure:
+          account: string
+          order_id: integer
+          alertName: string
+          tif: string
+          expire_time: string
+          alert_active: integer
+          alert_repeatable: integer
+          alert_email: string
+          alert_send_message: integer
+          alert_message: string
+          alert_show_popup: integer
+          alert_play_audio: integer
+          order_status: string
+          alert_triggered: integer
+          fg_color: string
+          bg_color: string
+          order_not_editable: boolean
+          itws_orders_only: integer
+          alert_mta_currency: string
+          alert_mta_defaults: string
+          tool_id: integer
+          time_zone: string
+          alert_default_type: integer
+          condition_size: integer
+          condition_outside_rth: integer
+          conditions:
+            - alertCondition

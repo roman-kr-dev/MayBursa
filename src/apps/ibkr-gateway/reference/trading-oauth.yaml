@@ -1,0 +1,60 @@
+section: Trading OAuth 1.0a
+description: 'The IB REST API reference documentation - Section: Trading OAuth 1.0a'
+baseUrl: https://localhost:5001
+note: All paths include /v1/api prefix (except /gw/* and /oauth2/* endpoints)
+endpoints:
+  - path: /v1/api/oauth/access_token
+    method: POST
+    summary: Request An Access Token For The IB Username That Has Granted Authorization To The Consumer.
+    parameters:
+      - name: Authorization
+        in: header
+        required: false
+        type: string
+    responses:
+      '200':
+        description: Success response with permanent OAuth access token
+        example:
+          is_paper: true
+          oauth_token: a1b2c3d4e5f6a7b8c9d0
+          oauth_token_secret: >-
+            coPZc+YOyFy7IdMg6is+etf9HASi3Um3SIhZvILcaifG6zhzZygYafYZx4XTFsrefRV/qrsy4sMAMwyPVp07VgkfQJPJkxYA7Sjhwz/Q76vuVN2YZNsRirNyL63Q3t+EHkjKA5HJEFY2PiIgqO4EWZ4etZUl3iZjCStiahhD+BNv7zgrlxS0bB4lL4vKw9AGcUiUnIQrqzTGJPj0/P2Zc3fMqCbXVWRcoYRcwUkk9ZYtMaIwPPVgvJ0c76rle5O5m4R4ZoFgrjfXpNiXC1F8MRS0fc7T6pgyyMvV+vI2C9XZbl7cNIEuCvtz3XYLNlUi+svyeZJh4RzjB824qH/fJQ==
+        structure:
+          is_true: boolean
+          oauth_token: string
+          oauth_token_secret: string
+  - path: /v1/api/oauth/live_session_token
+    method: POST
+    summary: Generate A Live Session Token Shared Secret And Gain Access To Web API.
+    parameters:
+      - name: Authorization
+        in: header
+        required: false
+        type: string
+    responses:
+      '200':
+        description: Success response with Diffie-Hellman challenge and Signature value
+        example:
+          diffie_hellman_response: >-
+            74d222b7c3c0916eb3c7e60ecec937cd4f531aab5ea5698ebd754feeb39a9d7fe04c2887b5e11d8a8e4176c2eee7ddd42016e57c7a98cfbb9a3282c5247f7d4a9b8f544a34fac4d6334065b55d6a2e73e390175cfb94e80281443e555030c576d1db409bf96870dab20581bc01cdf28489778f20c714e7ad39af60c476cf2207a119df3af82bbefcdad7749fa5b4ae6e93169ec14f66ff3220cf3156487ca33932284b0a09af14f05a75269ab243362ff4eabb2e2a57db0d7911ca549f24affa1f92f04908fd9a2349cefb0f9326aca65fc144847ab837fcbd1635b1aa84b4509198e349fad87c2caf6744cb94be2c5c1c7ef9f08c44e85ded45ebeefa248dc8
+          live_session_token_signature: 712549e22ba937ab10bc8d571bd3a9c20c43d7cb
+          live_session_token_expiration: 1714669716258
+        structure:
+          diffie_hellman_challenge: string
+          live_session_token_signature: string
+          live_session_token_expiration: integer
+  - path: /v1/api/oauth/request_token
+    method: POST
+    summary: Request A Temporary Token As A Third Party To Begin The OAuth 1.0a Authorization Workflow.
+    parameters:
+      - name: Authorization
+        in: header
+        required: false
+        type: string
+    responses:
+      '200':
+        description: Success response with temporary OAuth access token
+        example:
+          oauth_token: e0d75b4c5c1d2c0f2af7
+        structure:
+          oauth_token: string

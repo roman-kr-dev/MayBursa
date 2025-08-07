@@ -1,0 +1,206 @@
+section: Trading Scanner
+description: 'The IB REST API reference documentation - Section: Trading Scanner'
+baseUrl: https://localhost:5001
+note: All paths include /v1/api prefix (except /gw/* and /oauth2/* endpoints)
+endpoints:
+  - path: /v1/api/hmds/scanner/params
+    method: GET
+    summary: HMDS Scanner Parameters
+    description: Query the parameter list for the HMDS market scanner.
+    responses:
+      '200':
+        description: An array of objects detailing contract information.
+        example:
+          instrument_list:
+            - display_name: display_name
+              type: type
+              filters: []
+          scan_type_list:
+            - display_name: display_name
+              code: code
+              instruments: []
+          location_tree:
+            - display_name: display_name
+              type: type
+              locations:
+                - display_name: display_name
+                  locationCode: locationCode
+                  locations: []
+        schema: hmdsScannerParams
+        structure:
+          scan_type_list:
+            - item
+          instrument_list:
+            - item
+          location_tree:
+            - item
+  - path: /v1/api/hmds/scanner/run
+    method: POST
+    summary: HMDS Market Scanner
+    description: Request a market scanner from our HMDS service. Can return a maximum of 250 contracts.
+    requestBody:
+      required: true
+      contentType: application/json
+    responses:
+      '200':
+        description: An array of objects detailing contract information.
+        example:
+          total: 17616
+          size: 250
+          offset: 0
+          scanTime: 20240403-20:31:48
+          id: scanner20
+          position: v1:AAAAAQABG3gAAAAAAAAA+g==
+          Contracts:
+            Contract:
+              - inScanTime: 20240403-20:31:48
+                contractID: 403154854
+              - inScanTime: 20240403-20:31:48
+                contractID: 460655952
+        structure:
+          total: integer
+          size: integer
+          offset: integer
+          scanTime: string
+          id: string
+          position: string
+          warningText: string
+          Contracts:
+            Contract:
+              - item
+  - path: /v1/api/iserver/scanner/params
+    method: GET
+    summary: Iserver Scanner Parameters
+    description: Returns an xml file containing all available parameters to be sent for the Iserver scanner request.
+    responses:
+      '200':
+        description: An array of objects detailing contract information.
+        example:
+          scan_type_list:
+            - display_name: Top % Gainers
+              code: TOP_PERC_GAIN
+              instruments:
+                - STK
+                - ETF.EQ.US
+                - ETF.FI.US
+                - FUT.US
+                - IND.US
+                - STOCK.NA
+                - FUT.NA
+                - SSF.NA
+                - STOCK.EU
+                - FUT.EU
+                - IND.EU
+                - SSF.EU
+                - STOCK.ME
+                - STOCK.HK
+                - FUT.HK
+                - IND.HK
+                - SSF.HK
+          instrument_list:
+            - display_name: US Stocks
+              type: STK
+              filters:
+                - afterHoursChange
+                - afterHoursChangePerc
+                - avgOptVolume
+                - avgPriceTarget
+                - avgRating
+          filter_list:
+            - group: afterHoursChangeAbove
+              display_name: After-Hours Change Above
+              code: afterHoursChangeAbove
+              type: non-range
+            - group: stkTypes
+              display_name: Stock type
+              code: stkTypes
+              combo_values:
+                - default: true
+                  vendor: null
+          location_tree:
+            - display_name: US Stocks
+              type: STK
+              locations:
+                - display_name: Listed/NASDAQ
+                  type: STK.US.MAJOR
+                  locations: []
+                - display_name: OTCMarkets
+                  type: STK.US.MINOR
+                  locations: []
+            - display_name: US Futures
+              type: FUT.US
+              locations:
+                - display_name: CME
+                  type: FUT.CME
+                - display_name: CBOT
+                  type: FUT.CBOT
+                - display_name: NYMEX
+                  type: FUT.NYMEX
+        schema: iserverScannerParams
+        structure:
+          scan_type_list:
+            - display_name: string
+              code: string
+              instruments: ...
+          instrument_list:
+            - display_name: string
+              type: string
+              filters: ...
+          filter_list:
+            - group: string
+              display_name: string
+              code: string
+              type: string
+              combo_values: ...
+          location_tree:
+            - display_name: string
+              type: string
+              locations: ...
+  - path: /v1/api/iserver/scanner/run
+    method: POST
+    summary: Iserver Market Scanner
+    description: Searches for contracts according to the filters specified in /iserver/scanner/params endpoint.
+    requestBody:
+      required: true
+      contentType: application/json
+    responses:
+      '200':
+        description: An array of objects detailing contract information.
+        example:
+          contracts:
+            - server_id: '0'
+              column_name: Trades
+              symbol: TSLA
+              conidex: '76792991'
+              con_id: 76792991
+              available_chart_periods: '#R|1'
+              company_name: TESLA INC
+              scan_data: 221.521K
+              contract_description_1: TSLA
+              listing_exchange: NASDAQ.NMS
+              sec_type: STK
+            - server_id: '1'
+              symbol: SPY
+              conidex: '756733'
+              con_id: 756733
+              available_chart_periods: '#R|1'
+              company_name: SPDR S&P 500 ETF TRUST
+              scan_data: 123.661K
+              contract_description_1: SPY
+              listing_exchange: ARCA
+              sec_type: STK
+          scan_data_column_name: Trades
+        schema: iserverScannerRunResponse
+        structure:
+          contracts:
+            - server_id: string
+              column_name: string
+              symbol: string
+              conidex: string
+              con_id: integer
+              available_chart_periods: string
+              company_name: string
+              contract_description_1: string
+              listing_exchange: string
+              sec_type: string
+          scan_data_column_name: string

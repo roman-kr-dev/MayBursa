@@ -1,0 +1,403 @@
+section: Trading Orders
+description: 'The IB REST API reference documentation - Section: Trading Orders'
+baseUrl: https://localhost:5001
+note: All paths include /v1/api prefix (except /gw/* and /oauth2/* endpoints)
+endpoints:
+  - path: /v1/api/iserver/account/{accountId}/order/{orderId}
+    method: POST
+    summary: Modify An Existing, Unfilled Order.
+    parameters:
+      - name: accountId
+        in: path
+        required: true
+        type: string
+      - name: orderId
+        in: path
+        required: true
+        type: string
+    requestBody:
+      required: true
+      contentType: application/json
+    responses:
+      '200':
+        description: Status of submission
+        example:
+          - order_id: '1370093239'
+            order_status: PreSubmitted
+            encrypt_message: '1'
+  - path: /v1/api/iserver/account/{accountId}/order/{orderId}
+    method: DELETE
+    summary: Cancel An Existing, Unfilled Order.
+    parameters:
+      - name: accountId
+        in: path
+        required: true
+        type: string
+      - name: orderId
+        in: path
+        required: true
+        type: string
+    responses:
+      '200':
+        description: Status of submission
+        example:
+          - msg: Request was submitted
+            order_id: '1370093239'
+            order_status: PreSubmitted
+            encrypt_message: '1'
+  - path: /v1/api/iserver/account/{accountId}/orders
+    method: POST
+    summary: Submit A New Order(s) Ticket, Bracket, Or OCA Group.
+    parameters:
+      - name: accountId
+        in: path
+        required: true
+        type: string
+    requestBody:
+      required: true
+      contentType: application/json
+    responses:
+      '200':
+        description: Order submission response (success, error, reply is required or order reject)
+        example:
+          - order_id: '1370093239'
+            order_status: PreSubmitted
+            encrypt_message: '1'
+  - path: /v1/api/iserver/account/{accountId}/orders/whatif
+    method: POST
+    summary: >-
+      Preview The Projected Effects Of An Order Ticket Or Bracket Of Orders, Including Cost And Changes To Margin And
+      Account Equity.
+    parameters:
+      - name: accountId
+        in: path
+        required: true
+        type: string
+    requestBody:
+      required: true
+      contentType: application/json
+    responses:
+      '200':
+        description: Order Preview
+        example:
+          amount:
+            amount: 1,977.60 USD (10 Shares)
+            commission: 1 USD
+            total: 1,978.60 USD
+          equity:
+            current: 123,456
+            change: '-1'
+            after: 123,455
+          initial:
+            current: '1000'
+            change: '652'
+            after: '1652'
+          maintenance:
+            current: '900'
+            change: 590""
+            after: '1490'
+          position:
+            current: '20'
+            change: '10'
+            after: '30'
+          warn: |-
+            21/You are trying to submit an order without having market data for this instrument. 
+            IB strongly recommends against this kind of blind trading which may result in 
+            erroreous or unexpected trades.
+          error: null
+        schema: orderPreview
+        structure:
+          amount:
+            amount: string
+            commission: string
+            total: string
+          equity:
+            current: string
+            change: string
+            after: string
+          initial:
+            current: string
+            change: string
+            after: string
+          maintenance:
+            current: string
+            change: string
+            after: string
+          position:
+            current: string
+            change: string
+            after: string
+          warn: string
+          error: string
+  - path: /v1/api/iserver/account/order/status/{orderId}
+    method: GET
+    summary: Retrieve The Status Of A Single Order.
+    parameters:
+      - name: orderId
+        in: path
+        required: true
+        type: string
+    responses:
+      '200':
+        description: order status
+        example:
+          sub_type: null
+          request_id: '209'
+          server_id: '0'
+          order_id: 1799796559
+          conidex: '265598'
+          conid: 265598
+          symbol: AAPL
+          side: S
+          contract_description_1: AAPL
+          listing_exchange: NASDAQ.NMS
+          option_acct: c
+          company_name: APPLE INC
+          size: '0.0'
+          total_size: '5.0'
+          currency: USD
+          account: U1234567
+          order_type: MARKET
+          cum_fill: '5.0'
+          order_status: Filled
+          order_ccp_status: '2'
+          order_status_description: Order Filled
+          tif: DAY
+          fg_color: '#FFFFFF'
+          bg_color: '#000000'
+          order_not_editable: true
+          editable_fields: ''
+          cannot_cancel_order: true
+          deactivate_order: false
+          sec_type: STK
+          available_chart_periods: '#R|1'
+          order_description: Sold 5 Market, Day
+          order_description_with_contract: Sold 5 AAPL Market, Day
+          alert_active: 1
+          child_order_type: '0'
+          order_clearing_account: U1234567
+          size_and_fills: '5'
+          exit_strategy_display_price: '193.12'
+          exit_strategy_chart_description: Sold 5 @ 192.26
+          average_price: '192.26'
+          exit_strategy_tool_availability: '1'
+          allowed_duplicate_opposite: true
+          order_time: '231211180049'
+  - path: /v1/api/iserver/account/orders
+    method: GET
+    summary: Retrieves Open Orders And Filled Or Cancelled Orders Submitted During The Current Brokerage Session.
+    parameters:
+      - name: filters
+        in: query
+        required: false
+        type: string
+      - name: force
+        in: query
+        required: false
+        type: boolean
+      - name: accountId
+        in: query
+        required: false
+        type: string
+    responses:
+      '200':
+        description: Orders for a specific account
+        example:
+          orders:
+            - acct: U1234567
+              exchange: IDEALPRO
+              conidex: 15016138@IDEALPRO
+              conid: 15016138
+              account: DU4355398
+              orderId: 1370093238
+              cashCcy: CAD
+              sizeAndFills: 2.4K CAD
+              orderDesc: Bought 2806.46 Limit 0.90000, Day
+              description1: AUD.CAD
+              ticker: AUD
+              secType: CASH
+              listingExchange: FXCONV
+              remainingQuantity: 0
+              filledQuantity: 2499.99
+              totalSize: 2806.46
+              totalCashSize: 2500
+              companyName: Australian dollar
+              status: Filled
+              order_ccp_status: Filled
+              origOrderType: LIMIT
+              supportsTaxOpt: '0'
+              lastExecutionTime: '240425160326'
+              orderType: Limit
+              bgColor: '#FFFFFF'
+              fgColor: '#000000'
+              isEventTrading: '0'
+              price: '0.90000'
+              timeInForce: CLOSE
+              lastExecutionTime_r: 1714061006000
+              side: BUY
+              avgPrice: '0.8908'
+          snapshot: true
+        schema: liveOrdersResponse
+        structure:
+          orders:
+            - acct: string
+              exchange: string
+              conidex: string
+              conid: string
+              account: string
+              orderId: integer
+              cashCcy: string
+              sizeAndFills: string
+              orderDesc: string
+              description1: string
+              ticker: string
+              secType: string
+              listingExchange: string
+              remainingQuantity: string
+              filledQuantity: string
+              totalSize: string
+              totalCashSize: string
+              companyName: string
+              status: string
+              order_ccp_status: string
+              origOrderType: string
+              supportsTaxOpt: string
+              lastExecutionTime: string
+              orderType: string
+              bgColor: string
+              fgColor: string
+              isEventTrading: string
+              price: string
+              timeInForce: string
+              lastExecutionTime_r: string
+              side: string
+              avgPrice: string
+          snapshot: boolean
+  - path: /v1/api/iserver/account/trades
+    method: GET
+    summary: Retrieve A List Of Trades.
+    description: Retrieve a list of trades, up to a maximum of 7 days prior.
+    parameters:
+      - name: days
+        in: query
+        required: false
+        type: string
+      - name: accountId
+        in: query
+        required: false
+        type: string
+    responses:
+      '200':
+        description: trades
+        example:
+          - execution_id: 0000e0d5.6576fd38.01.01
+            symbol: AAPL
+            supports_tax_opt: '1'
+            side: S
+            order_description: Sold 5 @ 192.26 on ISLAND
+            trade_time: 20231211-18:00:49
+            trade_time_r: 1702317649000
+            size: 5
+            price: '192.26'
+            order_ref: Order123
+            submitter: user1234
+            exchange: ISLAND
+            commission: '1.01'
+            net_amount: 961.3
+            account: U1234567
+            accountCode: U1234567
+            account_allocation_name: U1234567
+            company_name: APPLE INC
+            contract_description_1: AAPL
+            sec_type: STK
+            listing_exchange: NASDAQ.NMS
+            conid: 265598
+            conidEx: '265598'
+            clearing_id: IB
+            clearing_name: IB
+            liquidation_trade: '0'
+            is_event_trading: '0'
+        schema: tradesResponse
+        structure:
+          - execution_id: string
+            symbol: string
+            supports_tax_opt: string
+            side: string
+            order_description: string
+            trade_time: string
+            trade_time_r: integer
+            size: number
+            price: string
+            order_ref: string
+            submitter: string
+            exchange: string
+            commission: string
+            net_amount: number
+            account: string
+            accountCode: string
+            account_allocation_name: string
+            company_name: string
+            contract_description_1: string
+            sec_type: string
+            listing_exchange: string
+            conid: string
+            conidEx: string
+            clearing_id: string
+            clearing_name: string
+            liquidation_trade: string
+            is_event_trading: string
+  - path: /v1/api/iserver/notification
+    method: POST
+    summary: Respond To A Server Prompt.
+    description: Respond to a server prompt received via ntf webscoket message.
+    requestBody:
+      required: true
+      contentType: application/json
+    responses:
+      '200':
+        description: Status of submitted prompt
+        structure: string
+  - path: /v1/api/iserver/questions/suppress
+    method: POST
+    summary: Suppress The Specified Order Reply Messages.
+    description: Suppress the specified order reply messages for the duration of the brokerage session.
+    requestBody:
+      required: true
+      contentType: application/json
+    responses:
+      '200':
+        description: Request's status
+        example:
+          status: submitted
+        structure:
+          status: string
+  - path: /v1/api/iserver/questions/suppress/reset
+    method: POST
+    summary: Removes Suppression Of All Order Reply Messages.
+    description: Removes suppression of all order reply messages that were previously suppressed in the current brokerage session.
+    responses:
+      '200':
+        description: Request's status
+        example:
+          status: submitted
+        structure:
+          status: string
+  - path: /v1/api/iserver/reply/{replyId}
+    method: POST
+    summary: Confirm An Order Reply Message.
+    description: Confirm an order reply message and continue with submission of order ticket.
+    parameters:
+      - name: replyId
+        in: path
+        required: true
+        type: string
+    requestBody:
+      required: true
+      contentType: application/json
+    responses:
+      '200':
+        description: Status of reply
+        example:
+          - order_id: '1370093239'
+            order_status: PreSubmitted
+            encrypt_message: '1'

@@ -1,0 +1,25 @@
+section: Trading Websocket
+description: 'The IB REST API reference documentation - Section: Trading Websocket'
+baseUrl: https://localhost:5001
+note: All paths include /v1/api prefix (except /gw/* and /oauth2/* endpoints)
+endpoints:
+  - path: /v1/api/ws
+    method: GET
+    summary: Open Websocket.
+    parameters:
+      - name: Connection
+        in: header
+        required: true
+        type: string
+      - name: Upgrade
+        in: header
+        required: true
+        type: string
+      - name: api
+        in: cookie
+        required: true
+        type: string
+      - name: oauth_token
+        in: query
+        required: true
+        type: string
