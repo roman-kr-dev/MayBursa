@@ -22,12 +22,8 @@ async function fetchAllStatuses() {
     if (isProcessing) return; // Skip if an operation is in progress
     
     try {
-        await Promise.all([
-            fetchProcessStatus(),
-            fetchLoginStatus(),
-            fetchMonitorStatus(),
-            fetchTradingMode()
-        ]);
+        // Fetch consolidated status from single endpoint
+        await fetchProcessStatus();
         updateRefreshTime();
     } catch (error) {
         logActivity('Error fetching status: ' + error.message, 'error');
@@ -39,7 +35,24 @@ async function fetchProcessStatus() {
         const response = await fetch('/api/status');
         const data = await response.json();
         
+        // Update all statuses from the consolidated response
         updateProcessStatus(data);
+        
+        // Update auth status from the same response
+        if (data.authentication) {
+            updateAuthStatus({
+                success: true,
+                authenticated: data.authentication.authenticated,
+                connected: data.connection ? data.connection.isApiAvailable : data.authentication.connected,
+                competing: data.authentication.competing,
+                tradingMode: data.mode
+            });
+        }
+        
+        // Update mode from the same response
+        if (data.mode) {
+            updateModeIndicator({ mode: data.mode, warning: data.warning });
+        }
     } catch (error) {
         updateProcessStatus({ success: false, error: error.message });
     }
@@ -101,7 +114,7 @@ function updateProcessStatus(data) {
         }
         
         if (data.connection && data.connection.latency) {
-            latency.textContent = data.connection.latency;
+            latency.textContent = `${data.connection.latency}ms`;
         }
         
         // Update mode if included in status

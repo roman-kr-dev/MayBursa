@@ -111,6 +111,7 @@ export async function createServer(): Promise<Express> {
   });
 
   // Initialize gateway on server start
+  // This will always kill any existing processes first to ensure clean state
   initializeGateway().catch(error => {
     logger.error('Gateway initialization failed:', error);
     // Continue running the server even if gateway init fails
