@@ -2,6 +2,7 @@ import { connectionStatus } from './connectionStatus';
 import { authStatus } from './authStatus';
 import { loginAutomation } from './loginAutomation';
 import { clientPortalManager } from './clientPortalManager';
+import { gatewayStateManager } from './gatewayStateManager';
 import { logger } from '@monorepo/shared-utils';
 import { config } from '../config/environment';
 
@@ -52,6 +53,16 @@ export class GatewayMonitorService {
     this.authHasGivenUp = false;
     this.autoRestartEnabled = config.IBKR_AUTO_RESTART !== false;
 
+    // Update state manager
+    gatewayStateManager.updateMonitorState({
+      isMonitoring: true,
+      authRetryCount: this.authRetryCount,
+      authMaxRetries: this.authMaxRetries,
+      authHasGivenUp: this.authHasGivenUp,
+      restartAttempts: this.restartAttempts,
+      totalRestarts: this.totalRestarts
+    });
+
     // Initial check
     await this.performMonitoringCheck();
 
@@ -67,6 +78,12 @@ export class GatewayMonitorService {
     if (this.monitorInterval) {
       clearInterval(this.monitorInterval);
       this.monitorInterval = null;
+      
+      // Update state manager
+      gatewayStateManager.updateMonitorState({
+        isMonitoring: false
+      });
+      
       logger.info('Gateway monitor stopped');
     }
   }
@@ -76,8 +93,26 @@ export class GatewayMonitorService {
       // Check process health first
       await this.checkProcessHealth();
       
+      // Check connection and update state
+      const connectionOk = await connectionStatus.checkConnection();
+      gatewayStateManager.updateConnectionState({
+        isConnected: connectionOk
+      });
+      
+      if (connectionOk) {
+        // Check API availability
+        const apiAvailable = await connectionStatus.checkApiAvailability();
+        gatewayStateManager.updateConnectionState({
+          isApiAvailable: apiAvailable,
+          latency: connectionStatus.getLastStatus()?.latency
+        });
+      }
+      
       // Then check authentication
       await this.checkAndReauthenticate();
+      
+      // Mark full update complete
+      gatewayStateManager.markFullUpdate();
     } catch (error) {
       logger.error('Error in gateway monitor:', error);
     }
@@ -86,6 +121,18 @@ export class GatewayMonitorService {
   private async checkProcessHealth(): Promise<void> {
     try {
       const isRunning = clientPortalManager.isRunning();
+      const pid = clientPortalManager.getProcessId();
+      
+      // Update process state
+      gatewayStateManager.updateProcessState({
+        isRunning,
+        pid
+      });
+      
+      // Update monitor state
+      gatewayStateManager.updateMonitorState({
+        processRunning: isRunning
+      });
       
       if (!isRunning) {
         logger.error('Gateway process crashed!');
@@ -118,6 +165,11 @@ export class GatewayMonitorService {
     this.restartAttempts++;
     this.lastRestartAttempt = new Date();
     
+    // Update monitor state
+    gatewayStateManager.updateMonitorState({
+      restartAttempts: this.restartAttempts
+    });
+    
     logger.info(`Attempting gateway restart (attempt #${this.restartAttempts})...`);
     
     try {
@@ -133,6 +185,12 @@ export class GatewayMonitorService {
         this.totalRestarts++;
         logger.info(`Gateway restarted successfully after ${this.restartAttempts} attempt(s)`);
         this.restartAttempts = 0; // Reset counter on success
+        
+        // Update monitor state
+        gatewayStateManager.updateMonitorState({
+          restartAttempts: 0,
+          totalRestarts: this.totalRestarts
+        });
         
         // Trigger authentication if auto-login is enabled
         if (config.IBKR_AUTO_LOGIN) {
@@ -170,6 +228,17 @@ export class GatewayMonitorService {
 
       // Check authentication status
       const isAuthenticated = await authStatus.isSessionValid();
+      const sessionInfo = authStatus.getLastSessionInfo();
+      
+      // Update authentication state
+      if (sessionInfo) {
+        gatewayStateManager.updateAuthenticationState({
+          isValid: sessionInfo.isValid,
+          authenticated: sessionInfo.authenticated,
+          connected: sessionInfo.connected,
+          competing: sessionInfo.competing
+        });
+      }
       
       if (isAuthenticated) {
         logger.debug('Session is valid');
@@ -178,6 +247,12 @@ export class GatewayMonitorService {
           this.authRetryCount = 0;
           this.authHasGivenUp = false;
           logger.info('Authentication restored, reset retry count');
+          
+          // Update monitor state
+          gatewayStateManager.updateMonitorState({
+            authRetryCount: 0,
+            authHasGivenUp: false
+          });
         }
         return;
       }
@@ -197,6 +272,11 @@ export class GatewayMonitorService {
       if (this.authRetryCount >= this.authMaxRetries) {
         this.authHasGivenUp = true;
         logger.error(`Given up authentication after ${this.authMaxRetries} attempts`);
+        
+        // Update monitor state
+        gatewayStateManager.updateMonitorState({
+          authHasGivenUp: true
+        });
         return;
       }
 
@@ -222,6 +302,11 @@ export class GatewayMonitorService {
     this.authRetryCount++;
     this.lastAuthAttempt = new Date();
     
+    // Update monitor state
+    gatewayStateManager.updateMonitorState({
+      authRetryCount: this.authRetryCount
+    });
+    
     logger.info(`Attempting re-authentication (attempt ${this.authRetryCount}/${this.authMaxRetries})...`);
     
     try {
@@ -232,6 +317,13 @@ export class GatewayMonitorService {
         logger.info('Re-authentication via API successful');
         this.authRetryCount = 0;
         this.authHasGivenUp = false;
+        
+        // Update monitor state
+        gatewayStateManager.updateMonitorState({
+          authRetryCount: 0,
+          authHasGivenUp: false
+        });
+        
         return;
       }
 
@@ -243,6 +335,12 @@ export class GatewayMonitorService {
         logger.info('Full authentication successful');
         this.authRetryCount = 0;
         this.authHasGivenUp = false;
+        
+        // Update monitor state
+        gatewayStateManager.updateMonitorState({
+          authRetryCount: 0,
+          authHasGivenUp: false
+        });
       } else {
         logger.error(`Authentication failed (attempt ${this.authRetryCount}/${this.authMaxRetries})`);
         

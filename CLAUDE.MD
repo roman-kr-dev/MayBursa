@@ -12,6 +12,10 @@ This document imports configuration and best practices for cloud-based Node.js a
 
 This guide combines best practices for building cloud-native applications using Node.js for backend services and React for frontend interfaces. The README provides essential project context including the monorepo structure, available applications (OptionsSniper and Intuitions), and development workflows. Refer to the imported documents above for specific implementation details and conventions for each technology stack.
 
+## IBKR Gateway Development
+When working on the IBKR Gateway application (`src/apps/ibkr-gateway/`), ALWAYS reference:
+- `src/apps/ibkr-gateway/CLAUDE.md` for gateway-specific rules and guidelines
+
 ## External Library Management with Context7 MCP
 
 ### IMPORTANT: Always Verify External Library Versions and Documentation
