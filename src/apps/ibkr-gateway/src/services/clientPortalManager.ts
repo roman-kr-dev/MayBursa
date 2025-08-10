@@ -2,6 +2,7 @@ import { spawn, ChildProcess, execSync } from 'child_process';
 import path from 'path';
 import fs from 'fs';
 import { config } from '../config/environment';
+import { gatewayStateManager } from './gatewayStateManager';
 import { logger } from '@monorepo/shared-utils';
 
 export class ClientPortalManager {
@@ -102,6 +103,12 @@ export class ClientPortalManager {
 
     // Save PID for later reference
     fs.writeFileSync(this.pidFilePath, this.gatewayProcess.pid.toString());
+    
+    // Update state manager
+    gatewayStateManager.updateProcessState({
+      isRunning: true,
+      pid: this.gatewayProcess.pid
+    });
 
     // Handle stdout
     this.gatewayProcess.stdout?.on('data', (data) => {
@@ -122,6 +129,12 @@ export class ClientPortalManager {
       if (fs.existsSync(this.pidFilePath)) {
         fs.unlinkSync(this.pidFilePath);
       }
+      
+      // Update state manager
+      gatewayStateManager.updateProcessState({
+        isRunning: false,
+        pid: null
+      });
     });
 
     // Unref the process so our Node app can exit independently
@@ -153,6 +166,13 @@ export class ClientPortalManager {
     await this.killExistingGateway();
 
     this.gatewayProcess = null;
+    
+    // Update state manager
+    gatewayStateManager.updateProcessState({
+      isRunning: false,
+      pid: null
+    });
+    
     logger.info('Gateway stopped');
   }
 

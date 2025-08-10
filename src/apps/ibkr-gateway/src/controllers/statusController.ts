@@ -1,7 +1,5 @@
 import { Request, Response } from 'express';
-import { clientPortalManager } from '../services/clientPortalManager';
-import { connectionStatus } from '../services/connectionStatus';
-import { authStatus } from '../services/authStatus';
+import { gatewayStateManager } from '../services/gatewayStateManager';
 import { getTradingMode } from '../config/environment';
 import { logger } from '@monorepo/shared-utils';
 import { getErrorMessage } from '../utils/errorUtils';
@@ -16,34 +14,10 @@ export const statusController = {
 
   async getGatewayStatus(_req: Request, res: Response): Promise<void> {
     try {
-      const isRunning = clientPortalManager.isRunning();
-      const pid = clientPortalManager.getProcessId();
-      const connectionInfo = await connectionStatus.getGatewayStatus();
-      const authInfo = authStatus.getLastSessionInfo();
-      const tradingMode = getTradingMode();
+      // Get cached state from state manager (no API calls)
+      const status = gatewayStateManager.getFormattedStatus();
       
-      res.json({
-        success: true,
-        mode: tradingMode,
-        warning: tradingMode === 'production' ? 'Running in PRODUCTION mode' : null,
-        process: {
-          isRunning,
-          pid
-        },
-        connection: {
-          isConnected: connectionInfo.isConnected,
-          isApiAvailable: connectionInfo.isApiAvailable,
-          latency: connectionInfo.latency,
-          lastChecked: connectionInfo.lastChecked
-        },
-        authentication: authInfo ? {
-          isValid: authInfo.isValid,
-          authenticated: authInfo.authenticated,
-          connected: authInfo.connected,
-          competing: authInfo.competing,
-          lastChecked: authInfo.lastChecked
-        } : null
-      });
+      res.json(status);
     } catch (error) {
       logger.error('Failed to get gateway status:', getErrorMessage(error));
       res.status(500).json({

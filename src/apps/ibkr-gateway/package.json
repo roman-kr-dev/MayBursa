@@ -8,7 +8,8 @@
     "build": "tsc",
     "clean": "rm -rf dist",
     "typecheck": "tsc --noEmit",
-    "lint": "eslint src --ext .ts,.tsx"
+    "lint": "eslint src --ext .ts,.tsx",
+    "test:puppeteer": "ts-node-dev src/test-puppeteer.ts"
   },
   "keywords": [
     "ibkr",
