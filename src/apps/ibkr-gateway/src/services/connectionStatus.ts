@@ -1,7 +1,7 @@
 import axios from 'axios';
 import https from 'https';
 import { config } from '../config/environment';
-import { authClient } from './authClient';
+import { checkAuthStatus } from '@monorepo/ibkr-client';
 import { logger, HttpApiError } from '@monorepo/shared-utils';
 
 interface ConnectionStatus {
@@ -62,8 +62,8 @@ export class ConnectionStatusService {
     const startTime = Date.now();
     
     try {
-      // Use apiClient to check auth status - this validates API is available
-      await authClient.checkAuthStatus();
+      // Use checkAuthStatus to validate API is available
+      await checkAuthStatus();
       
       const latency = Date.now() - startTime;
 
