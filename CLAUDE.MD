@@ -12,9 +12,34 @@ This document imports configuration and best practices for cloud-based Node.js a
 
 This guide combines best practices for building cloud-native applications using Node.js for backend services and React for frontend interfaces. The README provides essential project context including the monorepo structure, available applications (OptionsSniper and Intuitions), and development workflows. Refer to the imported documents above for specific implementation details and conventions for each technology stack.
 
+## Git Workflow Rules
+
+### CRITICAL: Never Push Directly to Main Branch
+- **ALWAYS** create a feature branch for any changes
+- **ALWAYS** push to the feature branch and create a pull request
+- **NEVER** push directly to the main branch
+- **NEVER** commit directly on the main branch
+
+## Documentation Maintenance Rules
+
+### CRITICAL: Keep CLAUDE.md Files Updated
+When making changes to any app or package that has a CLAUDE.md file, you MUST update the documentation to reflect:
+
+- **New Functions/Methods**: Document any new functions, their purpose, and usage examples
+- **File Structure Changes**: Update the project structure diagram if files are added, moved, or deleted
+- **Architecture Changes**: Document any changes to the overall architecture or design patterns
+- **Configuration Changes**: Update environment variables or configuration options
+- **API Changes**: Document new endpoints, modified parameters, or breaking changes
+- **Dependencies**: Note any new dependencies or version updates that affect usage
+- **Commit Documentation**: Include documentation updates in the same commit as code changes
+
 ## IBKR Gateway Development
 When working on the IBKR Gateway application (`src/apps/ibkr-gateway/`), ALWAYS reference:
 - `src/apps/ibkr-gateway/CLAUDE.md` for gateway-specific rules and guidelines
+
+## IBKR Client Package Development
+When working on the IBKR Client package (`src/packages/ibkr-client/`), ALWAYS reference:
+- `src/packages/ibkr-client/CLAUDE.md` for package-specific architecture and guidelines
 
 ## External Library Management with Context7 MCP
 

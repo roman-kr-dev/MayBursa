@@ -22,6 +22,7 @@ Idea and prediction management system with:
 - **@monorepo/shared-types**: Common type definitions
 - **@monorepo/shared-utils**: Utility functions and helpers
 - **@monorepo/ui-components**: Reusable React components
+- **@monorepo/ibkr-client**: Interactive Brokers API client library with authentication functions
 
 ## 🏗️ Project Structure
 
@@ -33,15 +34,24 @@ Idea and prediction management system with:
 │   │   │   ├── api/       # Express API server
 │   │   │   ├── live/      # WebSocket server
 │   │   │   └── ui/        # React UI
-│   │   └── intuitions/
-│   │       ├── api/       # Express API server
-│   │       └── ui/        # React UI
+│   │   ├── intuitions/
+│   │   │   ├── api/       # Express API server
+│   │   │   └── ui/        # React UI
+│   │   └── ibkr-gateway/  # IBKR Gateway management service
 │   └── packages/
 │       ├── typescript-config/
 │       ├── eslint-config/
 │       ├── shared-types/
 │       ├── shared-utils/
-│       └── ui-components/
+│       ├── ui-components/
+│       └── ibkr-client/   # IBKR API client library
+│           └── src/
+│               ├── auth/  # Authentication functions
+│               │   ├── types.ts
+│               │   ├── functions.ts
+│               │   └── index.ts
+│               ├── IBKRClient.ts
+│               └── index.ts
 ├── package.json
 ├── pnpm-workspace.yaml
 ├── turbo.json
