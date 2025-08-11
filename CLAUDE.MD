@@ -1,23 +1,5 @@
 # Cloud Development Guide
 
-## 🛑 CRITICAL RULES - READ FIRST
-
-### MANDATORY: External Library Verification
-**STOP AND CHECK** - Before making ANY changes to external library usage:
-1. **ALWAYS verify with Context7 MCP** before modifying external library code, including:
-   - Property names and method calls
-   - Configuration options and parameters
-   - Even "obvious" or "simple" fixes
-   - TypeScript error corrections involving library APIs
-2. This applies to ALL libraries including but not limited to:
-   - Puppeteer launch options and methods
-   - Axios configurations
-   - Express middleware
-   - React hooks and components
-   - Any third-party library APIs
-
-**Never assume** - Even if you think you know the correct API, always verify first.
-
 This document imports configuration and best practices for cloud-based Node.js and React development.
 
 ## Imports
@@ -36,25 +18,14 @@ When working on the IBKR Gateway application (`src/apps/ibkr-gateway/`), ALWAYS 
 
 ## External Library Management with Context7 MCP
 
-### ⚠️ REMINDER: Verification is Required for ALL External Library Changes
+### IMPORTANT: Always Verify External Library Versions and Documentation
 
-This includes ANY modification to how external libraries are used:
-- **Property name changes** (e.g., fixing TypeScript errors)
-- **Method parameters** (even if they seem obvious)
-- **Configuration options** (launch options, initialization parameters)
-- **Version updates** (major, minor, or patch)
-- **New library additions or removals**
+Before making ANY changes involving external libraries or dependencies (including updates, modifications, additions, or removals), you MUST use the Context7 MCP server to:
 
-**Process:**
-1. Encounter an issue with external library usage
-2. **STOP** - Do not make assumptions
-3. Use Context7 MCP to verify the correct API
-4. Only then make the change based on official documentation
+1. Verify the latest available version of the library.
+2. Review and confirm current documentation, usage patterns, and best practices.
 
-**Common Pitfalls to Avoid:**
-- Assuming property names based on similar APIs
-- "Quick fixing" TypeScript errors without verification
-- Relying on training knowledge instead of current documentation
+This applies every time external library code is altered to ensure compatibility, optimal usage, and adherence to updated standards.
 
 ## Logging Standards
 
