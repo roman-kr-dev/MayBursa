@@ -20,6 +20,9 @@ importers:
 
   src/apps/ibkr-gateway:
     dependencies:
+      '@monorepo/ibkr-client':
+        specifier: workspace:*
+        version: link:../../packages/ibkr-client
       '@monorepo/shared-utils':
         specifier: workspace:*
         version: link:../../packages/shared-utils
@@ -42,9 +45,6 @@ importers:
       '@types/express':
         specifier: ^4.17.21
         version: 4.17.23
-      '@types/jest':
-        specifier: ^29.5.12
-        version: 29.5.14
       '@types/node':
         specifier: ^20.10.0
         version: 20.19.9
@@ -57,12 +57,6 @@ importers:
       eslint:
         specifier: ^8.54.0
         version: 8.57.1
-      jest:
-        specifier: ^29.7.0
-        version: 29.7.0(@types/node@20.19.9)(ts-node@10.9.2(@types/node@20.19.9)(typescript@5.8.3))
-      ts-jest:
-        specifier: ^29.1.2
-        version: 29.4.1(@babel/core@7.28.0)(@jest/transform@29.7.0)(@jest/types@29.6.3)(babel-jest@29.7.0(@babel/core@7.28.0))(jest-util@29.7.0)(jest@29.7.0(@types/node@20.19.9)(ts-node@10.9.2(@types/node@20.19.9)(typescript@5.8.3)))(typescript@5.8.3)
       ts-node-dev:
         specifier: ^2.0.0
         version: 2.0.0(@types/node@20.19.9)(typescript@5.8.3)
@@ -270,6 +264,31 @@ importers:
         specifier: ^5.0.0
         version: 5.8.3
 
+  src/packages/ibkr-client:
+    dependencies:
+      '@monorepo/shared-utils':
+        specifier: workspace:*
+        version: link:../shared-utils
+      axios:
+        specifier: ^1.6.2
+        version: 1.11.0
+      https:
+        specifier: ^1.0.0
+        version: 1.0.0
+    devDependencies:
+      '@monorepo/typescript-config':
+        specifier: workspace:*
+        version: link:../typescript-config
+      '@types/node':
+        specifier: ^18.18.0
+        version: 18.19.122
+      tsup:
+        specifier: ^8.0.1
+        version: 8.5.0(jiti@1.21.7)(postcss@8.5.6)(tsx@4.20.3)(typescript@5.8.3)(yaml@2.8.0)
+      typescript:
+        specifier: ^5.3.3
+        version: 5.8.3
+
   src/packages/shared-types:
     devDependencies:
       '@monorepo/typescript-config':
@@ -287,6 +306,9 @@ importers:
       '@monorepo/shared-types':
         specifier: workspace:*
         version: link:../shared-types
+      axios:
+        specifier: ^1.6.2
+        version: 1.11.0
       winston:
         specifier: ^3.11.0
         version: 3.17.0
@@ -1180,6 +1202,9 @@ packages:
 
   '@types/morgan@1.9.10':
     resolution: {integrity: sha512-sS4A1zheMvsADRVfT0lYbJ4S9lmsey8Zo2F7cnbYjWHP67Q0AwMYuuzLlkIM2N8gAbb9cubhIVFwcIN2XyYCkA==}
+
+  '@types/node@18.19.122':
+    resolution: {integrity: sha512-yzegtT82dwTNEe/9y+CM8cgb42WrUfMMCg2QqSddzO1J6uPmBD7qKCZ7dOHZP2Yrpm/kb0eqdNMn2MUyEiqBmA==}
 
   '@types/node@20.19.9':
     resolution: {integrity: sha512-cuVNgarYWZqxRJDQHEB58GEONhOK79QVR/qYx4S7kcUObQvUwvFnYxJuuHUKm2aieN9X3yZB4LZsuYNU1Qphsw==}
@@ -2365,6 +2390,9 @@ packages:
   https-proxy-agent@7.0.6:
     resolution: {integrity: sha512-vK9P5/iUfdl95AI+JVyUuIcVtd4ofvtrOr3HNtM2yxC9bnMbEdp3x01OhQNnjb8IJYi38VlTE3mBXwcfvywuSw==}
     engines: {node: '>= 14'}
+
+  https@1.0.0:
+    resolution: {integrity: sha512-4EC57ddXrkaF0x83Oj8sM6SLQHAWXw90Skqu2M4AEWENZ3F02dFJE/GARA8igO79tcgYqGrD7ae4f5L3um2lgg==}
 
   human-signals@2.1.0:
     resolution: {integrity: sha512-B4FFZ6q/T2jhhksgkbEW3HBvWIfDW85snkQgawt07S7J5QXTk6BkNV+0yAeZrM5QpMAdYlocGoljn0sJ/WQkFw==}
@@ -3873,6 +3901,9 @@ packages:
   unbzip2-stream@1.4.3:
     resolution: {integrity: sha512-mlExGW4w71ebDJviH16lQLtZS32VKqsSfk80GCfUlwT/4/hNRFsoscrF/c++9xinkMzECL1uL9DDwXqFWkruPg==}
 
+  undici-types@5.26.5:
+    resolution: {integrity: sha512-JlCMO+ehdEIKqlFxk6IfVoAUVmgz7cU7zD/h9XZ0qzeosSHmUJVOzSQvvYSYWXkFXC+IfLKSIffhv0sVZup6pA==}
+
   undici-types@6.21.0:
     resolution: {integrity: sha512-iwDZqg0QAGrg9Rav5H4n0M64c3mkR59cJ6wQp+7C4nI0gsmExaedaYLNO44eT4AtBBwjbTiGPMlt2Md0T9H9JQ==}
 
@@ -4865,6 +4896,10 @@ snapshots:
   '@types/morgan@1.9.10':
     dependencies:
       '@types/node': 20.19.9
+
+  '@types/node@18.19.122':
+    dependencies:
+      undici-types: 5.26.5
 
   '@types/node@20.19.9':
     dependencies:
@@ -6369,6 +6404,8 @@ snapshots:
       debug: 4.4.1
     transitivePeerDependencies:
       - supports-color
+
+  https@1.0.0: {}
 
   human-signals@2.1.0: {}
 
@@ -8155,6 +8192,8 @@ snapshots:
     dependencies:
       buffer: 5.7.1
       through: 2.3.8
+
+  undici-types@5.26.5: {}
 
   undici-types@6.21.0: {}
 
