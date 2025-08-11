@@ -1,8 +1,8 @@
 import axios from 'axios';
 import https from 'https';
 import { config } from '../config/environment';
-import { apiClient, IBKRAPIError } from './apiClient';
-import { logger } from '@monorepo/shared-utils';
+import { authClient } from './authClient';
+import { logger, HttpApiError } from '@monorepo/shared-utils';
 
 interface ConnectionStatus {
   isConnected: boolean;
@@ -63,7 +63,7 @@ export class ConnectionStatusService {
     
     try {
       // Use apiClient to check auth status - this validates API is available
-      await apiClient.checkAuthStatus();
+      await authClient.checkAuthStatus();
       
       const latency = Date.now() - startTime;
 
@@ -79,7 +79,7 @@ export class ConnectionStatusService {
       }
 
       // API might not be available yet, which is expected during startup
-      if (error instanceof IBKRAPIError) {
+      if (error instanceof HttpApiError) {
         logger.debug('API availability check failed:', error.message);
       } else {
         logger.debug('API availability check failed:', error);

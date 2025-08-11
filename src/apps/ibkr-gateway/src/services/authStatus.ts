@@ -1,6 +1,6 @@
-import { apiClient, AuthStatusResponse, IBKRAPIError } from './apiClient';
+import { authClient, AuthStatusResponse } from './authClient';
 import { getTradingMode, TradingMode } from '../config/environment';
-import { logger } from '@monorepo/shared-utils';
+import { logger, HttpApiError } from '@monorepo/shared-utils';
 
 interface SessionInfo {
   isValid: boolean;
@@ -25,7 +25,7 @@ export class AuthenticationStatusService {
 
   async checkAuthStatus(): Promise<AuthStatusResponse> {
     try {
-      const status = await apiClient.checkAuthStatus();
+      const status = await authClient.checkAuthStatus();
 
       // Update last session info
       this.lastSessionInfo = {
@@ -57,7 +57,7 @@ export class AuthenticationStatusService {
       };
 
       // Return a default status if error occurs
-      if (error instanceof IBKRAPIError) {
+      if (error instanceof HttpApiError) {
         return {
           authenticated: false,
           connected: false,
@@ -105,7 +105,7 @@ export class AuthenticationStatusService {
     try {
       logger.info('Attempting to reauthenticate...');
       
-      const response = await apiClient.reauthenticate();
+      const response = await authClient.reauthenticate();
       
       if (response.message) {
         logger.info('Reauthentication response:', response.message);
@@ -124,7 +124,7 @@ export class AuthenticationStatusService {
 
   async keepAlive(): Promise<void> {
     try {
-      await apiClient.tickle();
+      await authClient.tickle();
       logger.debug('Keep-alive sent');
     } catch (error) {
       logger.error('Keep-alive failed:', error);
@@ -133,7 +133,7 @@ export class AuthenticationStatusService {
 
   async logout(): Promise<void> {
     try {
-      const response = await apiClient.logout();
+      const response = await authClient.logout();
       
       if (response.status) {
         logger.info('Logged out successfully');

@@ -191,3 +191,6 @@ export {
   type TransportConfig,
   type LogFormat
 } from './logger';
+
+// HTTP Client exports
+export * from './http';
