@@ -1,12 +1,5 @@
-// Export all auth functions
-export {
-  checkAuthStatus,
-  tickle,
-  validateSSO,
-  reauthenticate,
-  logout,
-  initSSO
-} from './functions';
+// Export auth class
+export { IBKRAuth } from './functions';
 
 // Export all auth types
 export type {
