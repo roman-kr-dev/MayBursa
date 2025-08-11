@@ -20,6 +20,19 @@ This guide combines best practices for building cloud-native applications using 
 - **NEVER** push directly to the main branch
 - **NEVER** commit directly on the main branch
 
+## Documentation Maintenance Rules
+
+### CRITICAL: Keep CLAUDE.md Files Updated
+When making changes to any app or package that has a CLAUDE.md file, you MUST update the documentation to reflect:
+
+- **New Functions/Methods**: Document any new functions, their purpose, and usage examples
+- **File Structure Changes**: Update the project structure diagram if files are added, moved, or deleted
+- **Architecture Changes**: Document any changes to the overall architecture or design patterns
+- **Configuration Changes**: Update environment variables or configuration options
+- **API Changes**: Document new endpoints, modified parameters, or breaking changes
+- **Dependencies**: Note any new dependencies or version updates that affect usage
+- **Commit Documentation**: Include documentation updates in the same commit as code changes
+
 ## IBKR Gateway Development
 When working on the IBKR Gateway application (`src/apps/ibkr-gateway/`), ALWAYS reference:
 - `src/apps/ibkr-gateway/CLAUDE.md` for gateway-specific rules and guidelines
