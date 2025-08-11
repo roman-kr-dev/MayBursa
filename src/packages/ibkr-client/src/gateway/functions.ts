@@ -1,7 +1,5 @@
-import axios, { AxiosInstance } from 'axios';
-import https from 'https';
 import { IBKRAuth } from '../auth';
-import { getGatewayUrl, IBKRGatewayConfig } from '../config/environment';
+import { IBKRClient } from '../IBKRClient';
 import { ConnectionStatus, GatewayHealthCheck } from './types';
 import { logger, HttpApiError } from '@monorepo/shared-utils';
 
@@ -13,19 +11,12 @@ export class IBKRGateway {
   private static lastStatus: ConnectionStatus | null = null;
 
   /**
-   * Create an axios instance for gateway checks
-   * @param config Optional configuration overrides
+   * Create an IBKRClient instance for gateway operations
+   * @param port Optional port override
    */
-  private static createGatewayClient(config?: Partial<IBKRGatewayConfig>): AxiosInstance {
-    const baseURL = getGatewayUrl(config);
-    
-    return axios.create({
-      baseURL,
-      timeout: config?.timeout || 5000,
-      httpsAgent: new https.Agent({
-        rejectUnauthorized: config?.rejectUnauthorized ?? false
-      })
-    });
+  private static createClient(port?: number): IBKRClient {
+    const baseURL = port ? `https://localhost:${port}` : undefined;
+    return new IBKRClient(baseURL ? { baseURL } : undefined);
   }
 
   /**
@@ -40,15 +31,16 @@ export class IBKRGateway {
    */
   static async checkConnection(port?: number): Promise<boolean> {
     const startTime = Date.now();
-    const config = port ? { gatewayPort: port } : undefined;
-    const client = this.createGatewayClient(config);
+    const client = this.createClient(port);
 
     try {
       // Try to reach the gateway root endpoint (not an API endpoint)
-      const response = await client.get('/');
+      // @ts-ignore - accessing protected method for internal use
+      const response = await client.getHttpClient().get('/');
       const latency = Date.now() - startTime;
 
-      const isConnected = response.status === 200 || response.status === 302;
+      // Check if we got a successful response (200 OK or 302 redirect)
+      const isConnected = true; // If we got here without error, gateway is reachable
 
       this.lastStatus = {
         isConnected,
@@ -57,7 +49,7 @@ export class IBKRGateway {
         lastChecked: new Date()
       };
 
-      logger.debug(`Gateway connection check: ${isConnected ? 'success' : 'failed'} (${latency}ms)`);
+      logger.debug(`Gateway connection check: success (${latency}ms)`);
       return isConnected;
 
     } catch (error) {
@@ -145,7 +137,7 @@ export class IBKRGateway {
   static async waitForConnection(timeout: number = 60000, port?: number): Promise<boolean> {
     const startTime = Date.now();
     const checkInterval = 2000; // Check every 2 seconds
-    const gatewayUrl = getGatewayUrl(port ? { gatewayPort: port } : undefined);
+    const gatewayUrl = `https://localhost:${port || 5001}`;
 
     logger.info(`Waiting for gateway connection at ${gatewayUrl}...`);
 

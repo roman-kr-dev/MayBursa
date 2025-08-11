@@ -34,7 +34,7 @@ export class IBKRAuth {
   static async checkAuthStatus(): Promise<AuthStatusResponse> {
     const client = this.createClient();
     // @ts-ignore - accessing protected method for internal use
-    return client.getHttpClient().post<AuthStatusResponse>('/iserver/auth/status');
+    return client.getHttpClient().post<AuthStatusResponse>('/v1/api/iserver/auth/status');
   }
 
   /**
@@ -49,7 +49,7 @@ export class IBKRAuth {
   static async tickle(): Promise<TickleResponse> {
     const client = this.createClient();
     // @ts-ignore - accessing protected method for internal use
-    return client.getHttpClient().post<TickleResponse>('/tickle');
+    return client.getHttpClient().post<TickleResponse>('/v1/api/tickle');
   }
 
   /**
@@ -64,7 +64,7 @@ export class IBKRAuth {
   static async validateSSO(): Promise<SSOValidationResponse> {
     const client = this.createClient();
     // @ts-ignore - accessing protected method for internal use
-    return client.getHttpClient().get<SSOValidationResponse>('/sso/validate');
+    return client.getHttpClient().get<SSOValidationResponse>('/v1/api/sso/validate');
   }
 
   /**
@@ -82,7 +82,7 @@ export class IBKRAuth {
   static async reauthenticate(): Promise<ReauthResponse> {
     const client = this.createClient();
     // @ts-ignore - accessing protected method for internal use
-    return client.getHttpClient().post<ReauthResponse>('/iserver/reauthenticate');
+    return client.getHttpClient().post<ReauthResponse>('/v1/api/iserver/reauthenticate');
   }
 
   /**
@@ -96,7 +96,7 @@ export class IBKRAuth {
   static async logout(): Promise<LogoutResponse> {
     const client = this.createClient();
     // @ts-ignore - accessing protected method for internal use
-    return client.getHttpClient().post<LogoutResponse>('/logout');
+    return client.getHttpClient().post<LogoutResponse>('/v1/api/logout');
   }
 
   /**
@@ -114,6 +114,6 @@ export class IBKRAuth {
   static async initSSO(credentials: SSOInitRequest): Promise<SSOInitResponse> {
     const client = this.createClient();
     // @ts-ignore - accessing protected method for internal use
-    return client.getHttpClient().post<SSOInitResponse>('/iserver/auth/ssodh/init', credentials);
+    return client.getHttpClient().post<SSOInitResponse>('/v1/api/iserver/auth/ssodh/init', credentials);
   }
 }

@@ -15,7 +15,7 @@ export class IBKRClient {
 
   constructor(config?: IBKRClientConfig) {
     const ibkrConfig: HttpClientConfig = {
-      baseURL: config?.baseURL || 'https://localhost:5001/v1/api',
+      baseURL: config?.baseURL || 'https://localhost:5001',
       timeout: config?.timeout || 10000,
       httpsAgent: new https.Agent({
         rejectUnauthorized: false // Accept self-signed certificates from IBKR Gateway
@@ -37,7 +37,7 @@ export class IBKRClient {
   async getServerInfo(): Promise<any> {
     try {
       // Try the tickle endpoint which returns basic server info
-      return await this.httpClient.post('/tickle');
+      return await this.httpClient.post('/v1/api/tickle');
     } catch (error) {
       // If tickle fails, try a simple GET to check connectivity
       return await this.httpClient.get('/');
