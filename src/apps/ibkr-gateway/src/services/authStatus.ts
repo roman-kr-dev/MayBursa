@@ -1,4 +1,4 @@
-import { checkAuthStatus, reauthenticate as reauthenticateSession, tickle, logout as logoutSession, AuthStatusResponse } from '@monorepo/ibkr-client';
+import { authClient, AuthStatusResponse } from './authClient';
 import { getTradingMode, TradingMode } from '../config/environment';
 import { logger, HttpApiError } from '@monorepo/shared-utils';
 
@@ -25,7 +25,7 @@ export class AuthenticationStatusService {
 
   async checkAuthStatus(): Promise<AuthStatusResponse> {
     try {
-      const status = await checkAuthStatus();
+      const status = await authClient.checkAuthStatus();
 
       // Update last session info
       this.lastSessionInfo = {
@@ -105,7 +105,7 @@ export class AuthenticationStatusService {
     try {
       logger.info('Attempting to reauthenticate...');
       
-      const response = await reauthenticateSession();
+      const response = await authClient.reauthenticate();
       
       if (response.message) {
         logger.info('Reauthentication response:', response.message);
@@ -124,7 +124,7 @@ export class AuthenticationStatusService {
 
   async keepAlive(): Promise<void> {
     try {
-      await tickle();
+      await authClient.tickle();
       logger.debug('Keep-alive sent');
     } catch (error) {
       logger.error('Keep-alive failed:', error);
@@ -133,7 +133,7 @@ export class AuthenticationStatusService {
 
   async logout(): Promise<void> {
     try {
-      const response = await logoutSession();
+      const response = await authClient.logout();
       
       if (response.status) {
         logger.info('Logged out successfully');
