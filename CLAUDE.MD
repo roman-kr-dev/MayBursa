@@ -16,6 +16,10 @@ This guide combines best practices for building cloud-native applications using 
 When working on the IBKR Gateway application (`src/apps/ibkr-gateway/`), ALWAYS reference:
 - `src/apps/ibkr-gateway/CLAUDE.md` for gateway-specific rules and guidelines
 
+## IBKR Client Package Development
+When working on the IBKR Client package (`src/packages/ibkr-client/`), ALWAYS reference:
+- `src/packages/ibkr-client/CLAUDE.md` for package-specific architecture and guidelines
+
 ## External Library Management with Context7 MCP
 
 ### IMPORTANT: Always Verify External Library Versions and Documentation
