@@ -108,7 +108,7 @@ export class LoginAutomationService {
       headless: headlessMode,
       defaultViewport: headlessMode ? undefined : null,
       args: args,
-      ignoreHTTPSErrors: true
+      acceptInsecureCerts: true
     });
 
     logger.debug('✅ Browser launched successfully');
